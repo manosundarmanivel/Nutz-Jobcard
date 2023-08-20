@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Nutz</title>
+    <title>Sathyodhayam</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <!-- <link rel="shortcut icon" href="<?= base_url('assets') ?>/images/header/logo.png">  -->
     <link href="<?= base_url('assets') ?>/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
                                 <div class="col-7">
                                     <div class="text-primary p-4">
                                         <h5 class="text-primary">Welcome Back !</h5>
-                                        <p>Sign in to continue to Nutz.</p>
+                                        <p>Sign in to continue to Sathyodhayam.</p>
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -38,7 +38,7 @@
                                 <a href="" class="auth-logo-light">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light" style="background-color: #fff !important;">
-                                            <img src="<?= base_url('assets') ?>/images/header/logo.png" alt=""   height="55">
+                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt=""   height="55">
                                         </span>
                                     </div>
                                 </a>
@@ -46,7 +46,7 @@
                                 <a href="" class="auth-logo-dark">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light" style="background-color: #fff !important;">
-                                            <img src="<?= base_url('assets') ?>/images/header/logo.png" alt=""   height="55">
+                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt=""   height="55">
                                         </span>
                                     </div>
                                 </a>
@@ -89,7 +89,7 @@
                             <!-- <p>Don't have an account ? <a href="auth-register.html" class="fw-medium text-primary"> Signup now </a> </p> -->
                             <p>© <script>
                                     document.write(new Date().getFullYear())
-                                </script> Nutz. Crafted with <i class="mdi mdi-heart text-danger"></i> by Nutz</p>
+                                </script> Sathyodhayam. Crafted with <i class="mdi mdi-heart text-danger"></i> by Nutz</p>
                         </div>
                     </div>
 

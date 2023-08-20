@@ -74,38 +74,84 @@
                         <!-- </form> -->
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="row">
+            <div class="col-12">
                 <div class="col-12">
-                    <div class="card">
-                        <form action="<?= base_url('admin/addRemedy') ?>" method="post">
-                            <div class="card-body">
-                                <!-- <h4 class="card-title">Add Remedy</h4> -->
-                                <div class="mb-3  row">   
-                                    <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Remedy 1</label>
-                                        <div class="col-md-12 col-xl-10">
-                                            <textarea class="form-control" rows="4" cols="50" id="remedy_1" name="remedy_1" placeholder="Remedy 1 Not Found" required disabled><?php if($remedy->remedy_1){echo "$remedy->remedy_1";} ?></textarea>
-                                        </div>
-                                    </div>  
-                                    <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Remedy 2</label>
-                                        <div class="col-md-12 col-xl-10">
-                                            <textarea class="form-control" rows="4" cols="50" id="remedy_2" name="remedy_2" placeholder="Remedy 2 Not Found" required disabled><?php if($remedy->remedy_2){echo "$remedy->remedy_2";} ?></textarea>
-                                        </div>
-                                    </div> 
-                                    <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Remedy 3</label>
-                                        <div class="col-md-12 col-xl-10">
-                                            <textarea class="form-control" rows="4" cols="50" id="remedy_3" name="remedy_3" placeholder="Remedy 3 Not Found" required disabled><?php if($remedy->remedy_3){echo "$remedy->remedy_3";} ?></textarea>
-                                        </div>
-                                    </div>   
-                                </div>     
-                            </div>
-                        </form>
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">View Remedy</h4>
                     </div>
                 </div>
-            </div>
+            <div class="card">
+                <?php if ($remedies) { ?>
+                <div class="ast_faq_section">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <?php $no = 1;
+                            foreach ($remedies as $remedy) : ?>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-heading<?= $no ?>">
+                                        <button class="accordion-button collapsed" onclick="Handleclick(this)" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse<?= $no ?>" aria-expanded="false" aria-controls="panelsStayOpen-collapse<?= $no ?>">
+                                            <div> 
+                                                    <div style="margin-left: 10px;" class="mt-3">
+                                                        <p><?= "Remedy No - $no"?></p> 
+                                                        <p><?= "Added By - ".$this->Help->getUserInfo($remedy->created_by)->email?></p> 
+                                                        <p><?php echo "Created Date - "; echo $this->Help->formateDate($remedy->created_at)?></p> 
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapse<?= $no ?>" class="accordion-collapse collapse  " aria-labelledby="panelsStayOpen-heading<?= $no ?>">
+                                        <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <form  method="post">
+                                                        <div class="card-body">
+                                                            <!-- <h4 class="card-title">Add Remedy</h4> -->
+                                                            <div class="mb-3  row">   
+                                                                <?php
+                                                                if($remedy->remedy)
+                                                                $items=json_decode($remedy->remedy);
+                                                                foreach($items as $key => $values){ ?>
+                                                                    <div class="mb-3  row">  
+                                                                        <label for="example-text-input" style="font-size: medium;" class="col-md-3 col-xl-3 col-form-label"><?= ucfirst($this->Help->getCategory($key)->name) ?></label>
+                                                                        <?php if($values){ 
+                                                                            foreach($values as $value){ ?>
+                                                                                <div class="col-md-12 col-xl-12">
+                                                                                    <ul> 
+                                                                                        <li ><?= ucwords($value)?></li>
+                                                                                    </ul>
+                                                                                </div> 
+                                                                            <?php  }
+                                                                            }  ?>
+                                                                    </div>  
+                                                                    <?php }
+                                                                ?>
+                                                                <div class="row">
+                                                                    <div class="col-6" style="margin-left: 15px;">
+                                                                        <a href="<?= base_url("admin/deleteCategory/$remedy->id") ?>" class="badge bg-danger p-2 align-bottom">Delete</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>  
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php $no++;
+                            endforeach; ?>
+                        </div>
+                    </div>
+                <?php } else if (!$handwrittenpaid && !$orders) { ?>
+                    <h2 class="text-center ast_toppadder70 ast_bottompadder70">No Category Found</h2>
+                <?php } ?> 
+        </div>
+        </div>
         </div>
     </div> 
 

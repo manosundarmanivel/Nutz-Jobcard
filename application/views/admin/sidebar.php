@@ -2,9 +2,9 @@
 <html lang="en"> 
 <head> 
     <meta charset="utf-8" />
-    <title>Nutz</title>
+    <title>Sathyodhayam</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="shortcut icon" href="<?= base_url('assets/') ?>images/header/logo.png">
+    <link rel="shortcut icon" href="<?= base_url('assets/') ?>images/header/favicon.svg">
     <link href="<?= base_url('assets/') ?>css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="<?= base_url('assets/') ?>css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url('assets/') ?>css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
@@ -21,15 +21,15 @@
                     <div class="navbar-brand-box">
                         <a href="" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="<?= base_url('assets') ?>/images/header/logo.png" alt="" height="40">
+                                <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt="" height="40">
                             </span>
                             <span class="logo-lg">
-                            <img src="<?= base_url('assets') ?>/images/header/logo2.png" alt="" height="55" >
+                            <img src="<?= base_url('assets') ?>/images/header/logo.png" alt="" height="55" >
                             </span>
                         </a>
                         <a href="" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="<?= base_url('assets') ?>/images/header/logo.png" alt="" height="40">
+                                <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt="" height="40">
                             </span>
                             <span class="logo-lg">
                                 <img src="<?= base_url('assets') ?>/images/header/logo.png" alt="" height="40">
@@ -83,9 +83,11 @@
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title" key="t-menu"></li>
                         <li><a href="<?= base_url('admin') ?>" key="t-dashboards"><i class="bx bx-home-circle"></i><span key="t-dashboards">Dashboards</span></a></li>
-                        <li><a href="<?= base_url('admin/adduser') ?>" key="t-dashboards"><i class="bx bxs-user"></i><span key="t-dashboards">Add User</span></a></li>
-                        <li><a href="<?= base_url('admin/addCustomer') ?>" key="t-dashboards"><i class="bx bxs-user"></i><span key="t-dashboards">Add Customer</span></a></li>
-                        <li><a href="<?= base_url('admin/addRemedy') ?>" key="t-dashboards"><i class="bx bx-calendar-alt"></i><span key="t-dashboards">Add Remedy</span></a></li>
+                        <li><a href="<?= base_url('admin/adduser') ?>" key="t-dashboards"><i class="bx bx-user-plus"></i><span key="t-dashboards">Add User</span></a></li>
+                        <li><a href="<?= base_url('admin/addCustomer') ?>" key="t-dashboards"><i class="bx bx-user-plus"></i><span key="t-dashboards">Add Customer</span></a></li>
+                        <li><a href="<?= base_url('admin/addCategory') ?>" key="t-dashboards"><i class="bx bx-layer"></i><span key="t-dashboards">Add Category</span></a></li>
+                        <li><a href="<?= base_url('admin/addAppointment') ?>" key="t-dashboards"><i class="bx bx-calendar"></i><span key="t-dashboards">Add Appointment</span></a></li>
+                        <li><a href="<?= base_url('admin/addRemedy') ?>" key="t-dashboards"><i class="bx bx-bell"></i><span key="t-dashboards">Add Remedy</span></a></li>
                         <!-- <li>
                             <a href="javascript: void(0);" class="waves-effect">
                                 <i class="bx bx-detail"></i>

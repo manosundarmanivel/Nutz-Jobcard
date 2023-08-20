@@ -24,35 +24,34 @@
                                 <!-- <h4 class="card-title">Add Remedy</h4> -->
                                 <div class="mb-3  row">
                                     <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Customer</label>
+                                        <label for="example-text-input" style="font-size: medium;" class="col-md-3 col-xl-3 col-form-label">Customer</label>
                                         <div class="col-md-12 col-xl-10">
                                             <?php if($customers)
                                                 foreach($customers as $customer): ?>
                                             <select class="form-control" name="customer_id" id="customer_id">
                                                 <option value="">Select Customer</option>
-                                                <option value="<?= $customer->id ?>"> <?php echo $customer->id . ucwords($customer->first_name) ;if($customer->last_name){echo ucwords($customer->last_name);}; ?></option>
+                                                <option value="<?= $customer->id ?>"> <?php echo CUSTOMER_ID;echo "00$customer->id" ." "."- " .ucwords($customer->first_name) ;if($customer->last_name){echo ucwords($customer->last_name);}; ?></option>
                                             </select>
                                             <?php endforeach; ?>
                                         </div>
                                     </div>   
-                                    <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Remedy 1</label>
-                                        <div class="col-md-12 col-xl-10">
-                                            <textarea class="form-control" rows="4" cols="50" id="remedy_1" name="remedy_1" placeholder="Enter Remedy 1" required></textarea>
-                                        </div>
-                                    </div>  
-                                    <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Remedy 2</label>
-                                        <div class="col-md-12 col-xl-10">
-                                            <textarea class="form-control" rows="4" cols="50" id="remedy_2" name="remedy_2" placeholder="Enter Remedy 2" required></textarea>
-                                        </div>
-                                    </div> 
-                                    <div class="mb-3  row">  
-                                        <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Remedy 3</label>
-                                        <div class="col-md-12 col-xl-10">
-                                            <textarea class="form-control" rows="4" cols="50" id="remedy_3" name="remedy_3" placeholder="Enter Remedy 3" required></textarea>
-                                        </div>
-                                    </div>   
+                                    <?php
+                                      if($categories)
+                                      foreach($categories as $category){ ?>
+                                          <div class="mb-3  row">  
+                                              <label for="example-text-input" style="font-size: medium;" class="col-md-3 col-xl-3 col-form-label"><?=ucfirst($category->name) ?></label>
+                                              <?php if($category->items){
+                                                  $items=json_decode($category->items);
+                                                  foreach($items as $item){ ?>
+                                                    <div class="col-md-12 col-xl-12">
+                                                        <input type="checkbox" class="form-check-success" id="<?=$item?>" name="category_items[<?=$category->id?>][]" value="<?=$item?>">
+                                                        <label for="<?=$item?>"><?= ucwords($item)?></label>
+                                                    </div> 
+                                                  <?php  }
+                                                }  ?>
+                                          </div>  
+                                     <?php }
+                                    ?>
                                 </div>     
                                 <div class="mb-3 row">
                                     <div class="col-12 col-xl-7 d-flex ">

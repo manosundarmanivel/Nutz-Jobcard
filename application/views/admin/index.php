@@ -107,7 +107,7 @@
                                         <tr>
                                             <th>S.No</th>
                                             <th>Customer Name</th> 
-                                            <th>Remedy</th> 
+                                            <th>Reminder</th> 
                                             <th>Date</th> 
                                             <th>Action</th>
                                         </tr>
@@ -119,9 +119,9 @@
                                             <tr>
                                                 <td><?= $no ?></td>
                                                 <td><?= ucwords($reminder->customer_name) ?></td> 
-                                                <td><?php if($reminder->remedy=="remedy_1"){echo "Remedy 1";}elseif($reminder->remedy=="remedy_2"){echo "Remedy 2";}elseif($reminder->remedy=="remedy_3"){echo "Remedy 3";}  ?></td> 
-                                                <td><?php if($reminder->remedy=="remedy_1"){echo date("m-d-Y", strtotime($reminder->created_at . " +1 month"));}elseif($reminder->remedy=="remedy_2"){echo date("m-d-Y", strtotime($reminder->created_at . " +1 month"));}elseif($reminder->remedy=="remedy_3"){echo date("m-d-Y", strtotime($reminder->created_at . " +2 month"));}  ?></td> 
-                                                <td><a href="<?= base_url("admin/viewRemedy/$reminder->customer_id") ?>" class="badge bg-success p-2 align-bottom">view</a></td>   
+                                                <td><?php if($reminder->remedy=="remedy_1"){echo "Reminder 1";}elseif($reminder->remedy=="remedy_2"){echo "Reminder 2";}elseif($reminder->remedy=="remedy_3"){echo "Reminder 3";}  ?></td> 
+                                                <td><?php if($reminder->remedy=="remedy_1"){echo date("d M Y", strtotime($reminder->remedy_1_date ));}elseif($reminder->remedy=="remedy_2"){echo date("m-d-Y", strtotime($reminder->remedy_2_date));}elseif($reminder->remedy=="remedy_3"){echo date("m-d-Y", strtotime($reminder->remedy_3_date));}  ?></td> 
+                                                <td><a href="<?= base_url("admin/viewRemedy/$reminder->customer_id/$reminder->id") ?>" class="badge bg-success p-2 align-bottom">view</a></td>   
                                             </tr>
                                         <?php $no++; endforeach; ?>
                                     </tbody>
