@@ -26,19 +26,19 @@
                                         <div class="col-lg-6 col-md-12">
                                             <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Customer</label>
                                             <div class="col-md-12 col-xl-10">
-                                                <?php if($customers)
-                                                    foreach($customers as $customer): ?>
                                                 <select class="form-control" name="customer_id" id="customer_id">
                                                     <option value="">Select Customer</option>
+                                                <?php if($customers)
+                                                    foreach($customers as $customer): ?>
                                                     <option value="<?= $customer->id ?>"> <?php echo $customer->id ." ".". " .ucwords($customer->first_name) ;if($customer->last_name){echo ucwords($customer->last_name);}; ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
-                                                <?php endforeach; ?>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12">
                                         <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Appointment Date</label>
                                             <div class="col-md-12 col-xl-10">
-                                                <input class="form-control" type="date" name="appointment_date"  placeholder="" required>
+                                                <input class="form-control" type="date" name="appointment_date"  placeholder="" >
                                             </div>
                                         </div> 
                                 </div>  
@@ -49,8 +49,7 @@
                                                 <select class="form-control" name="priority"  required>
                                                     <option value="">Select Priority</option>
                                                     <option value="high">High</option>
-                                                    <option value="medium">Medium</option>
-                                                    <option value="low">Low</option>
+                                                    <option value="medium">Medium</option> 
                                                 </select>
                                             </div>
                                         </div>
@@ -59,8 +58,21 @@
                                             <div class="col-md-12 col-xl-10">
                                                 <select class="form-control" name="type"  required>
                                                     <option value="">Select Visiting Type</option>
-                                                    <option value="new">New Remwdy</option>
+                                                    <option value="consulting">Consulting</option>
+                                                    <option value="remedy">New Remedy</option>
                                                     <option value="re-visit">Re-visit</option> 
+                                                </select>                                           
+                                             </div>
+                                        </div> 
+                                </div>  
+                                <div class="mb-3  row"> 
+                                        <div class="col-lg-6 col-md-12">
+                                            <label for="example-text-input" class="col-md-3 col-xl-3 col-form-label">Appointment Type</label>
+                                            <div class="col-md-12 col-xl-10">
+                                                <select class="form-control" name="appointment_type"  required>
+                                                    <option value="">Select Visiting Type</option>
+                                                    <option value="waiting">Waiting</option>
+                                                    <option value="normal">Normal</option> 
                                                 </select>                                           
                                              </div>
                                         </div> 
@@ -100,7 +112,8 @@
                                         <th>Customer Name</th>
                                         <th>Appointment Date</th>
                                         <th>Priority</th> 
-                                        <th>Type</th> 
+                                        <th>Visting Type</th> 
+                                        <th>Appointment Type</th> 
                                         <th>Created By</th>
                                         <th>Created At</th>
                                         <th>Action</th>
@@ -116,6 +129,7 @@
                                             <td><?php if($appointment->appointment_date){ echo ucwords($appointment->appointment_date); }else{echo "-";} ?></td>
                                             <td><?php if($appointment->priority){echo ucwords($appointment->priority);}else{echo "-";} ?></td>   
                                             <td><?php if($appointment->type){echo ucwords($appointment->type);}else{echo "-";} ?></td>   
+                                            <td><?php if($appointment->appointment_type){echo ucwords($appointment->appointment_type);}else{echo "-";} ?></td>   
                                             <td><?php if($this->Help->getUserInfo($appointment->created_by)->email){echo ucwords($this->Help->getUserInfo($appointment->created_by)->email);}else{echo "-";} ?></td>   
                                             <td><?= $this->Help->formateDate($appointment->created_at) ?></td>   
                                             <td><a href="<?= base_url("admin/deleteAppointment/$appointment->id") ?>" class="badge bg-danger p-2 align-bottom">Delete</a></td>   

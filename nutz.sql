@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2023 at 08:11 PM
+-- Generation Time: Sep 14, 2023 at 04:13 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -33,6 +33,7 @@ CREATE TABLE `appointment` (
   `appointment_date` date NOT NULL,
   `priority` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
+  `appointment_type` varchar(250) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_by` int(100) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -43,9 +44,10 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`id`, `customer_id`, `appointment_date`, `priority`, `type`, `is_active`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 2, '2023-08-12', 'high', 'new', 1, 1, '2023-08-12 19:59:32', '2023-08-12 19:59:32'),
-(2, 2, '2023-08-13', 'medium', 're-visit', 1, 1, '2023-08-12 20:00:04', '2023-08-12 20:00:04');
+INSERT INTO `appointment` (`id`, `customer_id`, `appointment_date`, `priority`, `type`, `appointment_type`, `is_active`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 2, '2023-08-12', 'high', 'new', NULL, 1, 1, '2023-08-12 19:59:32', '2023-08-12 19:59:32'),
+(2, 2, '2023-08-13', 'medium', 're-visit', NULL, 1, 1, '2023-08-12 20:00:04', '2023-08-12 20:00:04'),
+(3, 9, '2023-09-14', 'high', 'remedy', 'normal', 1, 1, '2023-09-14 19:42:29', '2023-09-14 19:42:29');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,8 @@ CREATE TABLE `customer` (
   `birth_time` time NOT NULL,
   `place_of_birth` varchar(100) NOT NULL,
   `jataka` text NOT NULL,
-  `appointment_date` datetime NOT NULL,
+  `referred_by` varchar(250) DEFAULT NULL,
+  `appointment_date` datetime DEFAULT NULL,
   `created_by` int(100) NOT NULL,
   `updated_by` int(100) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
@@ -100,8 +103,12 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `first_name`, `last_name`, `mobile_no`, `dob`, `address`, `birth_time`, `place_of_birth`, `jataka`, `appointment_date`, `created_by`, `updated_by`, `is_active`, `created_at`, `updated_at`) VALUES
-(2, 'Test', '02', '9876543210', '2023-08-11 18:30:00', 'Zdfv', '16:40:00', 'Erode', 'aaf0c610ab9499d1918d27a16c901d481.jpeg', '2023-08-12 00:00:00', 1, NULL, 1, '2023-08-12 11:07:17', '2023-08-12 11:57:13');
+INSERT INTO `customer` (`id`, `first_name`, `last_name`, `mobile_no`, `dob`, `address`, `birth_time`, `place_of_birth`, `jataka`, `referred_by`, `appointment_date`, `created_by`, `updated_by`, `is_active`, `created_at`, `updated_at`) VALUES
+(2, 'Test', '02', '9876543210', '2023-08-11 18:30:00', 'Zdfv', '16:40:00', 'Erode', 'aaf0c610ab9499d1918d27a16c901d481.jpeg', NULL, '2023-08-12 00:00:00', 1, NULL, 1, '2023-08-12 11:07:17', '2023-08-12 11:57:13'),
+(9, 'test', '01', '9876543210', '2023-09-12 18:30:00', 'Erode', '20:45:00', 'Erode', '', 'google', NULL, 1, NULL, 1, '2023-09-12 15:20:39', '2023-09-12 15:20:39'),
+(10, 'test', '01', '9876543210', '2023-09-13 18:30:00', 'erode', '20:53:00', 'Erode', '', 'google', NULL, 1, NULL, 1, '2023-09-12 15:21:45', '2023-09-12 15:21:45'),
+(11, 'test', '01', '9876543210', '2023-09-13 18:30:00', 'erode', '20:54:00', 'Erode', '', 'google', NULL, 1, NULL, 1, '2023-09-12 15:22:24', '2023-09-12 15:22:24'),
+(12, 'test', '01', '9876543210', '2023-09-13 18:30:00', 'erode', '21:53:00', 'Erode', '[\"8750835cb7e7d006ae9065c7c7bf8f9a1.jpeg\",\"44547cddd9066cdad62f30f0a9b6ffff1.jpeg\"]', 'google', NULL, 1, NULL, 1, '2023-09-12 15:31:15', '2023-09-12 15:31:15');
 
 -- --------------------------------------------------------
 
@@ -200,7 +207,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -212,7 +219,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `remedy`

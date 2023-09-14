@@ -83,8 +83,7 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('mobile_no', 'Mobile Number', 'required|max_length[15]'); 
             $this->form_validation->set_rules('dob', 'Date of Birth', 'required|max_length[50]'); 
             $this->form_validation->set_rules('birth_time', 'Birth Time', 'required|max_length[50]'); 
-            $this->form_validation->set_rules('place_of_birth', 'Place Of Birth', 'required|max_length[50]'); 
-            $this->form_validation->set_rules('appointment_date', 'Appointment Date', 'required|max_length[50]'); 
+            $this->form_validation->set_rules('place_of_birth', 'Place Of Birth', 'required|max_length[50]');  
             $this->form_validation->set_rules('address', 'Address', 'required|max_length[50]');  
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('message', array('danger', validation_errors()));
@@ -95,11 +94,12 @@ class Admin extends CI_Controller {
                 $customer["mobile_no"]=$post["mobile_no"]; 
                 $customer["dob"]=$post["dob"]; 
                 $customer["place_of_birth"]=$post["place_of_birth"]; 
-                if($this->Help->upload('jataka')){ 
-                    $customer["jataka"]=$this->Help->upload('jataka'); 
-                }
+                $customer["referred_by"]=$post["referred_by"]; 
+                if($this->Help->uploadMultiple('jataka')){ 
+                    $customer["jataka"]=json_encode($this->Help->uploadMultiple('jataka'));  
+                } 
                 $customer["birth_time"]=$post["birth_time"]; 
-                $customer["appointment_date"]=$post["appointment_date"]; 
+                // $customer["appointment_date"]=$post["appointment_date"]; 
                 $customer["address"]=$post["address"]; 
                 if($id){ 
                     $customer["updated_by"]=$this->session->userdata("userdata")->id;
@@ -124,9 +124,9 @@ class Admin extends CI_Controller {
     public function addAppointment(){
         if($this->input->post()){
             $this->form_validation->set_rules('customer_id', 'Customer Id', 'required|max_length[50]');
-            $this->form_validation->set_rules('priority', 'Priority', 'required|max_length[50]');  
-            $this->form_validation->set_rules('appointment_date', 'Appointment Date', 'required|max_length[50]'); 
+            $this->form_validation->set_rules('priority', 'Priority', 'required|max_length[50]');    
             $this->form_validation->set_rules('type', 'Type', 'required|max_length[50]');  
+            $this->form_validation->set_rules('appointment_type', 'Appointment Type', 'required|max_length[50]');  
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('message', array('danger', validation_errors()));
             }else{
@@ -134,6 +134,7 @@ class Admin extends CI_Controller {
                 $appointment["customer_id"]=$post["customer_id"];
                 $appointment["priority"]=$post["priority"]; 
                 $appointment["type"]=$post["type"];  
+                $appointment["appointment_type"]=$post["appointment_type"];  
                 $appointment["appointment_date"]=$post["appointment_date"]; 
                 $appointment["created_by"]=$this->session->userdata("userdata")->id;
                 $this->db->insert("appointment",$appointment);

@@ -147,7 +147,7 @@
                             endforeach; ?>
                         </div>
                     </div>
-                <?php } else if (!$handwrittenpaid && !$orders) { ?>
+                <?php } else if (!$remedies) { ?>
                     <h2 class="text-center ast_toppadder70 ast_bottompadder70">No Category Found</h2>
                 <?php } ?> 
         </div>
