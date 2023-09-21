@@ -26,13 +26,13 @@
                                     <div class="mb-3  row">  
                                         <label for="example-text-input" style="font-size: medium;" class="col-md-3 col-xl-3 col-form-label">Customer</label>
                                         <div class="col-md-12 col-xl-10">
-                                            <?php if($customers)
-                                                foreach($customers as $customer): ?>
                                             <select class="form-control" name="customer_id" id="customer_id">
                                                 <option value="">Select Customer</option>
+                                            <?php if($customers)
+                                                foreach($customers as $customer): ?>
                                                 <option value="<?= $customer->id ?>"> <?php echo CUSTOMER_ID;echo "00$customer->id" ." "."- " .ucwords($customer->first_name) ;if($customer->last_name){echo ucwords($customer->last_name);}; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
-                                            <?php endforeach; ?>
                                         </div>
                                     </div>   
                                     <?php
