@@ -132,7 +132,7 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Help');
+$autoload['model'] = array('User_model');
 
 $autoload['time_zone'] = date_default_timezone_set('Asia/Kolkata');
 

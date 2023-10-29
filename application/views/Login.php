@@ -1,19 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8" />
-    <title>Sathyodhayam</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <!-- <link rel="shortcut icon" href="<?= base_url('assets') ?>/images/header/logo.png">  -->
-    <link href="<?= base_url('assets') ?>/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-
-    <link href="<?= base_url('assets') ?>/css/icons.min.css" rel="stylesheet" type="text/css" /> 
-    <link href="<?= base_url('assets') ?>/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+    <title>Login - Sathyodhayam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="<?= base_url('assets') ?>/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets') ?>/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets') ?>/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
 </head>
-
 <body>
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
@@ -38,76 +32,58 @@
                                 <a href="" class="auth-logo-light">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light" style="background-color: #fff !important;">
-                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt=""   height="55">
+                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt="" height="55">
                                         </span>
                                     </div>
                                 </a>
-
                                 <a href="" class="auth-logo-dark">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light" style="background-color: #fff !important;">
-                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt=""   height="55">
+                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt="" height="55">
                                         </span>
                                     </div>
                                 </a>
                             </div>
                             <div class="p-2">
-                            <?php if ($this->session->flashdata('message')) { ?>
-                                <div class="alert alert-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" role="alert">
-                                <?= $this->session->flashdata('message')[1] ?>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                                <?php   } ?>
-                                <form class="form-horizontal" method="post" action="<?= base_url('Login') ?>">
-
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Email</label>
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="Enter Email" required>
+                                <?php if ($this->session->flashdata('message')) { ?>
+                                    <div class="alert alert-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" role="alert">
+                                        <?= $this->session->flashdata('message')[1] ?>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Password</label>
-                                        <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" class="form-control" name="password" placeholder="Enter password" aria-label="password" aria-describedby="password-addon" required>
-                                            <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                <?php } ?>
+                                <div class="mt-3">
+                                    <!-- Form for user login -->
+                                    <form class="form-horizontal" method="post" action="<?= base_url('dashboard/login') ?>">
+                                        <div class="mb-3">
+                                            <label for="login_email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" name="login_email" id="login_email" placeholder="Enter Email" required>
                                         </div>
-                                    </div> 
-                                    <div class="mt-3 d-grid">
-                                        <button class="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
-                                    </div> 
-                                    <!-- <div class="mt-4 text-center">
-                                        <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
-                                    </div> -->
-                                </form>
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <div class="input-group auth-pass-inputgroup">
+                                                <input type="password" class="form-control" name="login_password" placeholder="Enter password" aria-label="password" aria-describedby="password-addon" required>
+                                                <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 d-grid">
+                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
+                                            <p>Already have an account? <a href="<?= base_url('dashboard/register') ?>" class="fw-medium text-primary">SignUp</a></p>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-
                         <div>
-                            <!-- <p>Don't have an account ? <a href="auth-register.html" class="fw-medium text-primary"> Signup now </a> </p> -->
-                            <p>© <script>
-                                    document.write(new Date().getFullYear())
-                                </script> Sathyodhayam. Crafted with <i class="mdi mdi-heart text-danger"></i> by Nutz</p>
+                            <p>© <script>document.write(new Date().getFullYear())</script> Sathyodhayam. Crafted with <i class="mdi mdi-heart text-danger"></i> by Nutz</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <!-- end account-pages -->
-
     <!-- JAVASCRIPT -->
     <script src="<?= base_url('assets') ?>/libs/jquery/jquery.min.js"></script>
-    <script src="<?= base_url('assets') ?>/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('assets') ?>/libs/metismenu/metisMenu.min.js"></script>
-    <script src="<?= base_url('assets') ?>/libs/simplebar/simplebar.min.js"></script>
-    <script src="<?= base_url('assets') ?>/libs/node-waves/waves.min.js"></script>
-
-    <!-- App js -->
-    <script src="<?= base_url('assets') ?>/js/app.js"></script>
-</body>
-
-</html>
+    <script src="<?= base_url('assets') ?>/
