@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => (ENVIRONMENT !== 'production')?'root':'',
+	'username' => (ENVIRONMENT !== 'production')?'root':'root',
 	'password' => (ENVIRONMENT !== 'production')?'':'',
-	'database' => (ENVIRONMENT !== 'production')?'Nutz':'',
+	'database' => (ENVIRONMENT !== 'production')?'Nutz':'jobcard',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

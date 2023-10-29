@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //development
 // $config['base_url'] = 'http://localhost/Version1/';
-$config['base_url'] =(ENVIRONMENT !== 'production')?'http://localhost/Nutz':'';
+$config['base_url'] =(ENVIRONMENT !== 'production')?'http://localhost/Nutz':'http://localhost/NutzJobcard';
 
 
 //production
