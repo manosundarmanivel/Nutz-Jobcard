@@ -7,15 +7,15 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Ledger Group</h4>
+            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Product Brand</h4>
     <div class="card">
-        <h6 class="card-header">View Ledger Groups</h6>
-        <div class="card-datatable table-responsive">
+        <h6 class="card-header">View Product Brand</h6>
+        <div class="card-datatable table-responsive p-3">
             <table class="datatables-demo table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Type</th>
+                        
                         <th>Created By</th>
                         <th>Updated By</th>
                         <th>Created At</th>
@@ -25,22 +25,24 @@
 
                     </tr>
                 </thead>
+            
+               
                 <tbody>
-                    <?php if (!empty($ledger_group_masters)) {
-                        foreach ($ledger_group_masters as $ledger_group) { ?>
+                    <?php if (!empty($product_brands)) {
+                        foreach ($product_brands as $product_brand) { ?>
                             <tr>
-                                <td><?= $ledger_group->name ?></td>
-                                <td><?= $ledger_group->type ?></td>
-                                <td><?= $ledger_group->created_by?></td>
-                                <td><?= $ledger_group->updated_by?></td>
-                                <td><?= $ledger_group->created_at?></td>
-                                <td><?= $ledger_group->updated_at?></td>
+                                <td><?= $product_brand['name'] ?></td>
+                                
+                                <td><?= $product_brand['created_by']?></td>
+                                <td><?= $product_brand['updated_by']?></td>
+                                <td><?= $product_brand['created_at']?></td>
+                                <td><?= $product_brand['updated_at']?></td>
                                 <td>
                                     <?php 
-                                    if($ledger_group->is_default == 0)
+                                    if($product_brand['is_default'] == 0)
                                     { ?>
- <a  class="btn btn-info btn-sm" href="<?= base_url('master/editLedgerGroup/'. $ledger_group->id); ?>"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                    <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteLedgerGroup/'. $ledger_group->id); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
+ <a  class="btn btn-info btn-sm" href="<?= base_url('master/editProductbrand/'. $product_brand['id']); ?>"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                    <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteProductbrand/'.$product_brand['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
                                     <?php
                                     }
                                     else

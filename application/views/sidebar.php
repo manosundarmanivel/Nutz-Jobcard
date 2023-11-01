@@ -88,7 +88,7 @@
                     <ul class="sidenav-inner sidenav-menu py-1">
 
                         <!-- Dashboards -->
-                        <li class="sidenav-item open ">
+                        <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
 
                                 <div>Ledger Group</div>
@@ -110,7 +110,7 @@
 
                             </ul>
                         </li>
-                        <li class="sidenav-item open ">
+                        <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
 
                                 <div>Ledger</div>
@@ -132,9 +132,209 @@
 
                             </ul>
                         </li>
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product Category</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="product_category_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_category_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="product_category_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_category_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product Group</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="product_group_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_group_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="product_group_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_group_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product Model</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="product_model_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_model_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="product_model_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_model_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product Model Complaint</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="product_model_complaint_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_model_complaint_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="product_model_complaint_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_model_complaint_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item open ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product Brand</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="product_brand_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_brand_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="product_brand_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_brand_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product Item</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="product_item_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_item_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="product_item_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/product_item_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>JobCard Service Type</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="jobcard_service_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_service_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="jobcard_service_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_service_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>JobCard Employee</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="jobcard_employee_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_employee_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="jobcard_employee_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_employee_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>JobCard Outwork Vendor </div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="jobcard_outwork_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_outwork_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="jobcard_outwork_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_outwork_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
                     </ul>
 
                 </li>
+
+   
 
 
 
@@ -173,7 +373,7 @@
                         <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">
                             <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                                 <!-- <img src="" alt class="d-block ui-w-30 rounded-circle"> -->
-                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0"><?= strtoupper($this->session->userdata('userdata')->Fname) ?></span>
+                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0">text</span>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right overflow-hidden">

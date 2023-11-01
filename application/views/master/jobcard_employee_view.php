@@ -7,15 +7,18 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Ledger Group</h4>
+            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Employee</h4>
     <div class="card">
-        <h6 class="card-header">View Ledger Groups</h6>
-        <div class="card-datatable table-responsive">
+        <h6 class="card-header">View Employee </h6>
+        <div class="card-datatable table-responsive p-3">
             <table class="datatables-demo table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
+                        <th>Employee Name</th>
+                        <th>Employee Designation</th>
+                        <th>Employee Contact Number</th>
+                        <th>Employee Address</th>
+                        <th>Employee Username</th>
                         <th>Created By</th>
                         <th>Updated By</th>
                         <th>Created At</th>
@@ -25,22 +28,29 @@
 
                     </tr>
                 </thead>
+            
+               
                 <tbody>
-                    <?php if (!empty($ledger_group_masters)) {
-                        foreach ($ledger_group_masters as $ledger_group) { ?>
+                    
+                    <?php if (!empty($employees)) {
+                        foreach ($employees as $employee) { ?>
                             <tr>
-                                <td><?= $ledger_group->name ?></td>
-                                <td><?= $ledger_group->type ?></td>
-                                <td><?= $ledger_group->created_by?></td>
-                                <td><?= $ledger_group->updated_by?></td>
-                                <td><?= $ledger_group->created_at?></td>
-                                <td><?= $ledger_group->updated_at?></td>
+                                <td><?= $employee['name'] ?></td>
+                                <td><?= $employee['designation'] ?></td>
+                                <td><?= $employee['contact'] ?></td>
+                                <td><?= $employee['address'] ?></td>
+                                <td><?= $employee['username'] ?></td>
+                                
+                                <td><?= $employee['created_by']?></td>
+                                <td><?= $employee['updated_by']?></td>
+                                <td><?= $employee['created_at']?></td>
+                                <td><?= $employee['updated_at']?></td>
                                 <td>
                                     <?php 
-                                    if($ledger_group->is_default == 0)
+                                    if($employee['is_default'] == 0)
                                     { ?>
- <a  class="btn btn-info btn-sm" href="<?= base_url('master/editLedgerGroup/'. $ledger_group->id); ?>"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                    <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteLedgerGroup/'. $ledger_group->id); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
+ <a  class="btn btn-info btn-sm" href="<?= base_url('master/editEmployee/'. $employee['id']); ?>"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                    <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteEmployee/'.$employee['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
                                     <?php
                                     }
                                     else
