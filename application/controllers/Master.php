@@ -290,6 +290,10 @@ class Master extends CI_Controller
         $this->User_model->deleteProductcategory($id);
         redirect('master/product_category_view'); 
     }
+    public function deleteProductimage($id) {
+        $this->User_model->deleteProductimage($id);
+        redirect('master/product_item_view'); 
+    }
 
     public function editProductcategory($id) {
         $data['product_category'] = $this->User_model->getProductcategoryById($id);
@@ -331,6 +335,7 @@ class Master extends CI_Controller
     public function product_group_view()
     { 
         $data['product_groups'] = $this->User_model->getActiveProductgroups();
+    
         $class['classname'] = 'product_group_view';
         $this->load->view("sidebar",$class);
         $this->load->view('master/product_group_view', $data);
@@ -634,7 +639,7 @@ class Master extends CI_Controller
     }
 
     public function editProductbrand($id) {
-        $data['product_brand'] = $this->User_model->getProductbrand($id);
+        $data['product_brand'] = $this->User_model->getProductbrandById($id);
 
          if($this->input->post())
          {
@@ -757,11 +762,6 @@ class Master extends CI_Controller
     public function editProductitem($id) {
         $data['product_item'] = $this->User_model->getProductitemById($id);
 
-        // $data['product_group'] = $this->User_model->getProductgroupById($id);
-        // $data['product_category'] = $this->User_model->getProductcategoryById($id);
-       
-        // $data['product_brand'] = $this->User_model->getProductbrandById($id);
-
          if($this->input->post())
          {
           
@@ -803,6 +803,35 @@ class Master extends CI_Controller
         } else {
             //error page
         }
+    }
+
+    public function addProductimage($id)
+    {
+        $data['product_item'] = $this->User_model->getProductitemById($id);
+        $data['product_image'] = $this->User_model->getProductimageById($id);
+
+        if (isset($data['product_item']) || isset($data['product_image'])) {
+            $class['classname'] = 'viewProductitem';
+            $this->load->view("sidebar",$class);
+            $this->load->view('master/product_image_edit', $data);
+            $this->load->view("footer");
+        } else {
+            //error page
+        }
+
+
+
+    }
+
+    public function saveProductImage($id)
+    {
+
+   $image_url = $this->User_model->uploadMultiple('img');
+
+   $this->User_model->insertProductImage($id, $image_url['0']);
+                redirect('master/product_item_view');
+  
+
     }
 
 
@@ -907,7 +936,7 @@ class Master extends CI_Controller
 
     public function jobcard_employee_view()
     { 
-        $data['employees'] = $this->User_model-> getActiveEmployee();
+        $data['employees'] = $this->User_model->getActiveEmployee();
         $class['classname'] = 'jobcard_employee_view';
         $this->load->view("sidebar",$class);
         $this->load->view('master/jobcard_employee_view', $data);

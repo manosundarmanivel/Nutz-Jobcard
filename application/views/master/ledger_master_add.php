@@ -32,7 +32,7 @@
                 <select class="select2-demo form-control " onchange="ledgerChange()"  data-allow-clear="true" style="width: 100%" id="customer_groups" name="customer_group">
                  <option value="">Select Customer Group</option>
                     <?php foreach ($active_ledger_groups as $group) { ?>
-                        <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
+                        <option value="<?= $group['id'] ?>"><?= $group['type'] ?></option>
                     <?php } ?>
                 </select>
             </div>

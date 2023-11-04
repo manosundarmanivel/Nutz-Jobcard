@@ -19,10 +19,8 @@
 
             <div class="form-group">
                 <label class="form-label" for="type">Type:</label>
-                <select name="type" class="select2-demo form-control " data-allow-clear="true" style="width: 100%" >
-                <option value="">Select Type</option>
-                <option>Supplier</option>
-                    <option>Customer</option>
+                <input type="text" class="form-control" name="type" id="name" required placeholder="Enter Type">
+             
                     
                 </select>
                

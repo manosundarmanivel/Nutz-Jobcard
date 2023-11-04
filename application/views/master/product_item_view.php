@@ -15,7 +15,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Item Images / Videos</th>
+                           
                             <th>Selling Unit Of Materials</th>
                             <th>Purchase Unit Of Materials</th>
                             <th>Product Category</th>
@@ -41,17 +41,18 @@
                     </thead>
                     <tbody>
                         <?php if (!empty($product_items)) {
+                          
                             foreach ($product_items as $product_item) { ?>
                                 <tr>
                                     <td><?= $product_item['name'] ?></td>
                                     <td><?= $product_item['description'] ?></td>
-                                    <td><?= $product_item['image_url'] ?></td>
+                                    
                                     <td><?= $product_item['selling_unit'] ?></td>
                                     <td><?= $product_item['purchase_unit'] ?></td>
-                                    <td><?= $product_item['product_category_id'] ?></td>
-                                    <td><?= $product_item['product_group_id'] ?></td>
-                                    <td><?= $product_item['product_model_id'] ?></td>
-                                    <td><?= $product_item['product_brand_id'] ?></td>
+                                    <td><?= $product_item['category_name'] ?></td>
+                                    <td><?= $product_item['group_name'] ?></td>
+                                    <td><?= $product_item['model_name'] ?></td>
+                                    <td><?= $product_item['brand_name'] ?></td>
                                     <td><?= $product_item['tax_master_id'] ?></td>
                                     <td><?= $product_item['hsn_sac_code'] ?></td>
                                     <td><?= $product_item['purchase_price'] ?></td>
@@ -69,6 +70,7 @@
                                         if ($product_item['is_default'] == 0) { ?>
                                             <a class="btn btn-info btn-sm" href="<?= base_url('master/editProductitem/'. $product_item['id']);?>" ><i class="feather icon-edit"></i>&nbsp;Edit </a>
                                             <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteProductitem/' . $product_item['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
+                                            <a class="btn btn-facebook btn-sm" href="<?= base_url('master/addProductimage/' . $product_item['id']); ?>"><i class=" feather icon-upload"></i>&nbsp;Add Image </a>
                                         <?php
                                         } else {
                                             echo ("-");

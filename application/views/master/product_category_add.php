@@ -16,12 +16,9 @@
 
             <div class="form-group">
                 <label class="form-label" for="type">Name of the Category:</label>
-                <select name="product_category" class="select2-demo form-control " data-allow-clear="true" style="width: 100%" >
-                <option value="">Select Type</option>
-                <option> Machines </option>
-                    <option> Spares</option>
-                   
-                </select>
+                <input type="text" class="form-control" name="product_category" id="name" required placeholder="Enter Name of the Category">
+                
+               
                
                 
             </div>

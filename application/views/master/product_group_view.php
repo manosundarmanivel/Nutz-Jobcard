@@ -26,10 +26,11 @@
                     </thead>
                     <tbody>
                         <?php if (!empty($product_groups)) {
+                            
                             foreach ($product_groups as $product_group) { ?>
                                 <tr>
                                     <td><?= $product_group['name'] ?></td>
-                                    <td><?= $product_group['product_category_id'] ?></td>
+                                    <td><?= $product_group['category_name'] ?></td>
 
                                     <td><?= $product_group['created_by'] ?></td>
                                     <td><?= $product_group['updated_by'] ?></td>

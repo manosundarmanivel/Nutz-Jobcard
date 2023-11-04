@@ -29,7 +29,7 @@
                             foreach ($product_models as $product_model) { ?>
                                 <tr>
                                     <td><?= $product_model['name'] ?></td>
-                                    <td><?= $product_model['product_group_id'] ?></td>
+                                    <td><?= $product_model['group_name'] ?></td>
 
                                     <td><?= $product_model['created_by'] ?></td>
                                     <td><?= $product_model['updated_by'] ?></td>
