@@ -220,7 +220,7 @@
 
                             </ul>
                         </li>
-                        <li class="sidenav-item open ">
+                        <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
 
                                 <div>Product Brand</div>
@@ -322,6 +322,29 @@
                                 </li>
                                 <li class="sidenav-item <?php if($classname=="jobcard_outwork_view"){echo "active";} ?>">
                                     <a href="<?= base_url('master/jobcard_outwork_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+
+                        <li class="sidenav-item open ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div> Add JobCard  </div>
+
+                            </a>
+                            <ul class="sidenav-menu ">
+                                <li class="sidenav-item <?php if($classname=="jobcard_add"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="jobcard_view"){echo "active";} ?>">
+                                    <a href="<?= base_url('master/jobcard_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
                                 </li>

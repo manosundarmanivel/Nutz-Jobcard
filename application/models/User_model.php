@@ -244,6 +244,14 @@ class User_model extends CI_Model {
         $query = $this->db->get('employee');
         return $query->result_array();
     }
+    public function getActiveTechnician() {
+      
+        $this->db->select('*');
+        $this->db->where('is_active', true); 
+        $this->db->where('designation', 'Technician'); 
+        $query = $this->db->get('employee');
+        return $query->result_array();
+    }
     public function getActiveOutwork() {
       
         $this->db->select('*');
@@ -351,6 +359,7 @@ class User_model extends CI_Model {
         
         $data = array('is_active' => false);
         $this->db->where('id', $id);
+        
         $this->db->update('ledger_group', $data);
     }
 
@@ -516,6 +525,33 @@ class User_model extends CI_Model {
     }
 
 
+
+public function getLedgerNameByContact($contactNumber) {
+    
+    $this->db->where('contact_no', $contactNumber);
+    $query = $this->db->get('ledger');
+
+    if ($query->num_rows() > 0) {
+        $row = $query->row();
+        return $row->name;
+    } else {
+        return false;
+    }
+}
+
+public function insert_job($data) {
+    $this->db->insert('job', $data);
+    return $this->db->insert_id();
+}
+
+public function insert_product($data) {
+    $this->db->insert('product', $data);
+    return $this->db->insert_id();
+}
+
+public function insert_group($data) {
+    $this->db->insert('group', $data);
+}
 
 
     
