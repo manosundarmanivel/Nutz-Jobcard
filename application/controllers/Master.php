@@ -747,6 +747,11 @@ class Master extends CI_Controller
         $this->User_model->deleteProductitem($id);
         redirect('master/product_item_view');
     }
+    public function deleteJobcard($id)
+    {
+        $this->User_model->deleteJobcard($id);
+        redirect('master/jobcard_view');
+    }
 
     public function editProductitem($id)
     {
@@ -1106,6 +1111,8 @@ class Master extends CI_Controller
         $data['product_models'] = $this->User_model->getActiveProductmodels();
         $data['service_types'] = $this->User_model->getActiveServicetype();
         $data['technitions'] = $this->User_model->getActiveTechnician();
+        $data['service_no'] = intval(($this->db->query("SELECT MAX(id) AS id FROM job")->row())->id)+1;
+        
         $class['classname'] = 'jobcard_add';
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_add', $data);
@@ -1114,10 +1121,11 @@ class Master extends CI_Controller
 
     public function jobcard_view()
     {
+        $data['jobs'] = $this->User_model->getJobcards();
         
         $class['classname'] = 'jobcard_view';
         $this->load->view("sidebar", $class);
-        $this->load->view('master/jobcard_view', $data);
+        $this->load->view('master/jobcard_view',$data);
         $this->load->view("footer");
     }
 
@@ -1142,8 +1150,9 @@ class Master extends CI_Controller
 
     public function addJobCard()
     {
-        $data = json_decode(file_get_contents('php://input'), true);
-
+        $post = $this->input->post('data');
+     
+        $data = json_decode($post , true);
         $jobData = $data['jobData'];
         $productsData = $data['productsData'];
 
@@ -1155,7 +1164,8 @@ class Master extends CI_Controller
             'billNo' => $jobData['billNo'],
             'remarks' => $jobData['remarks'],
             'jobcard_status' => true,
-            'createdBy' => 'Mano Sundar'
+            'createdBy' => 'Mano Sundar',
+            'is_active' => 1
         );
 
         $this->load->model('User_model');
@@ -1170,28 +1180,55 @@ class Master extends CI_Controller
                 'products' => $product['products'],
                 'complaint' => $product['complaint'],
                 'service' => $product['service'],
-                'assigned' => $product['assigned']
+                'assigned' => $product['assigned'],
+               
             );
 
 
             $product_id = $this->User_model->insert_product($product_data);
+             $this->User_model->updateStatus($product_id,STATUS_OPEN);
 
             foreach ($product['group'] as $group) {
+
+                
                 $group_data = array(
                     'jobID' => $job_id,
-                    'productID' => $product_id,
+                    'parent_id' => $product_id,
                     'jobcardNo' => $group['jobcardNo'],
                     'products' => $group['products'],
-                    'problem' => $group['problem'],
+                    'problem_stated' => $group['problem'],
                     'service' => $group['service'],
-                    'assigned' => $group['assigned']
+                    'assigned' => $group['assigned'],
+                   
                 );
 
 
-                $this->User_model->insert_group($group_data);
+               
+                $group_id = $this->User_model->insert_product($group_data);
+                $this->User_model->updateStatus($group_id,STATUS_OPEN);
             }
-        }
 
+            
+        }
+        $this->session->set_flashdata('message', array('success', "Job Added Successfully"));
         redirect('master/jobcard_add');
     }
+
+
+    public function fetchProductsAndGroups($jobID) {
+        $data['jobID'] = $jobID;
+        
+       
+        $data['products'] = $this->User_model->getProductsByJobID($jobID);
+        $data['groups'] = $this->User_model->getGroupsByJobID($jobID);
+        
+    
+       
+       
+        $class['classname'] = 'jobcard_view';
+        $this->load->view("sidebar", $class);
+        $this->load->view('master/products_and_groups_view', $data);
+        $this->load->view("footer");
+    }
+    
 }

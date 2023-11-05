@@ -1,5 +1,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <div class="layout-content">
+<?php if ($this->session->flashdata('message')) { ?>
+            <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <span><?= $this->session->flashdata('message')[1] ?></span>
+            </div>
+        <?php   } ?>
     <div class="container-fluid flex-grow-1 container-p-y">
     <div class="alert alert-dark alert-dismissible fade show" id="serverResponseAlert" style="display: none;">
     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -15,11 +21,11 @@
         <div class="card mb-4">
             <h6 class="card-header">Add JobCard</h6>
             <div class="card-body">
-                <form method="post" action="<?= base_url('master/addEmployee') ?>">
+                <form id="jobform" method="post" enctype="multipart/form-data" action="<?= base_url('master/addJobCard') ?>">
                     <div style="display: flex; flex-wrap: wrap;">
                         <div class="form-group col-6">
                             <label class="form-label" for="name">Form No. / Service No :</label>
-                            <input type="text" class="form-control" name="formno" required placeholder="Enter Service No">
+                            <input type="text" disabled class="form-control" value="<?= $service_no ?>" required placeholder="Enter Service No">
                         </div>
                         <div class="form-group col-6 ">
                             <label class="form-label" for="name">Contact Number:</label>
@@ -65,7 +71,7 @@
                             <label class="form-label" for="name">Remarks :</label>
                             <textarea type="text" class="form-control" name="remarks" id="name" required placeholder="Enter Remarks"> </textarea>
                         </div>
-
+                        <input type="hidden" name="data" id="jobdata"  />
                        
 
                     </div>
@@ -78,7 +84,7 @@
 
         <div class="card mb-4">
 
-            <form action="" id="my_form">
+            <form action=""  id="my_form">
 
 
                 <!-- <button class="btn btn-primary" type="button" onclick="handlesubmit()">submit</button> -->
@@ -87,6 +93,32 @@
         <button type="submit" onclick="handlesubmit()" class="btn btn-primary">Add JobCard</button>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    
+const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 10000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }   
+    })
+    $(document).ready(function() {
+        var table = $('#example').DataTable({
+            buttons: ["copy", "excel", "pdf", "csv"],
+        })
+
+        table.buttons().container()
+            .appendTo($('.col-sm-6:eq(0)', table.table().container()));
+    });
+</script>
+
 
 <script>
     let warrantyAvailable = false;
@@ -277,9 +309,6 @@
         billNo: '',
         remarks: '',
        
-       
-       
-        
         
     };
 
@@ -288,7 +317,7 @@
     
     const resultValue = resultElement.textContent;
 
-    jobData.formno = document.querySelector(`[name="formno"]`).value;
+    jobData.formno = <?= $service_no ;?>;
     jobData.contact = document.querySelector(`[name="contact"]`).value;
     jobData.customerName = resultValue;
     jobData.warrantyStatus = document.getElementById('toggleButton').checked;
@@ -302,17 +331,15 @@
             product.complaint = document.querySelector(`[name="complaint_${index + 1}"]`).value;
             product.service = document.querySelector(`[name="service_${index + 1}"]`).value;
             product.assigned = document.querySelector(`[name="employee_${index + 1}"]`).value; // Corrected field name
-            images = document.querySelector(`[name="img_${index + 1}[]"]`); 
+            // images = document.querySelector(`[name="img_${index + 1}[]"]`); 
+            product.images = new FormData();
+  let  productImageInput = document.querySelector(`[name="img_${index + 1}[]"]`);
+  console.log(productImageInput);
+  for (let i = 0; i < productImageInput.files.length; i++) {
+    product.images.append(`product_image_${i}`, productImageInput.files[i]);
+    console.log(productImageInput.files[i],"test");
+  }
 
-            var files = images.files;
-            console.log(images);
-
-            for (var i = 0; i < files.length; i++) {
-                formData.append('userfile[]', files[i]);
-               
-                console.log(files[i], i);
-            }
-            formData.append('products',product.jobcardNo);
 
            
 
@@ -324,9 +351,9 @@
                 group.assigned = document.querySelector(`[name="employee_${groupIndex + 1}_${index + 1}"]`).value; // Corrected field name
             });
         });
-        // console.log(productsData);
+        console.log(productsData,"text");
         // console.log(jobData);
-        console.log(formData,"jrjer");
+      
 
 
         const requestData = {
@@ -334,30 +361,29 @@
         productsData: productsData,
     };
 
-
-        fetch('addJobCard', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        
-        console.log("got response");
-    const serverResponseAlert = document.getElementById('serverResponseAlert');
-    serverResponseAlert.style.display = 'block';
-    serverResponseAlert.querySelector('span').textContent = "Job Card Added Successfully"; 
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+document.getElementById("jobdata").value = JSON.stringify(requestData);
+document.getElementById("jobform").submit();
+    //     fetch('addJobCard', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(requestData),
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log(data);
+    //     console.log("got response");
+    // window.reload();
+    // })
+    // .catch(error => {
+    //     console.error('Error:', error);
+    // });
 
     }
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#lookup_btn').click(function() {

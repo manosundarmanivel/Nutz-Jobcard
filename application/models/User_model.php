@@ -259,6 +259,13 @@ class User_model extends CI_Model {
         $query = $this->db->get('outwork_vendor');
         return $query->result_array();
     }
+    public function getJobcards() {
+      
+        $this->db->select('*');
+        $this->db->where('is_active', true); 
+        $query = $this->db->get('job');
+        return $query->result_array();
+    }
     public function getActiveProductitems() {
         $this->db->select('product_item.*, product_group.name AS group_name, product_category.name AS category_name, product_brand.name AS brand_name , product_model.name AS model_name');
         $this->db->where('product_item.is_active', true);
@@ -551,6 +558,64 @@ public function insert_product($data) {
 
 public function insert_group($data) {
     $this->db->insert('group', $data);
+}
+
+// public function getProductsByJobID($jobID) {
+   
+//     $this->db->where('jobID', $jobID);
+//     $query = $this->db->get('product');
+//     return $query->result();
+// }
+
+public function getProductsByJobID($jobID) {
+    $this->db->select('product.*, product_model_complaint.name AS complaint_name, product_model.name AS product_model_name, service_type.name AS service_name , employee.name AS assigned');
+    $this->db->from('product');
+    $this->db->where('product.jobID', $jobID);
+    $this->db->where('parent_id',0);
+    $this->db->join('product_model_complaint', 'product_model_complaint.id = product.complaint', 'left');
+    $this->db->join('product_model', 'product_model.id = product.products', 'left');
+    $this->db->join('service_type', 'service_type.id = product.service', 'left');
+    $this->db->join('employee', 'employee.id = product.assigned', 'left');
+    $query = $this->db->get();
+    return $query->result();
+}
+
+// public function getGroupsByJobID($jobID) {
+   
+//     $this->db->where('jobID', $jobID);
+//     $query = $this->db->get('group');
+//     return $query->result();
+// }
+
+public function getGroupsByJobID($jobID) {
+    $this->db->select('product.*, product_model.name AS product_model_name, service_type.name AS service_name, employee.name AS assigned');
+    $this->db->from('product');
+    $this->db->where('product.jobID', $jobID);
+    $this->db->where('parent_id !=',0 );
+  
+    $this->db->join('product_model', 'product_model.id = product.products', 'left');
+    $this->db->join('service_type', 'service_type.id = product.service', 'left');
+    $this->db->join('employee', 'employee.id = product.assigned', 'left');
+    $query = $this->db->get();
+    return $query->result();
+}
+
+public function deleteJobcard($id) {
+        
+    $data = array('is_active' => false);
+    $this->db->where('id', $id);
+    
+    $this->db->update('job', $data);
+}
+
+
+public function updateStatus($id, $status)
+{
+    $data = array('job_id'=> $id,
+    'name'=>$status );
+    
+
+    $this->db->insert('job_status', $data);
 }
 
 
