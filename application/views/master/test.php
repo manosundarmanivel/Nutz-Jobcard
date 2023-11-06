@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Get Ledger Name</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
 </head>
 <body>
     <h1>Lookup Ledger Name</h1>

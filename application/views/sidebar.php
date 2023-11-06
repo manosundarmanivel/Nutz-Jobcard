@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <!-- Icon fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/shreerang-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/uikit.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
         function ShowModel(e){
             e.preventDefault();
@@ -79,7 +81,7 @@
                 <div class="sidenav-divider mt-0"></div>
                       <!-- Links -->
 
-                <li class="sidenav-item open">
+                <li class="sidenav-item ">
                     <a href="javascript:" class="sidenav-link sidenav-toggle">
 
                         <div>Masters</div>
@@ -357,6 +359,64 @@
 
                 </li>
 
+                <li class="sidenav-item open">
+                    <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                        <div>Entries</div>
+
+                    </a>
+                    <ul class="sidenav-inner sidenav-menu py-1">
+
+                        <!-- Dashboards -->
+
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Jobcard</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="outwork_send"){echo "active";} ?> ">
+                                    <a href="<?= base_url('entries/outwork_send') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="outwork_receieve"){echo "active";} ?>">
+                                    <a href="<?= base_url('entries/outwork_receieve') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Outworks</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if($classname=="outwork_send"){echo "active";} ?> ">
+                                    <a href="<?= base_url('entries/outwork_send') ?>" class="sidenav-link">
+                                        <div>Send</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if($classname=="outwork_receive"){echo "active";} ?>">
+                                    <a href="<?= base_url('entries/outwork_receive') ?>" class="sidenav-link">
+                                        <div>Receive</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
    
 
 
@@ -396,7 +456,14 @@
                         <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">
                             <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                                 <!-- <img src="" alt class="d-block ui-w-30 rounded-circle"> -->
-                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0">text</span>
+                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0"><?php if($this->session->userdata('user')->name){
+                                    echo($this->session->userdata('user')->name);
+                                }
+                                else
+                                {
+                                    echo('-');
+                                }
+                                ?></span>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right overflow-hidden">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 05, 2023 at 08:00 AM
+-- Generation Time: Nov 06, 2023 at 05:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -48,36 +48,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `name`, `designation`, `contact`, `address`, `username`, `password`, `is_active`, `is_default`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'MANO SUNDAR M ', 'Technician', '7983484', ' kkkk', 'manosundarmm', '839048239047', 1, 0, NULL, NULL, '2023-11-01 18:01:49', '2023-11-01 18:01:49');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `group`
---
-
-CREATE TABLE `group` (
-  `id` int(11) NOT NULL,
-  `jobID` int(11) DEFAULT NULL,
-  `productID` int(11) DEFAULT NULL,
-  `jobcardNo` varchar(255) NOT NULL,
-  `products` varchar(255) DEFAULT NULL,
-  `problem` varchar(255) DEFAULT NULL,
-  `service` varchar(255) DEFAULT NULL,
-  `assigned` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `group`
---
-
-INSERT INTO `group` (`id`, `jobID`, `productID`, `jobcardNo`, `products`, `problem`, `service`, `assigned`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, '2', '3', 'nothing', '2', '1', '2023-11-05 04:36:27', '2023-11-05 04:36:27'),
-(2, 4, 2, '2', '3', 'nothing', '2', '1', '2023-11-05 04:43:28', '2023-11-05 04:43:28'),
-(3, 5, 3, '', '', '', '', '', '2023-11-05 06:19:21', '2023-11-05 06:19:21'),
-(4, 6, 4, '', '', '', '', '', '2023-11-05 06:20:08', '2023-11-05 06:20:08');
+(1, 'MANO SUNDAR M ', 'Technician', '7983484', ' kkkk', 'manosundarmm', '839048239047', 1, 0, NULL, NULL, '2023-11-01 18:01:49', '2023-11-01 18:01:49'),
+(2, 'Admin', 'Admin', '987645327', 'kjwnefkj', 'test', '827ccb0eea8a706c4c34a16891f84e7b', 1, 1, NULL, NULL, '2023-11-06 21:16:22', '2023-11-06 21:16:22');
 
 -- --------------------------------------------------------
 
@@ -96,23 +68,44 @@ CREATE TABLE `job` (
   `createdBy` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `jobcard_status` tinyint(1) DEFAULT NULL
+  `jobcard_status` tinyint(1) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `job`
 --
 
-INSERT INTO `job` (`id`, `formno`, `contact`, `customerName`, `warrantyStatus`, `billNo`, `remarks`, `createdBy`, `created_at`, `updated_at`, `jobcard_status`) VALUES
-(3, '123', '9442911327', 'Mano Sundar', 1, '321', ' nil', 'Mano Sundar', '2023-11-05 04:36:27', '2023-11-05 04:36:27', NULL),
-(4, '123', '9442911327', 'Mano Sundar', 1, '321', ' nil', 'Mano Sundar', '2023-11-05 04:43:28', '2023-11-05 04:43:28', NULL),
-(5, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:19:21', '2023-11-05 06:19:21', 1),
-(6, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:20:08', '2023-11-05 06:20:08', 1),
-(7, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:21:58', '2023-11-05 06:21:58', 1),
-(8, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:23:36', '2023-11-05 06:23:36', 1),
-(9, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:24:32', '2023-11-05 06:24:32', 1),
-(10, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:28:21', '2023-11-05 06:28:21', 1),
-(11, '', '', '', 0, '', ' ', 'Mano Sundar', '2023-11-05 06:29:36', '2023-11-05 06:29:36', 1);
+INSERT INTO `job` (`id`, `formno`, `contact`, `customerName`, `warrantyStatus`, `billNo`, `remarks`, `createdBy`, `created_at`, `updated_at`, `jobcard_status`, `is_active`) VALUES
+(25, '25', '9442911327', 'Mano Sundar', 1, '234', ' Nil', 'Mano Sundar', '2023-11-06 14:33:09', '2023-11-06 14:33:09', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_status`
+--
+
+CREATE TABLE `job_status` (
+  `id` int(11) NOT NULL,
+  `job_id` int(40) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `job_status`
+--
+
+INSERT INTO `job_status` (`id`, `job_id`, `name`, `created_by`, `is_active`, `created_at`, `updated_at`) VALUES
+(30, 13, 'open', 0, 1, '2023-11-06 20:03:09', '2023-11-06 20:03:09'),
+(31, 14, 'open', 0, 1, '2023-11-06 20:03:09', '2023-11-06 20:03:09'),
+(32, 25, 'process', 0, 1, '2023-11-06 20:09:20', '2023-11-06 20:09:20'),
+(33, 25, 'process', 0, 1, '2023-11-06 20:15:25', '2023-11-06 20:15:25'),
+(34, 25, 'process', 0, 1, '2023-11-06 20:17:54', '2023-11-06 20:17:54'),
+(35, 25, 'process', 0, 1, '2023-11-06 20:27:09', '2023-11-06 20:27:09');
 
 -- --------------------------------------------------------
 
@@ -214,7 +207,11 @@ CREATE TABLE `product` (
   `jobcardNo` varchar(255) NOT NULL,
   `products` varchar(255) DEFAULT NULL,
   `complaint` varchar(255) DEFAULT NULL,
+  `problem_stated` varchar(255) NOT NULL,
   `service` varchar(255) DEFAULT NULL,
+  `parent_id` int(40) NOT NULL,
+  `outwork_vendor_id` int(40) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `assigned` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -224,15 +221,9 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `jobID`, `jobcardNo`, `products`, `complaint`, `service`, `assigned`, `created_at`, `updated_at`) VALUES
-(1, 3, '1', '4', '3', '2', '1', '2023-11-05 04:36:27', '2023-11-05 04:36:27'),
-(2, 4, '1', '4', '3', '2', '1', '2023-11-05 04:43:28', '2023-11-05 04:43:28'),
-(3, 5, '', '', '', '', '', '2023-11-05 06:19:21', '2023-11-05 06:19:21'),
-(4, 6, '', '', '', '', '', '2023-11-05 06:20:08', '2023-11-05 06:20:08'),
-(5, 8, '', '', '', '', '', '2023-11-05 06:23:36', '2023-11-05 06:23:36'),
-(6, 9, '', '', '', '', '', '2023-11-05 06:24:32', '2023-11-05 06:24:32'),
-(7, 10, '123', '', '', '', '', '2023-11-05 06:28:21', '2023-11-05 06:28:21'),
-(8, 11, '12', '', '', '', '', '2023-11-05 06:29:36', '2023-11-05 06:29:36');
+INSERT INTO `product` (`id`, `jobID`, `jobcardNo`, `products`, `complaint`, `problem_stated`, `service`, `parent_id`, `outwork_vendor_id`, `status`, `assigned`, `created_at`, `updated_at`) VALUES
+(13, 25, '123', '3', '3', '', '2', 0, 2, 'process', '1', '2023-11-06 14:33:09', '2023-11-06 14:47:54'),
+(14, 25, '124', '3', NULL, 'Simple', '2', 13, 2, 'process', '1', '2023-11-06 14:33:09', '2023-11-06 14:57:09');
 
 -- --------------------------------------------------------
 
@@ -466,27 +457,6 @@ INSERT INTO `service_type` (`id`, `name`, `description`, `is_active`, `is_defaul
 (1, 'Service Type 1', 'Sample description', 0, 0, NULL, NULL, '2023-11-01 11:25:17', '2023-11-01 11:25:17'),
 (2, 'Service Type 1', 'Sample description 1', 1, 0, NULL, NULL, '2023-11-01 11:31:12', '2023-11-01 11:31:12');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `email_id` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `contact_no` varchar(20) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `role` int(11) DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Indexes for dumped tables
 --
@@ -499,17 +469,15 @@ ALTER TABLE `employee`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `group`
---
-ALTER TABLE `group`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `jobID` (`jobID`),
-  ADD KEY `productID` (`productID`);
-
---
 -- Indexes for table `job`
 --
 ALTER TABLE `job`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `job_status`
+--
+ALTER TABLE `job_status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -588,13 +556,6 @@ ALTER TABLE `service_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email_id` (`email_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -602,19 +563,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `group`
---
-ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `job_status`
+--
+ALTER TABLE `job_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `ledger`
@@ -638,7 +599,7 @@ ALTER TABLE `outwork_vendor`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product_brand`
@@ -691,13 +652,6 @@ ALTER TABLE `service_type`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `group`
---
-ALTER TABLE `group`
-  ADD CONSTRAINT `group_ibfk_1` FOREIGN KEY (`jobID`) REFERENCES `job` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `group_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `product`

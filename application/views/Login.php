@@ -56,12 +56,12 @@
                                     <form class="form-horizontal" method="post" action="<?= base_url('dashboard/login') ?>">
                                         <div class="mb-3">
                                             <label for="login_email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" name="login_email" id="login_email" placeholder="Enter Email" required>
+                                            <input type="text" class="form-control" name="username" id="login_email" placeholder="Enter Email" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" name="login_password" placeholder="Enter password" aria-label="password" aria-describedby="password-addon" required>
+                                                <input type="password" class="form-control" name="password" placeholder="Enter password" aria-label="password" aria-describedby="password-addon" required>
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
@@ -86,4 +86,4 @@
     <!-- end account-pages -->
     <!-- JAVASCRIPT -->
     <script src="<?= base_url('assets') ?>/libs/jquery/jquery.min.js"></script>
-    <script src="<?= base_url('assets') ?>/
+   

@@ -98,21 +98,15 @@ class User_model extends CI_Model {
         return $this->db->affected_rows() > 0; 
     }
 
-    public function login_user($email, $password) {
+    public function login_user($username, $password) {
        
-        $this->db->where('email', $email);
-        $query = $this->db->get('users');
+        $this->db->select(['id','name','contact','designation'])->where('username', $username)->where('password', md5($password)) ; 
+        
+        $user = $this->db->get('employee')->row();
 
-        if ($query->num_rows() == 1) {
-            $user = $query->row();
 
-           
-            if (password_verify($password, $user->password)) {
-                return $user->id; 
-            }
-        }
 
-        return false; 
+        return $user; 
     }
 
     public function addLedgerGroup($data) {
@@ -240,6 +234,7 @@ class User_model extends CI_Model {
     public function getActiveEmployee() {
       
         $this->db->select('*');
+        $this->db->where('id != ',$this->session->userdata("user")->id );
         $this->db->where('is_active', true); 
         $query = $this->db->get('employee');
         return $query->result_array();
@@ -259,6 +254,7 @@ class User_model extends CI_Model {
         $query = $this->db->get('outwork_vendor');
         return $query->result_array();
     }
+    
     public function getJobcards() {
       
         $this->db->select('*');
@@ -266,6 +262,27 @@ class User_model extends CI_Model {
         $query = $this->db->get('job');
         return $query->result_array();
     }
+    public function  getOutworkvendors() {
+      
+        $this->db->select('*');
+        $this->db->where('is_active', true); 
+        $query = $this->db->get('outwork_vendor');
+        return $query->result_array();
+    }
+    public function  getOpenJobcars() {
+      
+        $this->db->select('job.jobno');
+    $this->db->from('outwork_vendor ov');
+    $this->db->join('job_status js', 'ov.job_id = js.job_id');
+    $this->db->join('job j', 'js.job_id = j.id');
+    $this->db->where('ov.is_active', true);
+    $this->db->where('js.status_name', 'open');
+
+    $query = $this->db->get();
+    return $query->result_array();
+    }
+
+   
     public function getActiveProductitems() {
         $this->db->select('product_item.*, product_group.name AS group_name, product_category.name AS category_name, product_brand.name AS brand_name , product_model.name AS model_name');
         $this->db->where('product_item.is_active', true);
@@ -328,6 +345,8 @@ class User_model extends CI_Model {
         
         $data = array('is_active' => false);
         $this->db->where('id', $id);
+        $this->db->where('is_default', 0);
+        $this->db->where('id != ',$this->session->userdata("user")->id );
         $this->db->update('employee', $data);
     }
 
@@ -430,6 +449,13 @@ class User_model extends CI_Model {
         $this->db->update('outwork_vendor', $data);
         return true;
     }
+    public function updateEmployee($id, $data) {
+        $this->db->where('id', $id);
+        $this->db->where('is_default', 0);
+        $this->db->where('id != ',$this->session->userdata("user")->id );
+        $this->db->update('employee', $data);
+        return true;
+    }
 
     public function getProductcategoryById($id) {
         
@@ -510,9 +536,16 @@ class User_model extends CI_Model {
         $this->db->update('product_group', $data);
         return true;
     }
-    public function updateProductmodel($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('product_model', $data);
+    public function updateOutworkvendorID($id, $data) {
+        $this->db->set($data);
+        $this->db->where('jobcardNo', $id);
+        $this->db->update('product');
+        return true;
+    }
+    
+    public function updateJobVendorID($id, $data) {
+        $this->db->where('', $id);
+        $this->db->update('vendor_id', $data);
         return true;
     }
     public function updateProductitem($id, $data) {
@@ -580,6 +613,19 @@ public function getProductsByJobID($jobID) {
     return $query->result();
 }
 
+public function getProductsByJobNO($jobNO) {
+    $this->db->select('product.*, product_model_complaint.name AS complaint_name, product_model.name AS product_model_name, service_type.name AS service_name ' );
+    $this->db->from('product');
+    $this->db->where('product.jobcardNo', $jobNO);
+   
+    $this->db->join('product_model_complaint', 'product_model_complaint.id = product.complaint', 'left');
+    $this->db->join('product_model', 'product_model.id = product.products', 'left');
+    $this->db->join('service_type', 'service_type.id = product.service', 'left');
+   
+    $query = $this->db->get();
+    return $query->result();
+}
+
 // public function getGroupsByJobID($jobID) {
    
 //     $this->db->where('jobID', $jobID);
@@ -617,6 +663,75 @@ public function updateStatus($id, $status)
 
     $this->db->insert('job_status', $data);
 }
+
+
+
+
+
+// public function getOpenJobFormNos() {
+//     $this->db->select('j.formno');
+//     $this->db->from('job j');
+//     $this->db->join('job_status js', 'j.id = js.job_id', 'inner');
+//     $this->db->where('js.name', 'open');
+   
+//     $query = $this->db->get();
+//     return $query->result_array();
+// }
+
+public function getOpenJobFormNos() {
+    $this->db->select('*');
+    $this->db->from('product');
+    $this->db->where('status', 'open');
+
+    
+    $query = $this->db->get();
+    return $query->result_array();
+
+}
+public function getProcessJobFormNos() {
+    $this->db->select('*');
+    $this->db->from('product');
+    $this->db->where('status', 'process');
+    
+    $query = $this->db->get();
+    return $query->result_array();
+
+}
+
+
+public function getJobCardDetails($jobCardNumber) {
+    // Get jobID from the product table based on the jobCardNumber
+    $this->db->select('jobID');
+    $this->db->from('product');
+    $this->db->where('jobcardNo', $jobCardNumber);
+    $productQuery = $this->db->get();
+
+    if ($productQuery->num_rows() > 0) {
+        $productRow = $productQuery->row();
+        $jobID = $productRow->jobID;
+
+        // Fetch all details from the job table using the obtained jobID
+        $this->db->select('*');
+        $this->db->from('job');
+        $this->db->where('id', $jobID);
+        $jobQuery = $this->db->get();
+
+        if ($jobQuery->num_rows() > 0) {
+            // If a matching job is found, return the details as an object
+            return $jobQuery->row();
+        } else {
+            // If no matching job is found, return null
+            return null;
+        }
+    } else {
+        // If no matching product is found, return null
+        return null;
+    }
+}
+
+
+
+
 
 
     

@@ -1181,6 +1181,7 @@ class Master extends CI_Controller
                 'complaint' => $product['complaint'],
                 'service' => $product['service'],
                 'assigned' => $product['assigned'],
+                'status' =>'open',
                
             );
 
@@ -1199,6 +1200,7 @@ class Master extends CI_Controller
                     'problem_stated' => $group['problem'],
                     'service' => $group['service'],
                     'assigned' => $group['assigned'],
+                    'status' =>'open',
                    
                 );
 
@@ -1230,5 +1232,7 @@ class Master extends CI_Controller
         $this->load->view('master/products_and_groups_view', $data);
         $this->load->view("footer");
     }
+
+
     
 }
