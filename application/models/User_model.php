@@ -3,8 +3,7 @@
 class User_model extends CI_Model {
 
     function uploadMultiple($name)
-    {
-       print_r(count(array_filter($_FILES[$name]['name'])));
+    { 
         if (!empty($_FILES[$name]['name']) && count(array_filter($_FILES[$name]['name'])) > 0) {
            
             $filesCount = count($_FILES[$name]['name']); 
@@ -22,8 +21,7 @@ class User_model extends CI_Model {
                 $config['file_name'] = md5($_FILES[$name]['name'][$i] . date("dmYHis"));
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
-                $uploadFile = $this->upload->do_upload('file');
-                print_r($uploadFile);
+                $uploadFile = $this->upload->do_upload('file'); 
                 if ($uploadFile) {
                     $uploadData = $this->upload->data();
                     $picture[$i] = $uploadData['file_name'];

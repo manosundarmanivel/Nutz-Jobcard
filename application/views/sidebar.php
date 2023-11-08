@@ -21,7 +21,13 @@
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/bootstrap-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/shreerang-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/uikit.css">
-    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css">
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css"> 
+
+    <!-- Libs -->
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/perfect-scrollbar/perfect-scrollbar.css"> 
+
+    <!-- Page -->
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/css/pages/tickets.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
         function ShowModel(e) {

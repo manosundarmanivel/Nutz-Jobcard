@@ -15,6 +15,11 @@ class Master extends CI_Controller
         redirect(base_url("master/ledger_group_master_add"));
     }
 
+    public function uploadImage(){
+        $image=$this->User_model->uploadMultiple('image'); 
+        echo json_encode($image);
+    }
+
     public function ledger_master_add()
     {
         $data['active_ledger_groups'] = $this->User_model->getActiveLedgerGroups();
@@ -1327,6 +1332,8 @@ class Master extends CI_Controller
         $post = $this->input->post('data');
      
         $data = json_decode($post , true);
+        print_r($data);
+        return;
         $jobData = $data['jobData'];
         $productsData = $data['productsData'];
 
@@ -1339,17 +1346,13 @@ class Master extends CI_Controller
             'remarks' => $jobData['remarks'],
             'jobcard_status' => true,
             'createdBy' => $this->session->userdata('user')->id,
-            'is_active' => 1,
-            
-            
-        );
-
-        $this->load->model('User_model');
+            'is_active' => 1, 
+        ); 
 
 
         $job_id = $this->User_model->insert_job($job_data);
 
-        foreach ($productsData as $product) {
+        foreach ($productsData as $product) { 
             $product_data = array(
                 'jobID' => $job_id,
                 'jobcardNo' => $product['jobcardNo'],
@@ -1357,19 +1360,15 @@ class Master extends CI_Controller
                 'complaint' => $product['complaint'],
                 'service' => $product['service'],
                 'assigned' => $product['assigned'],
-                'status' =>'open',
-                
-                        
-               
+                'status' =>'open', 
+                'image_url'=>$product['image_url']
             );
 
 
             $product_id = $this->User_model->insert_product($product_data);
              $this->User_model->updateStatus($product_id,STATUS_OPEN);
 
-            foreach ($product['group'] as $group) {
-
-                
+            foreach ($product['group'] as $group) { 
                 $group_data = array(
                     'jobID' => $job_id,
                     'parent_id' => $product_id,
@@ -1378,10 +1377,8 @@ class Master extends CI_Controller
                     'problem_stated' => $group['problem'],
                     'service' => $group['service'],
                     'assigned' => $group['assigned'],
-                    'status' =>'open',
-                    
-                        
-                   
+                    'status' =>'open', 
+                    'image_url'=>$group['image_url']
                 );
 
 
