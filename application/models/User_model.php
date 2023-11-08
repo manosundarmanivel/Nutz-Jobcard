@@ -816,9 +816,17 @@ public function updateCharges($job_id, $outwork_vendor_charges, $customer_charge
 }
 
 
+public function getProductItemsByCategoryName() {
+    $this->db->select('pi.*');
+    $this->db->from('product_item as pi');
+    $this->db->join('product_category as pc', 'pc.id = pi.product_category_id', 'left');
+    $this->db->where('pc.name', 'Spares');
+    
+    $query = $this->db->get();
 
-    
-    
+    return $query->result_array();
+}
+
 }
 
 

@@ -35,11 +35,11 @@ class Entries extends CI_Controller
     }
     public function employee_workready_entry()
     {
-        // $data['open_jobcards'] = $this->User_model->getProcessJobFormNos();
-        // $data['outwork_vendors'] = $this->User_model->getActiveOutwork();
+       
+        $data['spares'] = $this->User_model->getProductItemsByCategoryName();
         $class['classname'] = 'employee_workready_entry';
         $this->load->view("sidebar", $class);
-        $this->load->view('entries/employee_workready_entry');
+        $this->load->view('entries/employee_workready_entry', $data);
         $this->load->view("footer");
     }
     public function getJobCardDetails() {
