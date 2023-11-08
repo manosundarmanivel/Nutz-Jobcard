@@ -40,8 +40,14 @@
                                 <td><?= $outwork['address'] ?></td>
                                 <td><?= $outwork['email'] ?></td>
                                 
-                                <td><?= $outwork['created_by']?></td>
-                                <td><?= $outwork['updated_by']?></td>
+                                <td><?= $outwork['created_name']?></td>
+                                <td><?php
+                                        if ($outwork['updated_name'] != NULL) {
+                                            echo $outwork['updated_name'];
+                                        } else {
+                                            echo "-";
+                                        }
+                                        ?></td>
                                 <td><?= $outwork['created_at']?></td>
                                 <td><?= $outwork['updated_at']?></td>
                                 <td>

@@ -19,7 +19,7 @@
 
             <div class="form-group col-12">
                 <label class="form-label" for="customer_group" >Product Group:</label>
-                <p><?= $product_model['product_group_id'] ?></p>
+                <p><?= $product_model['group_name'] ?></p>
             
 
             </div>

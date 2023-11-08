@@ -6,23 +6,19 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php } ?>
-        <h4 class="font-weight-bold mt-2 mb-4"><i class="feather icon-home"></i>Edit Ledger Group</h4>
+        <h4 class="font-weight-bold mt-2 mb-4"><i class="feather icon-home"></i>Edit Tax</h4>
         <div class="card mb-4">
-            <h6 class="card-header">Edit Ledger Group</h6>
+            <h6 class="card-header">Edit Tax</h6>
             <div class="card-body">
-                <form method="post" action="<?= base_url('master/editLedgerGroup/'.$ledgerGroup['id']) ?>">
+                <form method="post" action="<?= base_url('master/editTax/'.$tax['id']) ?>">
                    
                     <div style="display: flex;">
                         <div class="form-group col-6">
-                            <label class="form-label" for="customer_name">Name</label>
-                            <input type="text" class="form-control" id="customer_name" name="name" value="<?= $ledgerGroup['name'] ?>" required placeholder="Enter Name">
+                            <label class="form-label" for="customer_name">Value</label>
+                            <input type="text" class="form-control" id="customer_name" name="value" value="<?= $tax['value'] ?>" required placeholder="Enter Name">
                         </div>
 
-                        <div class="form-group col-6">
-                            <label class="form-label" for="customer_contact">Type</label>
-                            <input type="text" class="form-control" id="customer_name" name="type" value="<?= $ledgerGroup['type'] ?>" required placeholder="Enter Name">
-                           <p></p>
-                        </div>
+                        
                     </div>
 
                    

@@ -32,8 +32,14 @@
                                     <td><?= $product_group['name'] ?></td>
                                     <td><?= $product_group['category_name'] ?></td>
 
-                                    <td><?= $product_group['created_by'] ?></td>
-                                    <td><?= $product_group['updated_by'] ?></td>
+                                    <td><?= $product_group['created_name'] ?></td>
+                                    <td><?php
+                                        if ($product_group['updated_name'] != NULL) {
+                                            echo $product_group['updated_name'];
+                                        } else {
+                                            echo "-";
+                                        }
+                                        ?></td>
                                     <td><?= $product_group['created_at'] ?></td>
                                     <td><?= $product_group['updated_at'] ?></td>
                                     <td>

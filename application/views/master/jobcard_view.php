@@ -40,17 +40,19 @@
                                 
                                 <td><?= $job['customerName'] ?></td>
                                 <td><?= $job['contact'] ?></td>
-                                <td><?= $job['warrantyStatus'] ?></td>
+                                <td><?= ($job['warrantyStatus'] == 1) ? 'Yes' : 'No' ?> </td>
                                 <td><?= $job['billNo'] ?></td>
                                 <td><?= $job['remarks'] ?></td>
                                 
-                                <td><?= $job['createdBy']?></td>
+                                <td><?= $job['created_name']?></td>
                                 
                                 <td><?= $job['created_at']?></td>
                                 <td><?= $job['updated_at']?></td>
                                 <td>
-                                <a class="btn btn-dark btn-sm" href="<?= base_url('master/fetchProductsAndGroups/'.$job['id']); ?>"><i class=" feather icon-navigation"></i>&nbsp;View </a>
+                                <a class="btn btn-success btn-sm" href="<?= base_url('master/fetchProductsAndGroups/'.$job['id']); ?>"><i class=" feather icon-navigation"></i>&nbsp;View </a>
                                    
+                                    <a class="btn btn-dark btn-sm" href="<?= base_url('master/editJobcard/'.$job['id']); ?>"><i class=" feather icon-edit"></i>&nbsp;Edit </a>
+                                    
                                     <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteJobcard/'.$job['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
                                     
                                    

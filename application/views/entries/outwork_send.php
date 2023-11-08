@@ -12,26 +12,23 @@
 
             <div class="card-body">
                 <form method="post" action="<?= base_url('entries/sendOutwork') ?>">
-                <input type="hidden" name="job_id" id="job_id" />
-                <div style="display: flex;">
-                    <div class="form-group col-6">
-                        <label class="form-label" for="customer_group">Jobcard Number:</label>
-                        <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="job_card_number" name="job_card_number"  >
-                            <option value="">Select Jobcard Number</option>
-
-                            <?php foreach ($open_jobcards as $open_jobcard) { ?>
-                                <option value="<?= $open_jobcard['jobcardNo'] ?>"><?= $open_jobcard['jobcardNo'] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <button class="btn btn-facebook m-3" type="button" id="lookup_btn">Lookup</button>
-                </div>
+                    <input type="hidden" name="job_id" id="job_id" />
+                    <input type="hidden" name="jobcardNo" id="jobcardNo" />
                     <div style="display: flex;">
-                   
+                        <div class="form-group col-6">
+                            <label class="form-label" for="customer_group">Jobcard Number:</label>
+                            <select onchange="handleChange()" class=" form-control " data-allow-clear="true" style="width: 100%" id="job_card_number" >
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div style="display: flex;">
+
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_name">Customer Name / Company Name:</label>
                             <p id="customer_name"></p>
-                            
+
                         </div>
 
                         <div class="form-group  col-6">
@@ -71,11 +68,11 @@
                     <div style="display: flex;">
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_pan">Complaints Type :</label>
-                           <p id="complaint_name"></p>
+                            <p id="complaint_name"></p>
                         </div>
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">Service Type : </label>
-                           <p id="service_name"></p>
+                            <p id="service_name"></p>
                         </div>
 
 
@@ -83,23 +80,23 @@
                     <div style="display: flex;">
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">Photos : </label>
-                           
+
                         </div>
                         <div class="form-group col-6">
-                        <label class="form-label" for="customer_group">Outwork Vendor</label>
-                        <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="outwork_vendor_id" name="outwork_vendor_id">
-                            <option value="">Select Outwork Vendor</option>
+                            <label class="form-label" for="customer_group">Outwork Vendor</label>
+                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="outwork_vendor_id" name="outwork_vendor_id">
+                                <option value="">Select Outwork Vendor</option>
 
-                            <?php foreach ($outwork_vendors as $outwork_vendor) { ?>
-                                <option value="<?= $outwork_vendor['id'] ?>"><?= $outwork_vendor['name'] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
+                                <?php foreach ($outwork_vendors as $outwork_vendor) { ?>
+                                    <option value="<?= $outwork_vendor['id'] ?>"><?= $outwork_vendor['name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
 
 
                     </div>
                     <div style="display: flex;">
-                    
+
 
 
                     </div>
@@ -122,57 +119,99 @@
 </div>
 
 
+
 <script type="text/javascript">
     $(document).ready(function() {
 
-        $('#lookup_btn').click(function() {
-            console.log("yess");
-            var jobCardNumber = $('#job_card_number').val();
+        $('#job_card_number')
+            .wrap('<div class="position-relative"></div>')
+            .select2({
+                ajax: {
+                    url: '<?= base_url("entries/getJobCardProducts") ?>',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            q: params.term, // Search term
+                            page: params.page // Page number
+                        };
 
-            $.ajax({
-                url: '<?= base_url('entries/getJobCardDetails') ?>',
-                method: 'post',
-                data: {
-                    job_card_number: jobCardNumber
+                    },
+
+                    processResults: function(data, params) {
+                        console.log(data);
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 10) < data.total_count // Adjust the number of items to load
+                            }
+                        };
+                    },
+                    cache: true
                 },
-                dataType: 'json',
-                success: function(response) {
-
-                    console.log(response);
-                    if (response.jobCardDetails) {
-                        // Display the job card details
-                        $('#assigned').text(response.jobCardDetails.createdBy);
-
-                        if (response.jobCardDetails.warrantyStatus === '1') {
-        $('#warranty').text('Yes');
-    } else {
-        $('#warranty').text('No');
-    }
-                        
-                        $('#remarks').text(response.jobCardDetails.remarks);
-                        $('#contact').text(response.jobCardDetails.contact);
-                        $('#customer_name').text(response.jobCardDetails.customerName);
-                        
-                        $('#product_model_name').text(response.jobCardDetails2[0].product_model_name);
-                        $('#service_name').text(response.jobCardDetails2[0].service_name);
-                        $('#job_id').val(response.jobCardDetails.id);
-
-                        if (response.jobCardDetails2[0].complaint_name !== null) {
-    $('#complaint_name').text(response.jobCardDetails2[0].complaint_name);
-} else {
-    $('#complaint_name').text(response.jobCardDetails2[0].problem_stated);
-}
-
-                        
-                       
-                        
-                    } else {
-                        $('#result').text('Job Card Not Found');
-                    }
+                // minimumInputLength: 2, // Minimum characters before search
+                templateResult: function(item) {
+                    if (item.loading) return 'Loading...';
+                    return item.jobcardNo;
+                },
+                templateSelection: function(item) {
+                    return item.jobcardNo;
                 }
             });
-        });
     });
+
+    function handleChange() {
+        console.log("yess");
+        var product_id = $('#job_card_number').val();
+        console.log(product_id);
+        
+
+        $.ajax({
+            url: '<?= base_url('entries/getJobCardDetails') ?>',
+            method: 'post',
+            data: {
+                product_id: product_id
+            },
+            dataType: 'json',
+            success: function(response) {
+
+                console.log(response);
+                if (response) {
+                    // Display the job card details
+                    $('#assigned').text(response[0].assigned_name);
+
+                    if (response[0].warrantyStatus === '1') {
+                        $('#warranty').text('Yes');
+                    } else {
+                        $('#warranty').text('No');
+                    }
+
+                    $('#remarks').text(response[0].remarks);
+                    $('#contact').text(response[0].contact);
+                    $('#customer_name').text(response[0].customerName);
+
+                    $('#product_model_name').text(response[0].model_name);
+                    $('#service_name').text(response[0].service_name);
+                    $('#job_id').val(response[0].jobID);
+                    $('#jobcardNo').val(response[0].jobcardNo);
+
+                    if (response[0].complaint_name !== null) {
+                        $('#complaint_name').text(response[0].complaint_name);
+                    } else {
+                        $('#complaint_name').text(response[0].problem_stated);
+                    }
+
+
+
+
+                } else {
+                    $('#result').text('Job Card Not Found');
+                }
+            }
+        });
+    };
 </script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

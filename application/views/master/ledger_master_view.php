@@ -15,6 +15,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Customer Group</th>
                             <th>Contact Number</th>
                             <th>Address</th>
                             <th>Email ID</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td><?php echo $ledger['id']; ?></td>
                                 <td><?php echo $ledger['name']; ?></td>
+                                <td><?php echo $ledger['ledger_group_type']; ?></td>
                                 <td><?php echo $ledger['contact_no']; ?></td>
                                 <td><?php echo $ledger['address']; ?></td>
                                 <td><?php echo $ledger['email_id']; ?></td>
@@ -43,7 +45,7 @@
                                 <td><?php echo $full_names[$key]; ?></td>
                                 <td>
                                     <a  class="btn btn-info btn-sm" href="<?= base_url('master/editLedger/'. $ledger['id']);?>" ><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                    <a class="btn btn-danger btn-sm" ><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
+                                    <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteLedger/'. $ledger['id']);?>" ><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

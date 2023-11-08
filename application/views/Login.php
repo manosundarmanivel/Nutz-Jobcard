@@ -1,89 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" class="default-style layout-fixed layout-navbar-fixed">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Login - Sathyodhayam</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?= base_url('assets') ?>/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
-    <link href="<?= base_url('assets') ?>/css/icons.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url('assets') ?>/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    <title>Login</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Empire is one of the unique admin template built on top of Bootstrap 4 framework. It is easy to customize, flexible code styles, well tested, modern & responsive are the topmost key factors of Empire Dashboard Template" />
+    <meta name="keywords" content="bootstrap admin template, dashboard template, backend panel, bootstrap 4, backend template, dashboard template, saas admin, CRM dashboard, eCommerce dashboard">
+    <meta name="author" content="Codedthemes" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets') ?>/img/favicon.ico">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- Icon fonts -->
+
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/bootstrap-material.css">
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/shreerang-material.css">
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/uikit.css">
+
+    <!-- Libs -->
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <!-- Page -->
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/pages/authentication.css">
 </head>
+
 <body>
-    <div class="account-pages my-5 pt-sm-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div class="card overflow-hidden">
-                        <div class="bg-primary bg-soft">
-                            <div class="row">
-                                <div class="col-7">
-                                    <div class="text-primary p-4">
-                                        <h5 class="text-primary">Welcome Back !</h5>
-                                        <p>Sign in to continue to Sathyodhayam.</p>
-                                    </div>
-                                </div>
-                                <div class="col-5 align-self-end">
-                                    <img src="<?= base_url('assets') ?>/images/profile-img.png" alt="" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="auth-logo">
-                                <a href="" class="auth-logo-light">
-                                    <div class="avatar-md profile-user-wid mb-4">
-                                        <span class="avatar-title rounded-circle bg-light" style="background-color: #fff !important;">
-                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt="" height="55">
-                                        </span>
-                                    </div>
-                                </a>
-                                <a href="" class="auth-logo-dark">
-                                    <div class="avatar-md profile-user-wid mb-4">
-                                        <span class="avatar-title rounded-circle bg-light" style="background-color: #fff !important;">
-                                            <img src="<?= base_url('assets') ?>/images/header/favicon.svg" alt="" height="55">
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="p-2">
-                                <?php if ($this->session->flashdata('message')) { ?>
-                                    <div class="alert alert-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" role="alert">
-                                        <?= $this->session->flashdata('message')[1] ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php } ?>
-                                <div class="mt-3">
-                                    <!-- Form for user login -->
-                                    <form class="form-horizontal" method="post" action="<?= base_url('dashboard/login') ?>">
-                                        <div class="mb-3">
-                                            <label for="login_email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" name="username" id="login_email" placeholder="Enter Email" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Password</label>
-                                            <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" name="password" placeholder="Enter password" aria-label="password" aria-describedby="password-addon" required>
-                                                <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="mt-3 d-grid">
-                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
-                                            <p>Already have an account? <a href="<?= base_url('dashboard/register') ?>" class="fw-medium text-primary">SignUp</a></p>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-5 text-center">
-                        <div>
-                            <p>© <script>document.write(new Date().getFullYear())</script> Sathyodhayam. Crafted with <i class="mdi mdi-heart text-danger"></i> by Nutz</p>
-                        </div>
+    <!-- [ Preloader ] Start -->
+    <div class="page-loader">
+        <div class="bg-primary"></div>
+    </div>
+    <!-- [ Preloader ] End -->
+
+    <!-- [ content ] Start -->
+    <div class="authentication-wrapper authentication-1 px-4">
+        <div class="authentication-inner py-5">
+
+            <!-- [ Logo ] Start -->
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="ui-w-60">
+                    <div class="w-100 position-relative">
+                        <img src="<?= base_url('assets') ?>/img/logo-dark.png" alt="Brand Logo" class="img-fluid">
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
+            <form class="my-5" method="post" action="<?= base_url('dashboard/login') ?> ">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="login_email" placeholder="Enter Email" required>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter password" aria-label="password" aria-describedby="password-addon" required>
+                    <div class="clearfix"></div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Login</button>
+
+            </form>
+            <!-- [ Form ] End -->
+
+            <div>
+                <?php if ($this->session->flashdata('message')) { ?>
+
+                    <div class="alert alert-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <?= $this->session->flashdata('message')[1] ?>
+                    </div>
+
+                <?php } ?>
+            </div>
+
         </div>
     </div>
-    <!-- end account-pages -->
-    <!-- JAVASCRIPT -->
-    <script src="<?= base_url('assets') ?>/libs/jquery/jquery.min.js"></script>
-   
+    <!-- [ content ] End -->
+
+    <!-- Core scripts -->
+    <script src="<?= base_url('assets') ?>/js/pace.js"></script>
+    <script src="<?= base_url('assets') ?>/js/jquery-3.3.1.min.js"></script>
+    <script src="<?= base_url('assets') ?>/libs/popper/popper.js"></script>
+    <script src="<?= base_url('assets') ?>/js/bootstrap.js"></script>
+
+
+
+</body>
+
+
+<!-- Mirrored from html.phoenixcoded.net/empire/bootstrap/default/pages_authentication_register-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Sep 2020 08:13:46 GMT -->
+
+</html>

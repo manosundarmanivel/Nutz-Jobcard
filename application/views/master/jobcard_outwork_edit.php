@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label class="form-label" for="name">Vendor Address:</label>
-                            <textarea value="<?= $outworks['address'] ?>" type="text" class="form-control" name="address" id="name" required > </textarea>
+                            <textarea  type="text" class="form-control" name="address" id="name" required ><?= $outworks['address'] ?> </textarea>
                         </div>
                         <div class="form-group col-6 ">
                             <label class="form-label" for="name">Vendor E-Mail ID::</label>

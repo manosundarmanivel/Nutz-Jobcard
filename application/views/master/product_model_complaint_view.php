@@ -29,10 +29,16 @@
                             foreach ($product_model_complaints as $product_model_complaint) { ?>
                                 <tr>
                                     <td><?= $product_model_complaint['name'] ?></td>
-                                    <td><?= $product_model_complaint['product_model_id'] ?></td>
+                                    <td><?= $product_model_complaint['product_model_name'] ?></td>
 
-                                    <td><?= $product_model_complaint['created_by'] ?></td>
-                                    <td><?= $product_model_complaint['updated_by'] ?></td>
+                                    <td><?= $product_model_complaint['created_name'] ?></td>
+                                    <td><?php
+                                        if ($product_model_complaint['updated_name'] != NULL) {
+                                            echo $product_model_complaint['updated_name'];
+                                        } else {
+                                            echo "-";
+                                        }
+                                        ?></td>
                                     <td><?= $product_model_complaint['created_at'] ?></td>
                                     <td><?= $product_model_complaint['updated_at'] ?></td>
                                     <td>

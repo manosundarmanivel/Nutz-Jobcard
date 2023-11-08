@@ -34,8 +34,14 @@
                                 <td><?= $service_type['name'] ?></td>
                                 <td><?= $service_type['description'] ?></td>
                                 
-                                <td><?= $service_type['created_by']?></td>
-                                <td><?= $service_type['updated_by']?></td>
+                                <td><?= $service_type['created_name']?></td>
+                                <td><?php
+                                        if ($service_type['updated_name'] != NULL) {
+                                            echo $service_type['updated_name'];
+                                        } else {
+                                            echo "-";
+                                        }
+                                        ?></td>
                                 <td><?= $service_type['created_at']?></td>
                                 <td><?= $service_type['updated_at']?></td>
                                 <td>

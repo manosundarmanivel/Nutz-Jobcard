@@ -19,7 +19,7 @@
 
             <div class="form-group col-12">
                 <label class="form-label" for="customer_group" >Product Model:</label>
-                <p><?= $product_model_complaint['product_model_id'] ?></p>
+                <p><?= $product_model_complaint['product_model_name'] ?></p>
             
 
             </div>

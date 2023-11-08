@@ -61,8 +61,14 @@
                                     <td><?= $product_item['mpo'] ?></td>
                                     <td><?= $product_item['min_stock'] ?></td>
                                     <td><?= $product_item['max_stock'] ?></td>
-                                    <td><?= $product_item['created_by'] ?></td>
-                                    <td><?= $product_item['updated_by'] ?></td>
+                                    <td><?= $product_item['created_name'] ?></td>
+                                    <td><?php
+                                        if ($product_item['updated_name'] != NULL) {
+                                            echo $product_item['updated_name'];
+                                        } else {
+                                            echo "-";
+                                        }
+                                        ?></td>
                                     <td><?= $product_item['created_at'] ?></td>
                                     <td><?= $product_item['updated_at'] ?></td>
                                     <td>

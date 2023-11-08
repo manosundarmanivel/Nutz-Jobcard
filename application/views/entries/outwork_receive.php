@@ -6,17 +6,18 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4">Outwork Receive</h4>
+        <h4 class="font-weight-bold  mt-2 mb-4">Outwork Receive Entry</h4>
         <div class="card mb-4">
-            <h6 class="card-header">Outwork Send</h6>
+            <h6 class="card-header">Outwork Receive Entry</h6>
 
             <div class="card-body">
-                <form method="post" action="<?= base_url('entries/sendOutwork') ?>">
+                <form method="post" action="<?= base_url('entries/receiveOutwork/' ) ?>">
                     <div style="display: flex;">
-                    
-                    <div class="form-group col-6">
+                
+                    <input type="hidden" name="job_id" id="job_id" />
+                        <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Outwork Vendor</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="outwork_vendor_id" name="outwork_vendor_id">
+                            <select onchange ="handleVendorChange(this)" class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="outwork_vendor_id" name="outwork_vendor_id">
                                 <option value="">Select Outwork Vendor</option>
 
                                 <?php foreach ($outwork_vendors as $outwork_vendor) { ?>
@@ -26,7 +27,7 @@
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label" for="customer_group">Jobcard Number:</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="job_card_number" name="job_id">
+                            <select onchange="handleChange()" class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="job_card_number" name="job_id">
                                 <option value="">Select Jobcard Number</option>
 
                                 <?php foreach ($open_jobcards as $open_jobcard) { ?>
@@ -34,7 +35,7 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <button class="btn btn-facebook m-3" type="button" id="lookup_btn">Lookup</button>
+                       
                     </div>
                     <div style="display: flex;">
 
@@ -95,12 +96,19 @@
                             <label class="form-label" for="customer_email">Photos : </label>
 
                         </div>
-                        
+
 
 
                     </div>
                     <div style="display: flex;">
-
+                        <div class="form-group col-6 ">
+                            <label class="form-label" for="name">Outwork Vendor Charges:</label>
+                            <input type="text" class="form-control" name="outwork_vendor_charges" id="name" required placeholder="Enter Contact Number">
+                        </div>
+                        <div class="form-group col-6 ">
+                            <label class="form-label" for="name">Customer Charges:</label>
+                            <input type="text" class="form-control" name="customer_charges" id="name" required placeholder="Enter Contact Number">
+                        </div>
 
 
                     </div>
@@ -124,48 +132,115 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    function handleVendorChange(element)
+    {
+        let vendor_id = element.value;
+        if(vendor_id)
+       {
+            $('#job_card_number')
+            .wrap('<div class="position-relative"></div>')
+            .select2({
+                ajax: {
+                    url: '<?= base_url("entries/getJobCardProducts") ?>',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            q: params.term, // Search term
+                            page: params.page ,// Page number
+                            vendor_id: vendor_id,
+                        };
+                        
+                    },
+                    
+                    processResults: function(data, params) {
+                        console.log(data);
+                        params.page = params.page || 1;
 
-        $('#lookup_btn').click(function() {
-            console.log("yess");
-            var jobCardNumber = $('#job_card_number').val();
-
-            $.ajax({
-                url: '<?= base_url('entries/getJobCardDetails') ?>',
-                method: 'post',
-                data: {
-                    job_card_number: jobCardNumber
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 10) < data.total_count // Adjust the number of items to load
+                            }
+                        };
+                    },
+                    cache: true
                 },
-                dataType: 'json',
-                success: function(response) {
-
-                    console.log(response);
-                    if (response.jobCardDetails) {
-                        // Display the job card details
-                        $('#assigned').text(response.jobCardDetails.createdBy);
-
-                        if (response.jobCardDetails.warrantyStatus === '1') {
-                            $('#warranty').text('Yes');
-                        } else {
-                            $('#warranty').text('No');
-                        }
-
-                        $('#remarks').text(response.jobCardDetails.remarks);
-                        $('#contact').text(response.jobCardDetails.contact);
-                        $('#customer_name').text(response.jobCardDetails.customerName);
-                        $('#complaint_name').text(response.jobCardDetails2[0].complaint_name);
-                        $('#product_model_name').text(response.jobCardDetails2[0].product_model_name);
-                        $('#service_name').text(response.jobCardDetails2[0].service_name);
-
-
-
-                    } else {
-                        $('#result').text('Job Card Not Found');
-                    }
+                // minimumInputLength: 2, // Minimum characters before search
+                templateResult: function(item) {
+                    if (item.loading) return 'Loading...';
+                    return item.jobcardNo;
+                },
+                templateSelection: function(item) {
+                    return item.jobcardNo;
                 }
             });
+        };
+    }
+
+    function handleChange() {
+        console.log("yess");
+        var product_id = $('#job_card_number').val();
+       
+
+        $.ajax({
+            url: '<?= base_url('entries/getJobCardDetails') ?>',
+            method: 'post',
+            data: {
+                product_id: product_id
+            },
+            dataType: 'json',
+            success: function(response) {
+
+                console.log(response,"text");
+                if (response) {
+                   
+                    $('#assigned').text(response[0].assigned_name);
+
+                    if (response[0].warrantyStatus === '1') {
+                        $('#warranty').text('Yes');
+                    } else {
+                        $('#warranty').text('No');
+                    }
+
+                    $('#remarks').text(response[0].remarks);
+                    $('#contact').text(response[0].contact);
+                    $('#customer_name').text(response[0].customerName);
+                    $('#product_model_name').text(response[0].model_name);
+                    $('#complaint_name').text(response[0].complaint_name);
+                    $('#service_name').text(response[0].service_name);
+
+                    // $('#product_model_name').text(response.jobCardDetails.products);
+                    // $('#service_name').text("mano");
+                    $('#job_id').val(response[0].jobID);
+                    
+                    
+                    $('#jobcardNo').val(response[0].jobcardNo);
+                    // $('#complaint_name').text(response[0].problem_stated);
+
+                    if (response[0].complaint_name !== null) {
+                        $('#complaint_name').text(response[0].complaint_name);
+                    } else {
+                        $('#complaint_name').text(response[0].problem_stated);
+                    }
+                
+
+
+                    
+
+
+
+                } else {
+                    $('#result').text('Job Card Not Found');
+                }
+            }
         });
-    });
+    };
+
+
+
+
+    
 </script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

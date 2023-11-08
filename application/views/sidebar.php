@@ -16,19 +16,19 @@
 
     <!-- Icon fonts -->
     <link rel="stylesheet" href="<?= base_url('') ?>assets/fonts/ionicons.css">
-    <link rel="stylesheet" href="<?= base_url('') ?>assets/fonts/feather.css"> 
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/fonts/feather.css">
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/bootstrap-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/shreerang-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/uikit.css">
-    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css"> 
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
-        function ShowModel(e){
+        function ShowModel(e) {
             e.preventDefault();
             document.getElementById('modals-top').classList.add("show");
         }
-    </script> 
+    </script>
 
     <style>
         @media screen and (min-width:1000px) {
@@ -37,8 +37,8 @@
             }
         }
 
-        .dropdown-menu{
-            max-height:500px;
+        .dropdown-menu {
+            max-height: 500px;
             overflow-y: scroll;
         }
 
@@ -79,7 +79,7 @@
                     </a>
                 </div>
                 <div class="sidenav-divider mt-0"></div>
-                      <!-- Links -->
+                <!-- Links -->
 
                 <li class="sidenav-item ">
                     <a href="javascript:" class="sidenav-link sidenav-toggle">
@@ -97,12 +97,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="ledger_group_master_add"){echo "active";} ?> ">
+                                <li class="sidenav-item <?php if ($classname == "ledger_group_master_add") {
+                                                            echo "active";
+                                                        } ?> ">
                                     <a href="<?= base_url('master/ledger_group_master_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="ledger_group_master_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "ledger_group_master_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/ledger_group_master_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -119,12 +123,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="ledger_master_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "ledger_master_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/ledger_master_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="ledger_master_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "ledger_master_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/ledger_master_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -141,12 +149,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="product_category_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_category_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_category_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="product_category_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_category_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_category_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -163,12 +175,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="product_group_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_group_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_group_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="product_group_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_group_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_group_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -185,12 +201,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="product_model_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_model_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_model_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="product_model_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_model_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_model_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -207,12 +227,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="product_model_complaint_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_model_complaint_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_model_complaint_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="product_model_complaint_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_model_complaint_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_model_complaint_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -229,13 +253,43 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="product_brand_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_brand_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_brand_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="product_brand_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_brand_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_brand_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="sidenav-item ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Tax</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if ($classname == "tax_add") {
+                                                            echo "active";
+                                                        } ?>">
+                                    <a href="<?= base_url('master/tax_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if ($classname == "tax_view") {
+                                                            echo "active";
+                                                        } ?>">
+                                    <a href="<?= base_url('master/tax_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -251,12 +305,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="product_item_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_item_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_item_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="product_item_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "product_item_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/product_item_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -273,12 +331,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="jobcard_service_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "jobcard_service_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/jobcard_service_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="jobcard_service_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "jobcard_service_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/jobcard_service_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -295,12 +357,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="jobcard_employee_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "jobcard_employee_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/jobcard_employee_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="jobcard_employee_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "jobcard_employee_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/jobcard_employee_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -317,12 +383,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="jobcard_outwork_add"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "jobcard_outwork_add") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/jobcard_outwork_add') ?>" class="sidenav-link">
                                         <div>Add</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="jobcard_outwork_view"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "jobcard_outwork_view") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('master/jobcard_outwork_view') ?>" class="sidenav-link">
                                         <div>View</div>
                                     </a>
@@ -333,33 +403,39 @@
                             </ul>
                         </li>
 
-                        <li class="sidenav-item open ">
-                            <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div> Add JobCard  </div>
-
-                            </a>
-                            <ul class="sidenav-menu ">
-                                <li class="sidenav-item <?php if($classname=="jobcard_add"){echo "active";} ?>">
-                                    <a href="<?= base_url('master/jobcard_add') ?>" class="sidenav-link">
-                                        <div>Add</div>
-                                    </a>
-                                </li>
-                                <li class="sidenav-item <?php if($classname=="jobcard_view"){echo "active";} ?>">
-                                    <a href="<?= base_url('master/jobcard_view') ?>" class="sidenav-link">
-                                        <div>View</div>
-                                    </a>
-                                </li>
-
-
-
-                            </ul>
-                        </li>
+                        
                     </ul>
 
                 </li>
 
-                <li class="sidenav-item open">
+                <li class="sidenav-item ">
+                    <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                        <div>New JobCard</div>
+
+                    </a>
+                    <ul class="sidenav-menu">
+                        <li class="sidenav-item <?php if ($classname == "outwork_send") {
+                                                    echo "active";
+                                                } ?> ">
+                             <a href="<?= base_url('master/jobcard_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                        </li>
+                        <li class="sidenav-item <?php if ($classname == "outwork_receive") {
+                                                    echo "active";
+                                                } ?>">
+                            <a href="<?= base_url('master/jobcard_view') ?>" class="sidenav-link">
+                                        <div>View</div>
+                                    </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+
+                <li class="sidenav-item ">
                     <a href="javascript:" class="sidenav-link sidenav-toggle">
 
                         <div>Entries</div>
@@ -369,28 +445,7 @@
 
                         <!-- Dashboards -->
 
-                        <li class="sidenav-item  ">
-                            <a href="javascript:" class="sidenav-link sidenav-toggle">
 
-                                <div>Jobcard</div>
-
-                            </a>
-                            <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="outwork_send"){echo "active";} ?> ">
-                                    <a href="<?= base_url('entries/outwork_send') ?>" class="sidenav-link">
-                                        <div>Add</div>
-                                    </a>
-                                </li>
-                                <li class="sidenav-item <?php if($classname=="outwork_receieve"){echo "active";} ?>">
-                                    <a href="<?= base_url('entries/outwork_receieve') ?>" class="sidenav-link">
-                                        <div>View</div>
-                                    </a>
-                                </li>
-
-
-
-                            </ul>
-                        </li>
 
                         <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
@@ -399,12 +454,16 @@
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if($classname=="outwork_send"){echo "active";} ?> ">
+                                <li class="sidenav-item <?php if ($classname == "outwork_send") {
+                                                            echo "active";
+                                                        } ?> ">
                                     <a href="<?= base_url('entries/outwork_send') ?>" class="sidenav-link">
                                         <div>Send</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if($classname=="outwork_receive"){echo "active";} ?>">
+                                <li class="sidenav-item <?php if ($classname == "outwork_receive") {
+                                                            echo "active";
+                                                        } ?>">
                                     <a href="<?= base_url('entries/outwork_receive') ?>" class="sidenav-link">
                                         <div>Receive</div>
                                     </a>
@@ -414,10 +473,28 @@
 
                             </ul>
                         </li>
+
+                        <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link">
+                            <a href="<?= base_url('entries/employee_workready_entry') ?>" class="sidenav-link">
+                                <div>Employee Workready Entry</div>
+                            </a>
+
+                            </a>
+                            
+                        </li>
                     </ul>
                 </li>
 
-   
+
+                
+
+
+                
+
+                </li>
+
+
 
 
 
@@ -433,9 +510,9 @@
 
 
 
-            </div> 
-            <div class="layout-container"> 
-                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x"> 
+            </div>
+            <div class="layout-container">
+                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x">
                     <a href="" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
                         <span class="app-brand-logo demo" style="margin-left: 10px;">
                             <img src="https://ik.imagekit.io/bfzb9z4tav/assets/Nutz_R_c7vy0Z41x.svg?updatedAt=1626781279459" alt="Brand Logo" width="100px" height="100px">
@@ -452,18 +529,16 @@
                     <!-- Divider -->
                     <!-- Divider -->
                     <div class="demo-navbar-user nav-item dropdown logout" style="display:flex;justify-content:end;">
-                    <div class="d-inline-flex flex-lg-row-reverse align-items-center align-middle cursor-pointer" onclick=ShowModel() data-toggle="modal" data-target="#modals-top"><i class="feather icon-help-circle text-danger"></i></div>
+                        <div class="d-inline-flex flex-lg-row-reverse align-items-center align-middle cursor-pointer" onclick=ShowModel() data-toggle="modal" data-target="#modals-top"><i class="feather icon-help-circle text-danger"></i></div>
                         <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">
                             <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                                 <!-- <img src="" alt class="d-block ui-w-30 rounded-circle"> -->
-                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0"><?php if($this->session->userdata('user')->name){
-                                    echo($this->session->userdata('user')->name);
-                                }
-                                else
-                                {
-                                    echo('-');
-                                }
-                                ?></span>
+                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0"><?php if ($this->session->userdata('user')->name) {
+                                                                            echo ($this->session->userdata('user')->name);
+                                                                        } else {
+                                                                            echo ('-');
+                                                                        }
+                                                                        ?></span>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right overflow-hidden">
@@ -474,42 +549,42 @@
                         </div>
                     </div>
                 </nav>
-                            <div class="modal modal-top fade" id="modals-top">
-                                <div class="modal-dialog">
-                                    <form class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Shortcuts Keys
-                                                <!-- <span class="font-weight-light">Information</span> -->
-                                                <br>
-                                                <!-- <small class="text-muted">We need payment information to process your order.</small> -->
-                                            </h5>
-                                            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button> -->
-                                        </div>
-                                        <div class="modal-body">
-                                            
-                                            <div class="form-row">
-                                                <div class="form-group col-12 mb-2">
-                                                    <span><strong>Shift+RightArrow : </strong>
-                                                    Add single product and move to next product </span>
-                                                </div>
-                                                <div class="form-group col-12 mb-2">
-                                                    <span><strong>Shift+DownArrow : </strong>
-                                                    Move to Bill to Details </span>
-                                                </div>
-                                                <div class="form-group col-12 mb-2">
-                                                    <span><strong>Shift+Enter : </strong>
-                                                    Print Bill</span>
-                                                </div>
-                                                <div class="form-group col-12 mb-0">
-                                                    <span><strong>Esc : </strong>
-                                                    To close the Print Bill page</span>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <!-- <button type="button" class="btn btn-primary">Save</button> -->
-                                        </div>
-                                    </form>
+                <div class="modal modal-top fade" id="modals-top">
+                    <div class="modal-dialog">
+                        <form class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Shortcuts Keys
+                                    <!-- <span class="font-weight-light">Information</span> -->
+                                    <br>
+                                    <!-- <small class="text-muted">We need payment information to process your order.</small> -->
+                                </h5>
+                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button> -->
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-row">
+                                    <div class="form-group col-12 mb-2">
+                                        <span><strong>Shift+RightArrow : </strong>
+                                            Add single product and move to next product </span>
+                                    </div>
+                                    <div class="form-group col-12 mb-2">
+                                        <span><strong>Shift+DownArrow : </strong>
+                                            Move to Bill to Details </span>
+                                    </div>
+                                    <div class="form-group col-12 mb-2">
+                                        <span><strong>Shift+Enter : </strong>
+                                            Print Bill</span>
+                                    </div>
+                                    <div class="form-group col-12 mb-0">
+                                        <span><strong>Esc : </strong>
+                                            To close the Print Bill page</span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Save</button> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>

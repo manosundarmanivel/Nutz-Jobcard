@@ -47,26 +47,27 @@
 
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_group">Product Category:</label>
-                        <p><?= $product_item['product_category_id'] ?></p>
+                        <p><?= $product_item['category_name'] ?></p>
                     </div>
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_group">Product Model:</label>
-                        <p><?= $product_item['product_model_id'] ?></p>
+                        <p><?= $product_item['model_name'] ?></p>
                     </div>
                     
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_group">Product Group:</label>
-                        <p><?= $product_item['product_group_id'] ?></p>
+                        <p><?= $product_item['group_name'] ?></p>
                     </div>
 
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_group">Product Brand:</label>
-                        <p><?= $product_item['product_brand_id'] ?></p>
+                        <p><?= $product_item['brand_name'] ?></p>
                     </div>
 
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_name">Tax %</label>
-                        <input value="<?= $product_item['tax_master_id'] ?>" type="text" class="form-control" id="tax" name="tax" required placeholder="Tax %">
+                        <p><?= $product_item['tax_value'] ?></p>
+                       
                     </div>
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_name">HSN / SAC Code</label>

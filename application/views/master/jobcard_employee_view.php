@@ -41,8 +41,14 @@
                                 <td><?= $employee['address'] ?></td>
                                 <td><?= $employee['username'] ?></td>
                                 
-                                <td><?= $employee['created_by']?></td>
-                                <td><?= $employee['updated_by']?></td>
+                                <td><?= $employee['created_name']?></td>
+                                <td><?php
+                                        if ($employee['updated_name'] != NULL) {
+                                            echo $employee['updated_name'];
+                                        } else {
+                                            echo "-";
+                                        }
+                                        ?></td>
                                 <td><?= $employee['created_at']?></td>
                                 <td><?= $employee['updated_at']?></td>
                                 <td>

@@ -6,9 +6,9 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>Add Product Group</h4>
+            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>Add Model Complaint</h4>
 <div class="card mb-4">
-    <h6 class="card-header">Add Product Group</h6>
+    <h6 class="card-header">Add Model Complaint</h6>
     <div class="card-body">
         <form method="post" action="<?= base_url('master/addProductmodelcomplaint') ?>">
        
@@ -19,8 +19,8 @@
             </div>
         
             
-       
-            <div class="form-group col-12">
+       <div style="display: flex;">
+       <div class="form-group col-10">
                 <label class="form-label" for="customer_group" >Product Model:</label>
                 <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="product_model_id" name="product_model">
                  <option value="">Select Customer Group</option>
@@ -29,6 +29,13 @@
                     <?php } ?>
                 </select>
             </div>
+            <div class="form-group col-2 m-3 p-1" >
+                       <button type="button" class="btn btn-primary" onclick="addNewProductModel()">Add   </button>
+
+
+            </div>
+       </div>
+            
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -37,7 +44,12 @@
         </div>
 </div>
 </div>
-
+<script>
+function addNewProductModel() {
+        // Navigate to the "Add Customer Group" page
+        window.location.href = "<?php echo base_url('master/product_model_add'); ?>"; // Replace with the actual URL
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="<?= base_url('') ?>assets/js/pages/forms_selects.js"></script>
 <script src="<?= base_url('') ?>assets/libs/bootstrap-select/bootstrap-select.js"></script>

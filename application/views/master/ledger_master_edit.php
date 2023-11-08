@@ -25,6 +25,10 @@
                     </div>
 
                     <div style="display: flex;">
+                    <div class="form-group col-6">
+                            <label class="form-label" for="customer_contact">Customer Group:</label>
+                            <p> <?= $ledger['ledger_group_type'] ?></p>
+                        </div>
                         <!-- <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Customer Group:</label>
                             <select class="select2-demo form-control" data-allow-clear="true" style="width: 100%" id="customer_group" name="customer_group">
@@ -54,12 +58,26 @@
 
                     <div class="form-group">
                         <label class="form-label" for="entry_type">Entry Type:</label>
-                        <input type="text" class="form-control" id="entry_type" name="entry_type" value="<?= $ledger['entry_type'] ?>" placeholder="Enter Entry Type">
+                        <select name="entry_type" class="form-control" data-allow-clear="true" style="width: 100%">
+    <option value="">Select an option</option>
+    <option value="Sales" <?= ($ledger['entry_type'] === 'Sales') ? 'selected' : '' ?>>Sales</option>
+    <option value="Purchase" <?= ($ledger['entry_type'] === 'Purchase') ? 'selected' : '' ?>>Purchase</option>
+    <option value="Both" <?= ($ledger['entry_type'] === 'Both') ? 'selected' : '' ?>>Both</option>
+</select>
+
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="price_list">Price List:</label>
-                        <input type="text" class="form-control" id="price_list" name="price_list" value="<?= $ledger['price_list'] ?>" placeholder="Enter Price List">
+                       
+                        <select name="price_list" class="form-control" data-allow-clear="true" style="width: 100%">
+    <option value="">Select a price list</option>
+    <option value="Purchase Price" <?= ($ledger['price_list'] === 'Purchase Price') ? 'selected' : '' ?>>Purchase Price</option>
+    <option value="DBP" <?= ($ledger['price_list'] === 'DBP') ? 'selected' : '' ?>>DBP</option>
+    <option value="Wholesale Price" <?= ($ledger['price_list'] === 'Wholesale Price') ? 'selected' : '' ?>>Wholesale Price</option>
+    <option value="MOP" <?= ($ledger['price_list'] === 'MOP') ? 'selected' : '' ?>>MOP</option>
+</select>
+
                     </div>
 
                     <div class="form-group">

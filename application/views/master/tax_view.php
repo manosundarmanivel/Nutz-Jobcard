@@ -6,15 +6,15 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Product Categories</h4>
+        <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Tax</h4>
         <div class="card">
-            <h6 class="card-header">View Product Categories</h6>
-            <div class="card-datatable table-responsive p-3">
+            <h6 class="card-header">View Tax</h6>
+            <div class="card-datatable table-responsive">
                 <table class="datatables-demo table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Name</th>
-
+                            
+                            <th>Value</th>
                             <th>Created By</th>
                             <th>Updated By</th>
                             <th>Created At</th>
@@ -25,26 +25,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($product_categories)) {
-                            foreach ($product_categories as $product_category) { ?>
+                        <?php if (!empty($taxs)) {
+                            foreach ($taxs as $tax) { ?>
                                 <tr>
-                                    <td><?= $product_category['name'] ?></td>
-
-                                    <td><?= $product_category['created_name'] ?></td>
+                                   
+                                    <td><?= $tax['value'] ?></td>
+                                    <td><?= $tax['created_name'] ?></td>
                                     <td><?php
-                                        if ($product_category['updated_name'] != NULL) {
-                                            echo $product_category['updated_name'];
+                                        if ($tax['updated_name'] != NULL) {
+                                            echo $tax['updated_name'];
                                         } else {
                                             echo "-";
                                         }
                                         ?></td>
-                                    <td><?= $product_category['created_at'] ?></td>
-                                    <td><?= $product_category['updated_at'] ?></td>
+                                    <td><?= $tax['created_at'] ?></td>
+                                    <td><?= $tax['updated_at'] ?></td>
+                                    
+
                                     <td>
                                         <?php
-                                        if ($product_category['is_default'] == 0) { ?>
-                                            <a class="btn btn-info btn-sm" href="<?= base_url('master/editProductcategory/'. $product_category['id']);?>" ><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                            <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteProductcategory/' . $product_category['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
+                                        if ($tax['is_default'] == 0) { ?>
+                                            <a class="btn btn-info btn-sm" href="<?= base_url('master/editTax/' . $tax['id']); ?>"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                            <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteTax/' . $tax['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
                                         <?php
                                         } else {
                                             echo ("-");
@@ -57,7 +59,7 @@
                             <?php }
                         } else { ?>
                             <tr>
-                                <td colspan="2">No active product categories found.</td>
+                                <td colspan="2">No active ledger group masters found.</td>
                             </tr>
                         <?php } ?>
                     </tbody>

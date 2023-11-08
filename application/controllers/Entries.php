@@ -33,35 +33,99 @@ class Entries extends CI_Controller
         $this->load->view('entries/outwork_receive', $data);
         $this->load->view("footer");
     }
-
+    public function employee_workready_entry()
+    {
+        // $data['open_jobcards'] = $this->User_model->getProcessJobFormNos();
+        // $data['outwork_vendors'] = $this->User_model->getActiveOutwork();
+        $class['classname'] = 'employee_workready_entry';
+        $this->load->view("sidebar", $class);
+        $this->load->view('entries/employee_workready_entry');
+        $this->load->view("footer");
+    }
     public function getJobCardDetails() {
-        // Get the job card number from the POST data
-        $jobCardNumber = $this->input->post('job_card_number');
-
+        
+        $product_id = $this->input->post('product_id');
+       
+        $jobCardDetails = $this->db
+            ->select([
+                "job.customerName",
+                "job.contact",
+                "job.formno",
+                "job.warrantyStatus",
+                "job.billNo",
+                "job.remarks",
+                "p.jobcardNo",
+               
+                "e.name AS employee_name",
+                "p.problem_stated",
+                "p.id",
+                "p.jobID",
+                "pc.name AS complaint_name",
+                "pm.name AS model_name",
+                "st.name AS service_name",
+                "e.name AS assigned_name",
+                "cb.name AS created_by_name",
+            ])
+            ->from('product as p')
+            ->where("p.id", $product_id) 
+            ->join('job', 'job.id = p.jobID', 'left')
+            ->join('product_model_complaint as pc', 'pc.id = p.complaint', 'left')
+            ->join('product_model as pm', 'pm.id = p.products', 'left')
+            ->join('service_type as st', 'st.id = p.service', 'left')
+            ->join('employee as e', 'e.id = p.assigned', 'left')
+            ->join('employee as cb', 'cb.id = job.createdBy', 'left')
+            ->get()
+            ->result();
+       
+        echo json_encode($jobCardDetails);
+    }
+    
     
 
-        // Call the model to get job card details
-        $jobCardDetails = $this->User_model->getJobCardDetails($jobCardNumber);
-        $jobCardDetails2 = $this->User_model->getProductsByJobNO($jobCardNumber);
+    public function getJobCardProducts(){ 
+        $searchTerm = $this->input->get('q'); // Get the search term from the request
+        $page = $this->input->get('page'); 
+        $vendor_id=$this->input->get('vendor_id');
+        $user_id = $this->input->get('user_id');
+        if(!$page){
+            $page=1;
+        }  
+        $limit = 10; // Default limit for subsequent loads
+        $offset = 0;
 
-        if ($jobCardDetails) {
-            $response = array('jobCardDetails' => $jobCardDetails ,'jobCardDetails2' => $jobCardDetails2 );
+        if ($page == 1) {
+            // If it's the first page, load only the first 10 items
+            $limit = 10;
         } else {
-            $response = array('jobCardDetails' => null, 'jobCardDetails2' => null);
+            $offset = ($page - 1) * $limit;
         }
+        $query = $this->db->select(['id','jobcardNo'])->like('jobcardNo', $searchTerm)->limit($limit, $offset);
+        if($vendor_id){
+           $query= $query->where("outwork_vendor_id",$vendor_id);
+        }
+        if($user_id){
+           $query= $query->where("assigned",$user_id);
+        }
+        $results['items'] = $query->get('product')->result_array();
+        $count_query= $this->db->like('jobcardNo', $searchTerm); 
+        if($vendor_id){
+            $count_query->where("outwork_vendor_id",$vendor_id);
+        }
+        $results['total_count']= $count_query->get('product')->num_rows(); 
 
-        // Send the response as JSON
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($response));
+        echo json_encode($results); 
     }
+
+    
+    
+
 
     public function sendOutwork()
     {
 
         $vendor_id = $this->input->post('outwork_vendor_id');
         $job_id = $this->input->post('job_id');
-        $job_no = $this->input->post('job_card_number');
+        $job_no = $this->input->post('jobcardNo');
        
         $data = array(
             'outwork_vendor_id' => $vendor_id, 
@@ -74,5 +138,24 @@ class Entries extends CI_Controller
         redirect('entries/outwork_send');
 
     }
+
+    public function receiveOutwork()
+{
+   
+    $job_id = $this->input->post('job_id');
+    
+    
+    $outwork_vendor_charges = $this->input->post('outwork_vendor_charges');
+    $customer_charges = $this->input->post('customer_charges');
+    
+    $this->User_model->updateStatus($job_id,STATUS_COMPLETED);
+    $result = $this->User_model->updateCharges($job_id, $outwork_vendor_charges, $customer_charges);
+    
+    if ($result) {
+       redirect('entries/outwork_receive');
+    } else {
+        print_r($outwork_vendor_charges);
+    }
+}
 
 }

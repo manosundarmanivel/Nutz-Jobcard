@@ -23,6 +23,25 @@ class Master extends CI_Controller
         $this->load->view('master/ledger_master_add', $data);
         $this->load->view("footer");
     }
+    public function tax_add()
+    {
+        $class['classname'] = 'tax_add';
+        $this->load->view("sidebar", $class);
+        $this->load->view('master/tax_add');
+        $this->load->view("footer");
+    }
+
+    public function tax_view()
+    {
+        $data['taxs'] = $this->User_model->getActiveTax();
+        $class['classname'] = 'tax_view';
+
+
+
+        $this->load->view("sidebar", $class);
+        $this->load->view('master/tax_view', $data);
+        $this->load->view("footer");
+    }
 
     public function ledger_master_view()
     {
@@ -53,6 +72,8 @@ class Master extends CI_Controller
     {
         $data['ledger_group_masters'] = $this->User_model->getActiveLedgerGroupMasters();
         $class['classname'] = 'ledger_group_master_view';
+
+     
         $this->load->view("sidebar", $class);
         $this->load->view('master/ledger_group_master_view', $data);
         $this->load->view("footer");
@@ -107,7 +128,8 @@ class Master extends CI_Controller
                         'price_list' => $this->input->post('price_list'),
                         'discount' => $this->input->post('add_less_percentage'),
                         'is_active' => true,
-                        'created_by' => $this->session->userdata('user_id'),
+                        'created_by' => $this->session->userdata('user')->id,
+                       
                         'created_at' => date('Y-m-d H:i:s')
 
                     );
@@ -144,7 +166,8 @@ class Master extends CI_Controller
                         'type' => $type,
                         'is_active' => 1,
                         // 'created_by' => $user_id,
-                        'created_by' => "1",
+                        'created_by' => $this->session->userdata('user')->id,
+                        
                         'created_at' => date('Y-m-d H:i:s'),
 
                     );
@@ -163,12 +186,59 @@ class Master extends CI_Controller
             }
         }
     }
+    public function addTax()
+    {
+        if ($this->input->server('REQUEST_METHOD') === 'POST') {
+
+            if ($this->input->post()) {
+
+                $this->form_validation->set_rules('value', 'Value', 'required');
+              
+
+                if ($this->form_validation->run() == FALSE) {
+                    $this->session->set_flashdata('message', array('danger', validation_errors()));
+                } else {
+                   
+                    $value = $this->input->post('value');
+                  
+
+
+                    $data = array(
+                        'value' => $value,
+                       
+                        'is_active' => 1,
+                        // 'created_by' => $user_id,
+                        'created_by' => $this->session->userdata('user')->id,
+                        
+                        'created_at' => date('Y-m-d H:i:s'),
+
+                    );
+
+
+
+                    $this->User_model->addTax($data);
+                    $this->session->set_flashdata('message', array('success', "Tax Added Successfully"));
+                    redirect('master/tax_add');
+                }
+            } else {
+                $class['classname'] = 'addTax';
+                $this->load->view("sidebar", $class);
+                $this->load->view('master/tax_add', $data);
+                $this->load->view("footer");
+            }
+        }
+    }
 
 
     public function deleteLedger($id)
     {
         $this->User_model->deleteLedger($id);
         redirect('master/ledger_master_view');
+    }
+    public function deleteTax($id)
+    {
+        $this->User_model->deleteTax($id);
+        redirect('master/tax_view');
     }
     public function deleteLedgerGroup($id)
     {
@@ -193,6 +263,8 @@ class Master extends CI_Controller
                 'entry_type' => $this->input->post('entry_type'),
                 'price_list' => $this->input->post('price_list'),
                 'discount' => $this->input->post('add_less_percentage'),
+                
+                'updated_by' => $this->session->userdata('user')->id
 
             );
 
@@ -209,6 +281,33 @@ class Master extends CI_Controller
             //error page
         }
     }
+    public function editTax($id)
+    {
+        $data['tax'] = $this->User_model->getTaxById($id);
+
+        if ($this->input->post()) {
+
+            $data = array(
+                'value' => $this->input->post('value'),
+                
+                
+                'updated_by' => $this->session->userdata('user')->id
+
+            );
+
+            $res = $this->User_model->updateTax($id, $data);
+            if ($res)
+                redirect('master/tax_view');
+        }
+        if ($data['tax']) {
+            $class['classname'] = 'viewTax';
+            $this->load->view("sidebar", $class);
+            $this->load->view('master/tax_edit', $data);
+            $this->load->view("footer");
+        } else {
+            //error page
+        }
+    }
     public function editLedgerGroup($id)
     {
         $data['ledgerGroup'] = $this->User_model->getLedgerGroupById($id);
@@ -218,6 +317,8 @@ class Master extends CI_Controller
             $data = array(
                 'name' => $this->input->post('name'),
                 'type' => $this->input->post('type'),
+               
+                'updated_by' => $this->session->userdata('user')->id
 
 
             );
@@ -230,6 +331,38 @@ class Master extends CI_Controller
             $class['classname'] = 'viewledgerGroup';
             $this->load->view("sidebar", $class);
             $this->load->view('master/ledger_group_master_edit', $data);
+            $this->load->view("footer");
+        } else {
+            //error page
+        }
+    }
+    public function editJobcard($id)
+    {
+        $data['jobcard'] = $this->User_model->getJobcardId($id);
+
+        if ($this->input->post()) {
+
+            $data = array(
+                'contact'  => $this->input->post('contact'),
+               
+                'customerName' => $this->input->post('customer_name'),
+                'warrantyStatus'  => $this->input->post('warrantyStatus'),
+                'billNo' => $this->input->post('billDetailsInput'),
+                'remarks' => $this->input->post('remarks'),
+               
+                'createdBy' => $this->session->userdata('user')->id
+
+
+            );
+
+            $res = $this->User_model->updateJobcard($id, $data);
+            if ($res)
+                redirect('master/jobcard_view');
+        }
+        if ($data['jobcard']) {
+            $class['classname'] = 'viewJobcard';
+            $this->load->view("sidebar", $class);
+            $this->load->view('master/jobcard_edit', $data);
             $this->load->view("footer");
         } else {
             //error page
@@ -270,7 +403,9 @@ class Master extends CI_Controller
                 } else {
                     $data = array(
                         'name' => $this->input->post('product_category'),
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        'updated_by' => $this->session->userdata('user')->id
 
 
                     );
@@ -301,6 +436,8 @@ class Master extends CI_Controller
 
             $data = array(
                 'name' => $this->input->post('product_category'),
+              
+                        'updated_by' => $this->session->userdata('user')->id
 
 
 
@@ -348,15 +485,17 @@ class Master extends CI_Controller
 
             if ($this->input->post()) {
                 $this->form_validation->set_rules('name', 'Name', 'required');
-                $this->form_validation->set_rules('customer_group', 'Product Category', 'required');
+                $this->form_validation->set_rules('product_category', 'Product Category', 'required');
 
                 if ($this->form_validation->run() == FALSE) {
                     $this->session->set_flashdata('message', array('danger', validation_errors()));
                 } else {
                     $data = array(
                         'name' => $this->input->post('name'),
-                        'product_category_id' => $this->input->post('customer_group'),
-                        'is_active' => 1
+                        'product_category_id' => $this->input->post('product_category'),
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        
 
 
                     );
@@ -382,7 +521,9 @@ class Master extends CI_Controller
 
             $data = array(
                 'name' => $this->input->post('name'),
-                'product_category_id' => $this->input->post('product_category_id'),
+                
+                
+                        'updated_by' => $this->session->userdata('user')->id
 
 
 
@@ -440,7 +581,9 @@ class Master extends CI_Controller
                     $data = array(
                         'name' => $this->input->post('name'),
                         'product_group_id' => $this->input->post('customer_group'),
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                       
 
 
                     );
@@ -466,7 +609,9 @@ class Master extends CI_Controller
 
             $data = array(
                 'name' => $this->input->post('name'),
-                'product_group_id' => $this->input->post('product_group_id'),
+            
+                
+                        'updated_by' => $this->session->userdata('user')->id
 
 
 
@@ -525,7 +670,9 @@ class Master extends CI_Controller
                     $data = array(
                         'name' => $this->input->post('name'),
                         'product_model_id' => $this->input->post('product_model'),
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        'updated_by' => $this->session->userdata('user')->id
 
 
                     );
@@ -551,7 +698,9 @@ class Master extends CI_Controller
 
             $data = array(
                 'name' => $this->input->post('name'),
-                'product_model_id' => $this->input->post('product_model'),
+            
+               
+                'updated_by' => $this->session->userdata('user')->id
 
 
 
@@ -611,7 +760,9 @@ class Master extends CI_Controller
                     $data = array(
                         'name' => $this->input->post('name'),
 
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        'updated_by' => $this->session->userdata('user')->id
 
 
                     );
@@ -664,6 +815,7 @@ class Master extends CI_Controller
         $data['active_product_categories'] = $this->User_model->getActiveProductcategory();
         $data['active_product_models'] = $this->User_model->getActiveProductmodels();
         $data['active_product_brands'] = $this->User_model->getActiveProductbrand();
+        $data['active_taxs'] = $this->User_model->getActiveTax();
 
         $class['classname'] = 'product_item_add';
         $this->load->view("sidebar", $class);
@@ -684,13 +836,14 @@ class Master extends CI_Controller
 
     public function addProductitem()
     {
+        
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
             if ($this->input->post()) {
                 $this->form_validation->set_rules('icode', 'Item Code', 'required');
                 $this->form_validation->set_rules('name', 'Item Name', 'required');
                 $this->form_validation->set_rules('description', 'Description', 'required');
-                $this->form_validation->set_rules('img', 'Item Images / Videos', 'required');
+                $this->form_validation->set_rules('img', 'Item Images / Videos');
                 $this->form_validation->set_rules('sellingunit', 'Selling Unit Of Materials', 'required');
                 $this->form_validation->set_rules('purchaseunit', 'Purchase Unit Of Materials', 'required');
                 $this->form_validation->set_rules('product_c', 'Product Category', 'required');
@@ -705,14 +858,15 @@ class Master extends CI_Controller
                 $this->form_validation->set_rules('mop', 'MOP', 'required');
                 $this->form_validation->set_rules('minimumstock', 'Minimum Stock', 'required');
                 $this->form_validation->set_rules('maximumstock', 'Maximum Stock', 'required');
-
+                
                 if ($this->form_validation->run() == FALSE) {
+                 
                     $this->session->set_flashdata('message', array('danger', validation_errors()));
                 } else {
                     $data = array(
 
                         'code ' => $this->input->post('icode'),
-                        ' name ' => $this->input->post('name'),
+                        'name ' => $this->input->post('name'),
                         'description ' => $this->input->post('description'),
                         'image_url'  => $this->input->post('img'),
                         'selling_unit'  => $this->input->post('sellingunit'),
@@ -729,11 +883,15 @@ class Master extends CI_Controller
                         'mpo ' => $this->input->post('mop'),
                         'min_stock ' => $this->input->post('minimumstock'),
                         'max_stock'   => $this->input->post('maximumstock'),
-                        'is_active ' => 1
+                        'is_active ' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                       
+
 
 
 
                     );
+                   
                     $this->User_model->addProductitem($data);
                     $this->session->set_flashdata('message', array('success', "Product Item Added Successfully"));
                     redirect('master/product_item_add');
@@ -766,11 +924,8 @@ class Master extends CI_Controller
                 'image_url'  => $this->input->post('img'),
                 'selling_unit'  => $this->input->post('sellingunit'),
                 'purchase_unit'  => $this->input->post('purchaseunit'),
-                'product_category_id ' => $this->input->post('product_c'),
-                'product_group_id'  => $this->input->post('product_g'),
-                'product_model_id'  => $this->input->post('product_m'),
-                'product_brand_id'  => $this->input->post('product_b'),
-                'tax_master_id' => $this->input->post('tax'),
+             
+                
                 'hsn_sac_code' => $this->input->post('code'),
                 'purchase_price' => $this->input->post('purchaseprice'),
                 'dealer_billing_price' => $this->input->post('dealerbprice'),
@@ -778,7 +933,10 @@ class Master extends CI_Controller
                 'mpo' => $this->input->post('mop'),
                 'min_stock ' => $this->input->post('minimumstock'),
                 'max_stock'   => $this->input->post('maximumstock'),
-                'is_active' => 1
+                'is_active' => 1,
+                
+                'updated_by' => $this->session->userdata('user')->id
+
 
 
 
@@ -864,7 +1022,9 @@ class Master extends CI_Controller
                         'name' => $this->input->post('name'),
                         'description' => $this->input->post('description'),
 
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        
 
 
                     );
@@ -956,9 +1116,11 @@ class Master extends CI_Controller
                         'contact' => $this->input->post('contact'),
                         'address' => $this->input->post('address'),
                         'username' => $this->input->post('username'),
-                        'password' => $this->input->post('password'),
+                        'password' => md5( $this->input->post('password')),
 
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        
 
 
                     );
@@ -990,6 +1152,8 @@ class Master extends CI_Controller
                 'address' => $this->input->post('address'),
                 'username' => $this->input->post('username'),
                 'password' => $this->input->post('password'),
+                
+                        'updated_by' => $this->session->userdata('user')->id
 
             );
 
@@ -1055,7 +1219,9 @@ class Master extends CI_Controller
                         'contact' => $this->input->post('contact'),
                         'address' => $this->input->post('address'),
                         'email' => $this->input->post('email'),
-                        'is_active' => 1
+                        'is_active' => 1,
+                        'created_by' => $this->session->userdata('user')->id,
+                        
 
 
                     );
@@ -1086,6 +1252,8 @@ class Master extends CI_Controller
                 'contact' => $this->input->post('contact'),
                 'address' => $this->input->post('address'),
                 'email' => $this->input->post('email'),
+              
+                        'updated_by' => $this->session->userdata('user')->id
 
             );
 
@@ -1164,8 +1332,10 @@ class Master extends CI_Controller
             'billNo' => $jobData['billNo'],
             'remarks' => $jobData['remarks'],
             'jobcard_status' => true,
-            'createdBy' => 'Mano Sundar',
-            'is_active' => 1
+            'createdBy' => $this->session->userdata('user')->id,
+            'is_active' => 1,
+            
+            
         );
 
         $this->load->model('User_model');
@@ -1182,6 +1352,8 @@ class Master extends CI_Controller
                 'service' => $product['service'],
                 'assigned' => $product['assigned'],
                 'status' =>'open',
+                
+                        
                
             );
 
@@ -1201,6 +1373,8 @@ class Master extends CI_Controller
                     'service' => $group['service'],
                     'assigned' => $group['assigned'],
                     'status' =>'open',
+                    
+                        
                    
                 );
 

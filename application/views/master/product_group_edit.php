@@ -6,9 +6,9 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php } ?>
-        <h4 class="font-weight-bold mt-2 mb-4"><i class="feather icon-home"></i>Edit Product Category</h4>
+        <h4 class="font-weight-bold mt-2 mb-4"><i class="feather icon-home"></i>Edit Product Group </h4>
         <div class="card mb-4">
-            <h6 class="card-header">Edit Product Category</h6>
+            <h6 class="card-header">Edit Product Group</h6>
             <div class="card-body">
                 <form method="post" action="<?= base_url('master/editProductgroup/' . $product_group['id']) ?>">
 
@@ -19,7 +19,7 @@
 
             <div class="form-group col-12">
                 <label class="form-label" for="customer_group" >Product Category:</label>
-                <p><?= $product_group['product_category_id'] ?></p>
+                <p><?= $product_group['category_name'] ?></p>
             
 
             </div>
