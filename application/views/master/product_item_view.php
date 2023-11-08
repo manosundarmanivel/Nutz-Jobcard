@@ -53,7 +53,7 @@
                                     <td><?= $product_item['group_name'] ?></td>
                                     <td><?= $product_item['model_name'] ?></td>
                                     <td><?= $product_item['brand_name'] ?></td>
-                                    <td><?= $product_item['tax_master_id'] ?></td>
+                                    <td><?= $product_item['tax_value'] ?></td>
                                     <td><?= $product_item['hsn_sac_code'] ?></td>
                                     <td><?= $product_item['purchase_price'] ?></td>
                                     <td><?= $product_item['dealer_billing_price'] ?></td>

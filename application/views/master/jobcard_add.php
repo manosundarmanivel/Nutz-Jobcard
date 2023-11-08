@@ -43,7 +43,7 @@
                             <label class="form-label" for="name">Customer / Company Name</label>
                             <div style="display: flex; align-items: center; ">
                                 <p id="result"></p>
-                                <button type="button" class="btn btn-outline-danger  p-2 m-2" id="addButton" style="display: none; "><a href="<?= base_url('master/ledger_master_add') ?>">Add Ledger</a> </button>
+                                <button type="button" class="btn btn-outline-danger  p-2 m-4" id="addButton" style="display: none; "><a href="<?= base_url('master/ledger_master_add') ?>">Add Ledger</a> </button>
                             </div>
 
 

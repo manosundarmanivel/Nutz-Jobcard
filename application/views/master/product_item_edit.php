@@ -30,10 +30,7 @@
                         <label class="form-label" for="customer_name">Description</label>
                         <input  value="<?= $product_item['description'] ?>" type="text" class="form-control" id="name" name="description" required placeholder="Enter Description">
                     </div>
-                    <div class="form-group col-6">
-                        <label class="form-label" for="customer_name">Item Images / Videos</label>
-                        <input value="<?= $product_item['image_url'] ?>" type="text" class="form-control" id="name" name="img" required placeholder="Item Images">
-                    </div>
+                    
                     <div class="form-group col-6">
                         <label class="form-label" for="customer_name">Selling Unit Of Materials</label>
                         <input value="<?= $product_item['selling_unit'] ?>" type="text" class="form-control" id="name" name="sellingunit" required placeholder="Enter Selling Unit Of Materials">

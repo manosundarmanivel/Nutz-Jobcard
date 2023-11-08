@@ -10,7 +10,7 @@
         <div class="card mb-4">
             <h6 class="card-header">Edit Product Brand</h6>
             <div class="card-body">
-                <form method="post" action="<?= base_url('master/editProductbrand/' . $product_brand['id']) ?>">
+                <form method="post" action="<?= base_url('master/editProductbrand/' .$product_brand['id']) ?>">
 
                 <div class="form-group col-12">
                 <label class="form-label" for="customer_name">Product Brand Name:</label>

@@ -405,7 +405,7 @@ class Master extends CI_Controller
                         'name' => $this->input->post('product_category'),
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        'updated_by' => $this->session->userdata('user')->id
+                        
 
 
                     );
@@ -672,7 +672,7 @@ class Master extends CI_Controller
                         'product_model_id' => $this->input->post('product_model'),
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        'updated_by' => $this->session->userdata('user')->id
+                        
 
 
                     );
@@ -762,7 +762,7 @@ class Master extends CI_Controller
 
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        'updated_by' => $this->session->userdata('user')->id
+                       
 
 
                     );
@@ -788,6 +788,7 @@ class Master extends CI_Controller
 
             $data = array(
                 'name' => $this->input->post('name'),
+                'updated_by' => $this->session->userdata('user')->id
 
             );
 
@@ -976,8 +977,11 @@ class Master extends CI_Controller
     {
 
         $image_url = $this->User_model->uploadMultiple('img');
+        foreach ($image_url as $item) {
+            $this->User_model->insertProductImage($id, $item);
+        }
+      
 
-        $this->User_model->insertProductImage($id, $image_url['0']);
         redirect('master/product_item_view');
     }
 
@@ -1051,6 +1055,8 @@ class Master extends CI_Controller
             $data = array(
                 'name' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
+                'updated_by' => $this->session->userdata('user')->id
+
 
             );
 

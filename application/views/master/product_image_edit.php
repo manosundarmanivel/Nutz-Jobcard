@@ -13,23 +13,25 @@
         border: 1px solid #ccc;
     }
 
-   
 
-.image-container {
 
-    margin-right: 10px; /* Adjust margin as needed */
-    margin-bottom: 10px; /* Adjust margin as needed */
-}
+    .image-container {
 
-.image-wrapper {
-    position: relative;
-}
+        margin-right: 10px;
+        /* Adjust margin as needed */
+        margin-bottom: 10px;
+        /* Adjust margin as needed */
+    }
 
-.delete-button {
-    text-align: center;
-    margin-top: 5px; /* Adjust margin as needed */
-}
+    .image-wrapper {
+        position: relative;
+    }
 
+    .delete-button {
+        text-align: center;
+        margin-top: 5px;
+        /* Adjust margin as needed */
+    }
 </style>
 
 <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/dropzone/dropzone.css">
@@ -100,7 +102,7 @@
 
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_name">Tax %</label>
-                            <p><?= $product_item['tax_master_id'] ?></p>
+                            <p><?= $product_item['tax_value'] ?></p>
 
                         </div>
                         <div class="form-group col-6">
@@ -175,30 +177,26 @@
 
             </div>
 
-
-
-
-            <div id="gallery-thumbnails" class="col form-col">
-    <div class="gallery-sizer col-sm-12 col-md-2 col-xl-3 position-absolute"></div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-around "  class="gallery-thumbnail ">
-        <?php foreach ($product_image as $image_url) { ?>
-            <div class="image-container"> <!-- Added a container for each image -->
-                <div class="image-wrapper">
+            <div id="gallery-thumbnails" class="row form-row">
+            <?php foreach ($product_image as $image_url) { ?>
+                <div class="gallery-sizer col-sm-6 col-md-6 col-xl-3 position-absolute"></div>
+                <div class="gallery-thumbnail col-sm-6 col-md-6 col-xl-3 mb-2" data-tag="nature">
                     <a href="<?= base_url("/assets/uploads/" . $image_url['image_url']) ?>" class="img-thumbnail img-thumbnail-zoom-in">
                         <span class="img-thumbnail-overlay bg-dark opacity-25"></span>
                         <span class="img-thumbnail-content display-4 text-white">
                             <i class="ion ion-ios-search"></i>
                         </span>
-                        <img width="400px" src="<?= base_url("/assets/uploads/" . $image_url['image_url']) ?>" class="img-fluid" alt="images">
+                        <img style="object-fit: contain;" src="<?= base_url("/assets/uploads/" . $image_url['image_url']) ?>" class="img-fluid" alt="images">
                     </a>
+                    <div class="delete-button">
+                                <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteProductimage/' . $image_url['id']); ?>"><i class="feather icon-trash-2"></i>&nbsp;Delete</a>
+                            </div>
                 </div>
-                <div class="delete-button">
-                    <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteProductimage/' . $image_url['id']); ?>"><i class="feather icon-trash-2"></i>&nbsp;Delete</a>
-                </div>
+                <?php } ?>
             </div>
-        <?php } ?>
-    </div>
-</div>
+
+
+            
 
 
         </div>
@@ -214,3 +212,4 @@
 <script src="<?= base_url('') ?>assets/libs/bootstrap-select/bootstrap-select.js"></script>
 <script src="<?= base_url('') ?>assets/libs/select2/select2.js"></script>
 <script src="<?= base_url('') ?>assets/libs/dropzone/dropzone.js"></script>
+<script src="<?= base_url('') ?>assets/js/pages/pages_gallery.js"></script>

@@ -336,7 +336,7 @@ class User_model extends CI_Model {
 
    
     public function getActiveProductItems() {
-        $this->db->select('pi.*, pg.name AS group_name, pc.name AS category_name, pb.name AS brand_name, pm.name AS model_name, e1.name AS created_name, e2.name AS updated_name');
+        $this->db->select('pi.*, pg.name AS group_name, pc.name AS category_name, pb.name AS brand_name, pm.name AS model_name, e1.name AS created_name, e2.name AS updated_name,tax.value AS tax_value');
         $this->db->from('product_item AS pi');
         $this->db->where('pi.is_active', true);
         $this->db->join('product_group AS pg', 'pg.id = pi.product_group_id', 'left');
@@ -345,6 +345,7 @@ class User_model extends CI_Model {
         $this->db->join('product_model AS pm', 'pm.id = pi.product_model_id', 'left');
         $this->db->join('employee AS e1', 'e1.id = pi.created_by', 'left');
         $this->db->join('employee AS e2', 'e2.id = pi.updated_by', 'left');
+        $this->db->join('tax', 'tax.id = pi.tax_master_id', 'left');
         $query = $this->db->get();
         return $query->result_array();
     }
