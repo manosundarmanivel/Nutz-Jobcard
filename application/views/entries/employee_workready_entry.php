@@ -331,7 +331,7 @@
                     $('#service_name').text(response[0].service_name);
                     $('#job_id').val(response[0].jobID);
                     $('#product_id').val(response[0].id); 
-                    $('#outwork_charges').val(response[0].outwork_vendor_charges); 
+                    $('#outwork_charges').val(response[0].customer_charges); 
                     var jsonString = response[0].image_url; 
                     function parseImageUrls(input) {
                         try {

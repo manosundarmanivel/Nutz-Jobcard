@@ -385,7 +385,8 @@ class Master extends CI_Controller
     public function deleteProductimage($id)
     {
         $this->User_model->deleteProductimage($id);
-        redirect('master/product_item_view');
+        
+        redirect('master/addProductimage/'.$id);
     }
 
     public function editProductcategory($id)
@@ -881,7 +882,7 @@ class Master extends CI_Controller
         foreach ($image_url as $item) {
             $this->User_model->insertProductImage($id, $item);
         } 
-        redirect('master/product_item_view');
+        redirect('master/addProductimage/'.$id);
     } 
 
     public function jobcard_service_add()

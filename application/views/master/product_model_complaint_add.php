@@ -23,15 +23,15 @@
         
         <div class="form-group col-12">
                 <label class="form-label" for="customer_name">Type of Complaint</label>
-                <input type="text" class="form-control" id="name" name="name" required placeholder="Enter Name">
+                <input required  type="text" class="form-control" id="name" name="name" required placeholder="Enter Name">
             </div>
         
             
        <div style="display: flex;">
        <div class="form-group col-10">
                 <label class="form-label" for="customer_group" >Product Model:</label>
-                <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="product_model_id" name="product_model">
-                 <option value="">Select Customer Group</option>
+                <select required class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="product_model_id" name="product_model">
+                 <option   value="">Select Customer Group</option>
                     <?php foreach ($active_product_models as $product_model) { ?>
                         <option value="<?= $product_model['id'] ?>"><?= $product_model['name'] ?></option>
                     <?php } ?>

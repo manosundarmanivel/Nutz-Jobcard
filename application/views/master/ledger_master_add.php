@@ -28,14 +28,14 @@
 
                         <div class="form-group  col-6">
                             <label class="form-label" for="customer_contact">Customer Contact Number:</label>
-                            <input type="text" class="form-control" id="customer_contact" name="customer_contact" placeholder="Enter Contact Number">
+                            <input required type="text" class="form-control" id="customer_contact" name="customer_contact" placeholder="Enter Contact Number">
                         </div>
                     </div> 
                     <div style="display: flex;">
                         <div class="form-group col-6" style="display: flex;">
                             <div class="form-group col-10 p-0 ">
                                 <label class="form-label" for="customer_group">Customer Group:</label>
-                                <select class="select2-demo form-control" onchange="ledgerChange()" data-allow-clear="true" style="width: 100%" id="customer_groups" name="customer_group">
+                                <select required class="select2-demo form-control" onchange="ledgerChange()" data-allow-clear="true" style="width: 100%" id="customer_groups" name="customer_group">
                                     <option value="">Select Customer Group</option> 
                                     <?php
                                     foreach ($active_ledger_groups as $group) { ?>
@@ -50,7 +50,7 @@
                         </div> 
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">E-Mail ID:</label>
-                            <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter Email">
+                            <input  type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter Email">
                         </div> 
                     </div> 
                     <div style="display: flex;">
@@ -67,7 +67,7 @@
 
                     <div class="form-group">
                         <label class="form-label" for="entry_type">Entry Type:</label>
-                        <select name="entry_type" class=" form-control " data-allow-clear="true" style="width: 100%">
+                        <select required name="entry_type" class=" form-control " data-allow-clear="true" style="width: 100%">
                             <option value="">Select Entry Type</option>
                             <option>Sales</option>
                             <option>Purchase</option>
@@ -76,7 +76,7 @@
                     </div> 
                     <div class="form-group">
                         <label class="form-label" for="price_list">Price List:</label>
-                        <select name="price_list" class=" form-control " data-allow-clear="true" style="width: 100%">
+                        <select required  name="price_list" class=" form-control " data-allow-clear="true" style="width: 100%">
                             <option value="">Select Price List</option>
                             <option>Purchase Price</option>
                             <option>DBP</option>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="customer_address">Address:</label>
-                        <textarea class="form-control" id="customer_address" name="customer_address" rows="3" placeholder="Enter Address"></textarea>
+                        <textarea required  class="form-control" id="customer_address" name="customer_address" rows="3" placeholder="Enter Address"></textarea>
                     </div>
                     <!-- <div class="form-group" id="isVendor" style="display: none;">
                         <label class="form-label" for="customer_address">Add as a Vendor</label>

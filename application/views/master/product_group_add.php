@@ -23,14 +23,14 @@
         
         <div class="form-group col-12">
                 <label class="form-label" for="customer_name">Product Group Name:</label>
-                <input type="text" class="form-control" id="name" name="name" required placeholder="Enter Name">
+                <input required  type="text" class="form-control" id="name" name="name" required placeholder="Enter Name">
             </div>
         
             
        <div style="display: flex;">
        <div class="form-group col-10">
                 <label class="form-label" for="customer_group" >Product Category:</label>
-                <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_category">
+                <select required  class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_category">
                  <option value="">Select Customer Group</option>
                     <?php foreach ($active_product_categories as $product_category) { ?>
                         <option value="<?= $product_category['id'] ?>"><?= $product_category['name'] ?></option>

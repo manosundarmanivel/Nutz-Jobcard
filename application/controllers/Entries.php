@@ -59,7 +59,7 @@ class Entries extends CI_Controller
                 "p.jobcardNo", 
                 "e.name AS employee_name",
                 "p.problem_stated",
-                "p.outwork_vendor_charges",
+                "p.customer_charges",
                 "p.id",
                 "p.jobID",
                 "pc.name AS complaint_name",

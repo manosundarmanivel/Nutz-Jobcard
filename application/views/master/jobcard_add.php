@@ -27,7 +27,7 @@
             border-bottom-width: 1px;">
                 <h6 class="card-header" style="border:none">Service</h6>
                 <div>
-                    <button type="button" onclick="addproduct()" class="btn btn-primary mr-3">Add job</button>
+                    <button id="scrollButton" type="button" onclick="addproduct()" class="btn btn-primary mr-3">Add job</button>
                     <button type="button" onclick="deleteProduct()" class="btn btn-danger mr-3">Delete job</button>
                 </div>
             </div>
@@ -88,7 +88,7 @@
         <form action="" id="my_form">
 
         </form>
-        <button type="submit" onclick="handlesubmit()" class="btn btn-primary">Add Service</button>
+        <button id="displayButton" style="display:none;" type="submit" onclick="handlesubmit()" class="btn btn-primary">Add Service</button>
     </div>
 </div>
 
@@ -107,6 +107,8 @@
         }
     })
 </script>
+
+
 
 
 <script>
@@ -137,10 +139,7 @@
         }
     }
 
-
-
-
-
+    let displayButton = document.getElementById('displayButton');
     const form = document.getElementById("my_form");
     let productcount = 1;
     let productsData = [];
@@ -149,13 +148,21 @@
         productsData?.pop();
         form.removeChild(form.lastChild);
         console.log(productsData);
+        productcount -= 1;
+
+        if (productsData.length > 0) {
+
+            displayButton.style.display = 'block';
+        } else {
+            displayButton.style.display = 'none';
+
+        }
     }
 
     function deleteGroup(id) {
         productsData?.[id - 1]?.group?.pop();
         let div = document.getElementById(`product_row_${id}`);
         div.removeChild(div.lastChild);
-
     }
 
     function addproduct() {
@@ -187,21 +194,20 @@
             <div style="display: flex; flex-wrap: wrap;">
             <div class="form-group col-6 ">
                 <label class="form-label" for="name">Jobcard No:</label>
-                <input type="text" class="form-control" name="jobno_${productcount}"  required placeholder="Enter JobCard Number">
+                <input required type="text" class="form-control" name="jobno_${productcount}"  required placeholder="Enter JobCard Number">
             </div>
             <div class="form-group col-6 ">
                                 <label class="form-label" for="name">Product Given for Service</label>
-                                <select class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_${productcount}" ">
+                                <select required class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_${productcount}" ">
                     <option value="">Select Product Model</option>
                         <?php foreach ($product_models as $product) { ?>
                             <option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
                         <?php } ?>
-                    </select>
-                            
+                    </select>   
             </div>
             <div class="form-group col-6 ">
                                 <label class="form-label" for="name">Compaints Type </label>
-                                <select class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="complaint_${productcount}">
+                                <select required class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="complaint_${productcount}">
                     <option value="">Select Compaints Type</option>
                         <?php foreach ($product_model_complaints as $complaint) { ?>
                             <option value="<?= $complaint['id'] ?>"><?= $complaint['name'] ?></option>
@@ -210,7 +216,7 @@
             </div>
             <div class="form-group col-6 ">
                                 <label class="form-label" for="name">Service Type </label>
-                                <select class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="service_${productcount}">
+                                <select required class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="service_${productcount}">
                     <option value="">Select Service Type</option>
                         <?php foreach ($service_types as $service) { ?>
                             <option value="<?= $service['id'] ?>"><?= $service['name'] ?></option>
@@ -222,13 +228,12 @@
             <div class="form-group col-6 ">
                                 <label class="form-label" for="name">Assigned to </label>
                                 
-                                <select class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="employee_${productcount}">
+                                <select required class="select2-demo form-control "  data-allow-clear="true" style="width: 100%" id="customer_groups" name="employee_${productcount}">
                     <option value="">Select Service Type</option>
                         <?php foreach ($technitions as $technition) { ?>
                             <option value="<?= $technition['id'] ?>"><?= $technition['name'] ?></option>
                         <?php } ?>
-                    </select>
-                            
+                    </select>        
             </div>
             <div class="form-group col-6">
                 <div class="ui-bordered px-3 pt-3">
@@ -236,16 +241,23 @@
                     <div class="clearfix" id='file_div_${productcount}'>
                         <a  href="javascript:void(0)" onclick="fileClick('file_${productcount}')" class="ticket-file-add float-left bg-lighter text-muted mt-2 mb-3"><span class="ion ion-md-add"></span></a>
                     </div>  
-                    <input type='file' name='file[]' onchange="imageChange(this,${productcount})" id='file_${productcount}' multiple style='display:none' />
-                    <input type='hidden' name='image_${productcount}' id='image_${productcount}' />
+                    <input required type='file' name='file[]' onchange="imageChange(this,${productcount})" id='file_${productcount}' multiple style='display:none' />
+                    <input required type='hidden' name='image_${productcount}' id='image_${productcount}' />
                                 
                 </div>
-
             </div> 
             `;
         form.appendChild(inputRow)
         productcount++;
         productsData.push(product);
+
+        if (productsData.length > 0) {
+
+            displayButton.style.display = 'block';
+        } else {
+            displayButton.style.display = 'none';
+
+        }
     }
 
     function imageChange(element, id, grp_id) {
@@ -263,7 +275,7 @@
         }
         let formData = new FormData();
         for (let i = 0; i < element.files.length; i++) {
-            formData.append(`image[]`, element.files[i]); 
+            formData.append(`image[]`, element.files[i]);
         }
         fetch('uploadImage', {
                 method: 'POST',
@@ -281,7 +293,7 @@
                         <img  src="<?= base_url('assets/uploads/') ?>${v}" alt="" class="img-fluid ticket-file-img image_scale">
                     </div>
                 `;
-                }); 
+                });
                 file_div.innerHTML = image_div + add_button;
                 file.value = JSON.stringify(arr);
             })
@@ -490,6 +502,25 @@
             }
         }, 100);
     });
+</script>
+
+<script>
+    const scrollButton = document.getElementById('scrollButton');
+    scrollButton.addEventListener('click', function() {
+        const scrollDistance = document.documentElement.scrollHeight - window.innerHeight;
+        window.scrollTo({
+            top: scrollDistance,
+            behavior: 'smooth'
+        });
+    });
+
+
+    // const myForm = document.getElementById('my_form');
+    // const displayButton1 = document.getElementById('displayButton');
+    // const divCount = myForm.querySelectorAll('div').length;
+    // if (divCount>0) {
+    //     displayButton1.style.display = 'block'; 
+    // }
 </script>
 
 </div>

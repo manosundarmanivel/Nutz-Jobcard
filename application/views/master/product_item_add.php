@@ -23,12 +23,12 @@
                     <div style="display: flex; flex-wrap: wrap;">
 
                         <div class="form-group col-6">
-                            <label class="form-label" for="customer_name">Item Code</label>
+                            <label required  class="form-label" for="customer_name">Item Code</label>
                             <input type="text" class="form-control" id="name" name="icode" required placeholder="Enter Item Code ">
                         </div>
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_name">Item Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required placeholder="Enter Item Name">
+                            <input required  type="text" class="form-control" id="name" name="name" required placeholder="Enter Item Name">
                         </div>
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_name">Description</label>
@@ -51,7 +51,7 @@
 
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Product Category:</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_c">
+                            <select required  class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_c">
                                 <option value="">Select Product Category</option>
                                 <?php foreach ($active_product_categories as $product_category) { ?>
                                     <option value="<?= $product_category['id'] ?>"><?= $product_category['name'] ?></option>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Product Model:</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_m">
+                            <select required  class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_m">
                                 <option value="">Select Product Model</option>
                                 <?php foreach ($active_product_models as $product_model) { ?>
                                     <option value="<?= $product_model['id'] ?>"><?= $product_model['name'] ?></option>
@@ -70,7 +70,7 @@
 
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Product Group:</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_g">
+                            <select required  class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_g">
                                 <option value="">Select Product Group</option>
                                 <?php foreach ($active_product_groups as $product_group) { ?>
                                     <option value="<?= $product_group['id'] ?>"><?= $product_group['name'] ?></option>
@@ -80,7 +80,7 @@
 
                         <div class="form-group col-4">
                             <label class="form-label" for="customer_group">Product Brand:</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_b">
+                            <select required  class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="product_b">
                                 <option value="">Select Product Brand</option>
                                 <?php foreach ($active_product_brands as $product_brand) { ?>
                                     <option value="<?= $product_brand['id'] ?>"><?= $product_brand['name'] ?></option>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="form-group col-6 ">
                             <label class="form-label" for="customer_group">Tax:</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="tax">
+                            <select required  class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="customer_groups" name="tax">
                                 <option value="">Select Tax</option>
                                 <?php foreach ($active_taxs as $tax) { ?>
                                     <option value="<?= $tax['id'] ?>"><?= $tax['value'] ?></option>

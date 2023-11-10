@@ -91,7 +91,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Outwork Vendor</label>
-                            <select class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="outwork_vendor_id" name="outwork_vendor_id">
+                            <select required class="select2-demo form-control " data-allow-clear="true" style="width: 100%" id="outwork_vendor_id" name="outwork_vendor_id">
                                 <option value="">Select Outwork Vendor</option>
 
                                 <?php foreach ($outwork_vendors as $outwork_vendor) { ?>
