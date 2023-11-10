@@ -21,10 +21,10 @@
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/bootstrap-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/shreerang-material.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/uikit.css">
-    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css"> 
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/datatables/datatables.css">
 
     <!-- Libs -->
-    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/perfect-scrollbar/perfect-scrollbar.css"> 
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/libs/perfect-scrollbar/perfect-scrollbar.css">
 
     <!-- Page -->
     <link rel="stylesheet" href="<?= base_url('') ?>assets/css/pages/tickets.css">
@@ -37,6 +37,10 @@
     </script>
 
     <style>
+
+        .image_scale:hover{
+            transform: scale(4.0);
+        }
         @media screen and (min-width:1000px) {
             .logout {
                 width: 100%;
@@ -89,16 +93,40 @@
 
                 <li class="sidenav-item ">
                     <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                        <div>Masters</div>
+                    <i class="sidenav-icon feather icon-shield"></i>
+                        <div>Service</div>
 
                     </a>
-                    <ul class="sidenav-inner sidenav-menu py-1">
+                    <ul class="sidenav-menu">
+                        <li class="sidenav-item <?php if ($classname == "jobcard_add") {
+                                                    echo "active";
+                                                } ?> ">
+                            <a href="<?= base_url('master/jobcard_add') ?>" class="sidenav-link"> 
+                                <div>Add</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item <?php if ($classname == "jobcard_view") {
+                                                    echo "active";
+                                                } ?>">
+                            <a href="<?= base_url('master/jobcard_view') ?>" class="sidenav-link"> 
+                                <div>List</div>
+                            </a>
+                        </li>
 
-                        <!-- Dashboards -->
-                        <li class="sidenav-item  ">
+
+
+                    </ul>
+                </li> 
+                <li class="sidenav-item ">
+                    <a href="javascript:" class="sidenav-link sidenav-toggle">
+                        <i class="sidenav-icon feather icon-users"></i> 
+                        <div>Ledger Master</div>
+
+                    </a>
+                    <ul class="sidenav-menu">
+                    <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Ledger Group</div>
 
                             </a>
@@ -114,6 +142,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/ledger_group_master_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -124,7 +153,7 @@
                         </li>
                         <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Ledger</div>
 
                             </a>
@@ -139,18 +168,49 @@
                                 <li class="sidenav-item <?php if ($classname == "ledger_master_view") {
                                                             echo "active";
                                                         } ?>">
-                                    <a href="<?= base_url('master/ledger_master_view') ?>" class="sidenav-link">
+                                    <a href="<?= base_url('master/ledger_master_view') ?>" class="sidenav-link"> 
                                         <div>View</div>
                                     </a>
+                                </li> 
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li> 
+                <li class="sidenav-item ">
+                    <a href="javascript:" class="sidenav-link sidenav-toggle">
+                        <i class="sidenav-icon feather icon-shopping-cart"></i> 
+                        <div>Product Master</div>
+
+                    </a>
+                    <ul class="sidenav-menu">
+                    <li class="sidenav-item  ">
+                            <a href="javascript:" class="sidenav-link sidenav-toggle">
+
+                                <div>Product</div>
+
+                            </a>
+                            <ul class="sidenav-menu">
+                                <li class="sidenav-item <?php if ($classname == "product_item_add") {
+                                                            echo "active";
+                                                        } ?>">
+                                    <a href="<?= base_url('master/product_item_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
                                 </li>
-
-
-
+                                <li class="sidenav-item <?php if ($classname == "product_item_view") {
+                                                            echo "active";
+                                                        } ?>">
+                                    <a href="<?= base_url('master/product_item_view') ?>" class="sidenav-link">
+                                        
+                                        <div>View</div>
+                                    </a>
+                                </li> 
                             </ul>
                         </li>
                         <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Product Category</div>
 
                             </a>
@@ -166,6 +226,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/product_category_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -176,7 +237,7 @@
                         </li>
                         <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Product Group</div>
 
                             </a>
@@ -192,19 +253,15 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/product_group_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
-                                </li>
-
-
-
+                                </li> 
                             </ul>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div>Product Model</div>
-
+                            <a href="javascript:" class="sidenav-link sidenav-toggle"> 
+                                <div>Product Model</div> 
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item <?php if ($classname == "product_model_add") {
@@ -217,7 +274,7 @@
                                 <li class="sidenav-item <?php if ($classname == "product_model_view") {
                                                             echo "active";
                                                         } ?>">
-                                    <a href="<?= base_url('master/product_model_view') ?>" class="sidenav-link">
+                                    <a href="<?= base_url('master/product_model_view') ?>" class="sidenav-link"> 
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -228,7 +285,7 @@
                         </li>
                         <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Product Model Complaint</div>
 
                             </a>
@@ -244,6 +301,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/product_model_complaint_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -254,7 +312,7 @@
                         </li>
                         <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Product Brand</div>
 
                             </a>
@@ -270,6 +328,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/product_brand_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -280,7 +339,7 @@
                         </li>
                         <li class="sidenav-item ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
+                               
                                 <div>Tax</div>
 
                             </a>
@@ -296,6 +355,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/tax_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -304,36 +364,43 @@
 
                             </ul>
                         </li>
-                        <li class="sidenav-item  ">
+                    </ul>
+                </li> 
+                <li class="sidenav-item ">
+                    <a href="javascript:" class="sidenav-link sidenav-toggle">
+                    <i class="sidenav-icon feather icon-external-link"></i>
+                        <div>Outwork Masters</div>
+                    </a>
+                    <ul class="sidenav-inner sidenav-menu py-1"> 
+                    <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div>Product Item</div>
+                               
+                                <div>Outworks</div>
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if ($classname == "product_item_add") {
+                                <li class="sidenav-item <?php if ($classname == "outwork_send") {
                                                             echo "active";
-                                                        } ?>">
-                                    <a href="<?= base_url('master/product_item_add') ?>" class="sidenav-link">
-                                        <div>Add</div>
+                                                        } ?> ">
+                                    <a href="<?= base_url('entries/outwork_send') ?>" class="sidenav-link">
+                                       
+                                        <div>Send</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item <?php if ($classname == "product_item_view") {
+                                <li class="sidenav-item <?php if ($classname == "outwork_receive") {
                                                             echo "active";
                                                         } ?>">
-                                    <a href="<?= base_url('master/product_item_view') ?>" class="sidenav-link">
-                                        <div>View</div>
+                                    <a href="<?= base_url('entries/outwork_receive') ?>" class="sidenav-link">
+                                       
+                                        <div>Receive</div>
                                     </a>
-                                </li>
-
-
-
+                                </li>  
                             </ul>
                         </li>
                         <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div>JobCard Service Type</div>
+                               
+                                <div>Service Type</div>
 
                             </a>
                             <ul class="sidenav-menu">
@@ -348,6 +415,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/jobcard_service_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -358,34 +426,8 @@
                         </li>
                         <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div>JobCard Employee</div>
-
-                            </a>
-                            <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if ($classname == "jobcard_employee_add") {
-                                                            echo "active";
-                                                        } ?>">
-                                    <a href="<?= base_url('master/jobcard_employee_add') ?>" class="sidenav-link">
-                                        <div>Add</div>
-                                    </a>
-                                </li>
-                                <li class="sidenav-item <?php if ($classname == "jobcard_employee_view") {
-                                                            echo "active";
-                                                        } ?>">
-                                    <a href="<?= base_url('master/jobcard_employee_view') ?>" class="sidenav-link">
-                                        <div>View</div>
-                                    </a>
-                                </li>
-
-
-
-                            </ul>
-                        </li>
-                        <li class="sidenav-item  ">
-                            <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div>JobCard Outwork Vendor </div>
+                               
+                                <div>Outwork Vendor </div>
 
                             </a>
                             <ul class="sidenav-menu">
@@ -400,6 +442,7 @@
                                                             echo "active";
                                                         } ?>">
                                     <a href="<?= base_url('master/jobcard_outwork_view') ?>" class="sidenav-link">
+                                        
                                         <div>View</div>
                                     </a>
                                 </li>
@@ -407,115 +450,44 @@
 
 
                             </ul>
-                        </li>
-
-                        
-                    </ul>
-
-                </li>
-
-                <li class="sidenav-item ">
-                    <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                        <div>New JobCard</div>
-
-                    </a>
-                    <ul class="sidenav-menu">
-                        <li class="sidenav-item <?php if ($classname == "outwork_send") {
-                                                    echo "active";
-                                                } ?> ">
-                             <a href="<?= base_url('master/jobcard_add') ?>" class="sidenav-link">
-                                        <div>Add</div>
-                                    </a>
-                        </li>
-                        <li class="sidenav-item <?php if ($classname == "outwork_receive") {
-                                                    echo "active";
-                                                } ?>">
-                            <a href="<?= base_url('master/jobcard_view') ?>" class="sidenav-link">
-                                        <div>View</div>
-                                    </a>
-                        </li>
-
-
-
-                    </ul>
-                </li>
-
-                <li class="sidenav-item ">
-                    <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                        <div>Entries</div>
-
-                    </a>
-                    <ul class="sidenav-inner sidenav-menu py-1">
-
-                        <!-- Dashboards -->
-
-
-
+                        </li> 
+                    </ul> 
+                </li> 
+                <li class="sidenav-item ">  
                         <li class="sidenav-item  ">
                             <a href="javascript:" class="sidenav-link sidenav-toggle">
-
-                                <div>Outworks</div>
+                            <i class="sidenav-icon feather icon-user-plus"></i>
+                                <div>Employee Master</div>
 
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item <?php if ($classname == "outwork_send") {
-                                                            echo "active";
-                                                        } ?> ">
-                                    <a href="<?= base_url('entries/outwork_send') ?>" class="sidenav-link">
-                                        <div>Send</div>
-                                    </a>
-                                </li>
-                                <li class="sidenav-item <?php if ($classname == "outwork_receive") {
+                                <li class="sidenav-item <?php if ($classname == "jobcard_employee_add") {
                                                             echo "active";
                                                         } ?>">
-                                    <a href="<?= base_url('entries/outwork_receive') ?>" class="sidenav-link">
-                                        <div>Receive</div>
+                                    <a href="<?= base_url('master/jobcard_employee_add') ?>" class="sidenav-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item <?php if ($classname == "jobcard_employee_view") {
+                                                            echo "active";
+                                                        } ?>">
+                                    <a href="<?= base_url('master/jobcard_employee_view') ?>" class="sidenav-link">
+                                        
+                                        <div>View</div>
                                     </a>
                                 </li>
 
 
 
                             </ul>
-                        </li>
-
-                        <li class="sidenav-item  ">
-                            <a href="javascript:" class="sidenav-link">
-                            <a href="<?= base_url('entries/employee_workready_entry') ?>" class="sidenav-link">
-                                <div>Employee Workready Entry</div>
-                            </a>
-
-                            </a>
-                            
-                        </li>
-                    </ul>
-                </li>
-
-
-                
-
-
-                
-
-                </li>
-
-
-
-
-
-
-
-
-
-                <!-- UI elements -->
-
-
-
-
-
-
-
+                        </li>  
+                </li> 
+                <li class="sidenav-item ">   
+                    <a href="<?= base_url('entries/employee_workready_entry') ?>" class="sidenav-link"> 
+                    <i class="sidenav-icon feather icon-book"></i>
+                        <div>Workready Entry</div>
+                    </a> 
+                </li>  
             </div>
             <div class="layout-container">
                 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x">

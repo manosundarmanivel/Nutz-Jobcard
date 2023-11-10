@@ -1,15 +1,23 @@
 <div class="layout-content">
     <div class="container-fluid flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-0">Employee</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Employee Master</li>
+                <li class="breadcrumb-item ">Employee</li>
+                <li class="breadcrumb-item active">Edit</li>
+            </ol>
+        </div>
         <?php if ($this->session->flashdata('message')) { ?>
             <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
-        <?php } ?>
-        <h4 class="font-weight-bold mt-2 mb-4"><i class="feather icon-home"></i>Edit Employee</h4>
+        <?php   } ?>
 
         <div class="card mb-4">
-            <h6 class="card-header">Edit Employee</h6>
+            <h6 class="card-header">Employee Edit</h6>
 
             <div class="card-body">
                 <form method="post" action="<?= base_url('master/editEmployee/' . $employees['id']) ?>">

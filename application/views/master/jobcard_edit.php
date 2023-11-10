@@ -10,15 +10,19 @@
             <button type="button" class="close" data-dismiss="alert">×</button>
             <span></span>
         </div>
-
-        <div style="display: flex; justify-content:space-between; align-items: center; ">
-            <h4 class="font-weight-bold  mt-2 mb-4">Edit JobCard</h4>
-
-        </div>
+ 
+        <h4 class="font-weight-bold py-3 mb-0">Edit Service</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Service</li>
+                <li class="breadcrumb-item active">Edit</li>
+            </ol>
+        </div> 
 
 
         <div class="card mb-4">
-            <h6 class="card-header">Edit JobCard</h6>
+            <h6 class="card-header">Edit Service</h6>
             <div class="card-body">
                 <form id="jobform" method="post" enctype="multipart/form-data" action="<?= base_url('master/editJobcard/'.$jobcard['id']) ?>">
                     <div style="display: flex; flex-wrap: wrap;">

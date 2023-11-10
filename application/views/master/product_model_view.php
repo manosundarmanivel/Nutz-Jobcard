@@ -1,14 +1,31 @@
 <div class="layout-content">
     <div class="container-fluid flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-0">Product Model</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Product Master</li>
+                <li class="breadcrumb-item">Product Model</li>
+                <li class="breadcrumb-item active">View</li>
+            </ol>
+        </div>
         <?php if ($this->session->flashdata('message')) { ?>
             <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Product Models</h4>
         <div class="card">
-            <h6 class="card-header">View Product Models</h6>
+        <div style="display: flex; justify-content:space-between; align-items: center;
+            border-bottom: 0 solid rgba(24, 28, 33, 0.13);
+            border-color: rgba(24, 28, 33, 0.13);
+            border-radius: 0.125rem 0.125rem 0 0; 
+            border-bottom-width: 1px;">
+                <h6 class="card-header" style="border:none">Product Model View</h6>
+                <div>
+                    <a href="<?=base_url('master/product_model_add')?>" class="btn btn-primary mr-3">Add Product Model</a> 
+                </div>
+            </div>
             <div class="card-datatable table-responsive">
                 <table class="datatables-demo table table-striped table-bordered">
                     <thead>
@@ -39,13 +56,13 @@
                                             echo "-";
                                         }
                                         ?></td>
-                                    
+
                                     <td><?= $product_model['created_at'] ?></td>
                                     <td><?= $product_model['updated_at'] ?></td>
                                     <td>
                                         <?php
                                         if ($product_model['is_default'] == 0) { ?>
-                                            <a class="btn btn-info btn-sm" href="<?= base_url('master/editProductmodel/'. $product_model['id']);?>" ><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                            <a class="btn btn-info btn-sm" href="<?= base_url('master/editProductmodel/' . $product_model['id']); ?>"><i class="feather icon-edit"></i>&nbsp;Edit </a>
                                             <a class="btn btn-danger btn-sm" href="<?= base_url('master/deleteProductmodel/' . $product_model['id']); ?>"><i class=" feather icon-trash-2"></i>&nbsp;Delete </a>
                                         <?php
                                         } else {

@@ -7,9 +7,25 @@
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-            <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Job Cards</h4>
-    <div class="card">
-        <h6 class="card-header">View Job Cards</h6>
+        <h4 class="font-weight-bold py-3 mb-0">Service List</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Service</li>
+                <li class="breadcrumb-item active">List</li>
+            </ol>
+        </div>
+    <div class="card"> 
+        <div style="display: flex; justify-content:space-between; align-items: center;
+            border-bottom: 0 solid rgba(24, 28, 33, 0.13);
+            border-color: rgba(24, 28, 33, 0.13);
+            border-radius: 0.125rem 0.125rem 0 0; 
+            border-bottom-width: 1px;">
+                <h6 class="card-header" style="border:none">Service</h6>
+                <div>
+                    <a href="<?=base_url('master/jobcard_add')?>" class="btn btn-primary mr-3">Add Service</a> 
+                </div>
+            </div>
         <div class="card-datatable table-responsive p-3">
             <table class="datatables-demo table table-striped table-bordered">
                 <thead>

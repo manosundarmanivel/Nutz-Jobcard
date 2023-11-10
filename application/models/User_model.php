@@ -16,9 +16,9 @@ class User_model extends CI_Model {
                 $_FILES['file']['size']     = $_FILES[$name]['size'][$i]; 
 
                 $config['upload_path'] = 'assets/uploads/';
-                $config['allowed_types'] = 'jpg|jpeg|png|svg|pdf';
+                $config['allowed_types'] = 'jpg|jpeg|png|svg|pjpeg';
                 $config['max_size'] = 5000;
-                $config['file_name'] = md5($_FILES[$name]['name'][$i] . date("dmYHis"));
+                $config['file_name'] = md5($_FILES[$name]['name'][$i] . date("dmYHis"). '.' . pathinfo($_FILES[$name]['name'][$i], PATHINFO_EXTENSION));
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
                 $uploadFile = $this->upload->do_upload('file'); 
@@ -30,7 +30,7 @@ class User_model extends CI_Model {
             // else {
             // $this->session->set_flashdata('message', array('warning', $this->upload->display_errors()));
             // redirect('company/addProgram', 'refresh'); 	 
-            // 	return $this->upload->display_errors();
+            	// return $this->upload->display_errors();
             // }
             return $picture;
         }
@@ -748,9 +748,7 @@ public function deleteJobcard($id) {
 public function updateStatus($id, $status)
 {
     $data = array('job_id'=> $id,
-    'name'=>$status );
-    
-
+    'name'=>$status ); 
     $this->db->insert('job_status', $data);
 }
 
@@ -775,18 +773,13 @@ public function getProcessJobFormNos() {
 }
 
 
-public function getJobCardDetails($product_id) {
-
-    
-    
+public function getJobCardDetails($product_id) { 
     $this->db->select('*');
     $this->db->from('product'); 
     $this->db->where('id', $product_id); 
     $product_query = $this->db->get();
-    $product_details = $product_query->row();
-
-    if ($product_details) {
-       
+    $product_details = $product_query->row(); 
+    if ($product_details) { 
         $this->db->select('job.*');
         $this->db->from('job');
         $this->db->join('product', 'product.jobID = job.id'); 
@@ -794,32 +787,51 @@ public function getJobCardDetails($product_id) {
         $job_query = $this->db->get();
         $product_details->jobs = $job_query->result();
     }
-
     return $product_details;
 }
 
-public function updateCharges($job_id, $outwork_vendor_charges, $customer_charges) {
-   
+public function getProductItemsByCategoryName() {
+    $this->db->select('pi.*');
+    $this->db->from('product_item as pi');
+    $this->db->join('product_category as pc', 'pc.id = pi.product_category_id', 'left');
+    $this->db->where('pc.name', 'Spares');
+    
+    $query = $this->db->get();
+
+    return $query->result_array();
+}
+
+public function updateCharges($job_id, $outwork_vendor_charges, $customer_charges) { 
     $data = array(
         'outwork_vendor_charges' => $outwork_vendor_charges,
         'customer_charges' => $customer_charges,
-        'status'=> STATUS_COMPLETED,
-
-    );
-    
+        'status'=> STATUS_COMPLETED, 
+    ); 
     $this->db->where('id', $job_id); 
-    $this->db->update('product', $data);
-    
+    $this->db->update('product', $data); 
     return $this->db->affected_rows() > 0;
+} 
+
+public function saveSpare($job_id, $product_id, $spareName, $spareAmount) {
+    $data = array(
+        'job_id' => $job_id,
+        'product_id' => $product_id,
+        'spare_name' => $spareName,
+        'spare_amount' => $spareAmount,
+        'is_active' => 1,
+        'created_by' => $this->session->userdata('user')->id,
+    );
+    $this->db->insert('spares', $data);
 }
 
-
-
-    
-    
+public function saveJob($product_id, $laborCharges, $outworkCharges, $grandTotalCharges) {
+    $data = array(
+        'labour_charges' => $laborCharges,
+        'outwork_vendor_charges' => $outworkCharges,
+        'grand_total_charges' => $grandTotalCharges,
+        'status' => STATUS_JOBCARD_COMPLETED,
+    );
+    $this->db->where('id', $product_id);
+    $this->db->update('product', $data);
+} 
 }
-
-
-
-
-?>

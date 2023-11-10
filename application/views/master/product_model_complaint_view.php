@@ -1,14 +1,31 @@
 <div class="layout-content">
     <div class="container-fluid flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-0">Product Model Complaint</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Product Master</li>
+                <li class="breadcrumb-item">Product Model Complaint</li>
+                <li class="breadcrumb-item active">View</li>
+            </ol>
+        </div>
         <?php if ($this->session->flashdata('message')) { ?>
             <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Product Model Complaint</h4>
         <div class="card">
-            <h6 class="card-header">View Product Model Complaint</h6>
+        <div style="display: flex; justify-content:space-between; align-items: center;
+            border-bottom: 0 solid rgba(24, 28, 33, 0.13);
+            border-color: rgba(24, 28, 33, 0.13);
+            border-radius: 0.125rem 0.125rem 0 0; 
+            border-bottom-width: 1px;">
+                <h6 class="card-header" style="border:none">Product Model Complaint</h6>
+                <div>
+                    <a href="<?=base_url('master/product_model_complaint_add')?>" class="btn btn-primary mr-3">Add Product Model Complaint</a> 
+                </div>
+            </div>
             <div class="card-datatable table-responsive p-3">
                 <table class="datatables-demo table table-striped table-bordered">
                     <thead>

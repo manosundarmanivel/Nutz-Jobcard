@@ -15,8 +15,9 @@ class Master extends CI_Controller
         redirect(base_url("master/ledger_group_master_add"));
     }
 
-    public function uploadImage(){
-        $image=$this->User_model->uploadMultiple('image'); 
+    public function uploadImage()
+    {
+        $image = $this->User_model->uploadMultiple('image');
         echo json_encode($image);
     }
 
@@ -28,6 +29,7 @@ class Master extends CI_Controller
         $this->load->view('master/ledger_master_add', $data);
         $this->load->view("footer");
     }
+
     public function tax_add()
     {
         $class['classname'] = 'tax_add';
@@ -39,10 +41,7 @@ class Master extends CI_Controller
     public function tax_view()
     {
         $data['taxs'] = $this->User_model->getActiveTax();
-        $class['classname'] = 'tax_view';
-
-
-
+        $class['classname'] = 'tax_view'; 
         $this->load->view("sidebar", $class);
         $this->load->view('master/tax_view', $data);
         $this->load->view("footer");
@@ -51,14 +50,12 @@ class Master extends CI_Controller
     public function ledger_master_view()
     {
         $data['ledger_masters'] = $this->User_model->getActiveLedgerMasters();
-        $class['classname'] = 'ledger_master_view';
-
+        $class['classname'] = 'ledger_master_view'; 
         $full_names = array();
         foreach ($data['ledger_masters'] as $ledger) {
             $full_names[] = $this->User_model->get_full_name($ledger['created_by']);
         }
-        $data['full_names'] = $full_names;
-
+        $data['full_names'] = $full_names; 
         $this->load->view("sidebar", $class);
         $this->load->view('master/ledger_master_view', $data);
         $this->load->view("footer");
@@ -76,14 +73,11 @@ class Master extends CI_Controller
     public function ledger_group_master_view()
     {
         $data['ledger_group_masters'] = $this->User_model->getActiveLedgerGroupMasters();
-        $class['classname'] = 'ledger_group_master_view';
-
-     
+        $class['classname'] = 'ledger_group_master_view'; 
         $this->load->view("sidebar", $class);
         $this->load->view('master/ledger_group_master_view', $data);
         $this->load->view("footer");
-    }
-
+    } 
 
     public function viewActiveLedgerGroupMasters()
     {
@@ -133,10 +127,8 @@ class Master extends CI_Controller
                         'price_list' => $this->input->post('price_list'),
                         'discount' => $this->input->post('add_less_percentage'),
                         'is_active' => true,
-                        'created_by' => $this->session->userdata('user')->id,
-                       
-                        'created_at' => date('Y-m-d H:i:s')
-
+                        'created_by' => $this->session->userdata('user')->id, 
+                        'created_at' => date('Y-m-d H:i:s') 
                     );
                     $this->User_model->addLedger($data);
                     $this->session->set_flashdata('message', array('success', "Ledger Added Successfully"));
@@ -144,41 +136,26 @@ class Master extends CI_Controller
                 }
             }
         }
-    }
-
-
-
+    }  
 
     public function addledgergroup()
     {
-        if ($this->input->server('REQUEST_METHOD') === 'POST') {
-
-            if ($this->input->post()) {
-
+        if ($this->input->server('REQUEST_METHOD') === 'POST') { 
+            if ($this->input->post()) { 
                 $this->form_validation->set_rules('name', 'Name', 'required');
-                $this->form_validation->set_rules('type', 'Type', 'required');
-
+                $this->form_validation->set_rules('type', 'Type', 'required'); 
                 if ($this->form_validation->run() == FALSE) {
                     $this->session->set_flashdata('message', array('danger', validation_errors()));
-                } else {
-                    $user_id = $this->session->userdata('user_id');
+                } else { 
                     $name = $this->input->post('name');
-                    $type = $this->input->post('type');
-
-
+                    $type = $this->input->post('type'); 
                     $data = array(
                         'name' => $name,
                         'type' => $type,
-                        'is_active' => 1,
-                        // 'created_by' => $user_id,
-                        'created_by' => $this->session->userdata('user')->id,
-                        
-                        'created_at' => date('Y-m-d H:i:s'),
-
-                    );
-
-
-
+                        'is_active' => 1, 
+                        'created_by' => $this->session->userdata('user')->id, 
+                        'created_at' => date('Y-m-d H:i:s'), 
+                    ); 
                     $this->User_model->addLedgerGroup($data);
                     $this->session->set_flashdata('message', array('success', "Ledger Group Added Successfully"));
                     redirect('master/ledger_group_master_add');
@@ -191,36 +168,22 @@ class Master extends CI_Controller
             }
         }
     }
+
     public function addTax()
     {
-        if ($this->input->server('REQUEST_METHOD') === 'POST') {
-
-            if ($this->input->post()) {
-
-                $this->form_validation->set_rules('value', 'Value', 'required');
-              
-
+        if ($this->input->server('REQUEST_METHOD') === 'POST') { 
+            if ($this->input->post()) { 
+                $this->form_validation->set_rules('value', 'Value', 'required'); 
                 if ($this->form_validation->run() == FALSE) {
                     $this->session->set_flashdata('message', array('danger', validation_errors()));
-                } else {
-                   
-                    $value = $this->input->post('value');
-                  
-
-
+                } else { 
+                    $value = $this->input->post('value'); 
                     $data = array(
-                        'value' => $value,
-                       
-                        'is_active' => 1,
-                        // 'created_by' => $user_id,
-                        'created_by' => $this->session->userdata('user')->id,
-                        
-                        'created_at' => date('Y-m-d H:i:s'),
-
-                    );
-
-
-
+                        'value' => $value, 
+                        'is_active' => 1, 
+                        'created_by' => $this->session->userdata('user')->id, 
+                        'created_at' => date('Y-m-d H:i:s'), 
+                    ); 
                     $this->User_model->addTax($data);
                     $this->session->set_flashdata('message', array('success', "Tax Added Successfully"));
                     redirect('master/tax_add');
@@ -232,32 +195,34 @@ class Master extends CI_Controller
                 $this->load->view("footer");
             }
         }
-    }
-
+    } 
 
     public function deleteLedger($id)
     {
         $this->User_model->deleteLedger($id);
         redirect('master/ledger_master_view');
     }
+
     public function deleteTax($id)
     {
         $this->User_model->deleteTax($id);
         redirect('master/tax_view');
     }
+
     public function deleteLedgerGroup($id)
     {
         $this->User_model->deleteLedgerGroup($id);
         redirect('master/ledger_group_master_view');
-    }
-
+    } 
 
     public function editLedger($id)
     {
-        $data['ledger'] = $this->User_model->getLedgerById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Ledger Not Found"));
+            redirect('master/ledger_master_view'); 
+        }
+        $data['ledger'] = $this->User_model->getLedgerById($id); 
+        if ($this->input->post()) { 
             $data = array(
                 'name' => $this->input->post('customer_name'),
                 'contact_no' => $this->input->post('customer_contact'),
@@ -267,10 +232,8 @@ class Master extends CI_Controller
                 'pan_no' => $this->input->post('customer_pan'),
                 'entry_type' => $this->input->post('entry_type'),
                 'price_list' => $this->input->post('price_list'),
-                'discount' => $this->input->post('add_less_percentage'),
-                
-                'updated_by' => $this->session->userdata('user')->id
-
+                'discount' => $this->input->post('add_less_percentage'), 
+                'updated_by' => $this->session->userdata('user')->id 
             );
 
             $res = $this->User_model->updateLedger($id, $data);
@@ -283,23 +246,23 @@ class Master extends CI_Controller
             $this->load->view('master/ledger_master_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Ledger Not Found"));
+            redirect('master/ledger_master_view');
         }
     }
+
     public function editTax($id)
     {
-        $data['tax'] = $this->User_model->getTaxById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Tax Not Found"));
+            redirect('master/tax_view'); 
+        }
+        $data['tax'] = $this->User_model->getTaxById($id); 
+        if ($this->input->post()) { 
             $data = array(
-                'value' => $this->input->post('value'),
-                
-                
-                'updated_by' => $this->session->userdata('user')->id
-
-            );
-
+                'value' => $this->input->post('value'), 
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateTax($id, $data);
             if ($res)
                 redirect('master/tax_view');
@@ -310,24 +273,24 @@ class Master extends CI_Controller
             $this->load->view('master/tax_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Tax Not Found"));
+            redirect('master/tax_view'); 
         }
     }
+
     public function editLedgerGroup($id)
     {
-        $data['ledgerGroup'] = $this->User_model->getLedgerGroupById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Ledger Group Id Not Found"));
+            redirect('master/ledger_group_master_view'); 
+        }
+        $data['ledgerGroup'] = $this->User_model->getLedgerGroupById($id); 
+        if ($this->input->post()) { 
             $data = array(
                 'name' => $this->input->post('name'),
-                'type' => $this->input->post('type'),
-               
-                'updated_by' => $this->session->userdata('user')->id
-
-
-            );
-
+                'type' => $this->input->post('type'), 
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateLedgerGroup($id, $data);
             if ($res)
                 redirect('master/ledger_group_master_view');
@@ -338,28 +301,27 @@ class Master extends CI_Controller
             $this->load->view('master/ledger_group_master_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Ledger Group Id Not Found"));
+            redirect('master/ledger_group_master_view');
         }
     }
+
     public function editJobcard($id)
     {
-        $data['jobcard'] = $this->User_model->getJobcardId($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Service Id Not Found"));
+            redirect('master/jobcard_view'); 
+        }
+        $data['jobcard'] = $this->User_model->getJobcardId($id); 
+        if ($this->input->post()) { 
             $data = array(
-                'contact'  => $this->input->post('contact'),
-               
+                'contact'  => $this->input->post('contact'), 
                 'customerName' => $this->input->post('customer_name'),
                 'warrantyStatus'  => $this->input->post('warrantyStatus'),
                 'billNo' => $this->input->post('billDetailsInput'),
-                'remarks' => $this->input->post('remarks'),
-               
-                'createdBy' => $this->session->userdata('user')->id
-
-
-            );
-
+                'remarks' => $this->input->post('remarks'), 
+                'createdBy' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateJobcard($id, $data);
             if ($res)
                 redirect('master/jobcard_view');
@@ -370,11 +332,10 @@ class Master extends CI_Controller
             $this->load->view('master/jobcard_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Service Id Not Found"));
+            redirect('master/jobcard_view'); 
         }
-    }
-
-
+    } 
 
     public function product_category_add()
     {
@@ -392,14 +353,11 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_category_view', $data);
         $this->load->view("footer");
-    }
-
-
+    }  
 
     public function addProductcategory()
     {
-        if ($this->input->server('REQUEST_METHOD') == 'POST') {
-
+        if ($this->input->server('REQUEST_METHOD') == 'POST') { 
             if ($this->input->post()) {
                 $this->form_validation->set_rules('product_category', 'product_category', 'required');
 
@@ -409,10 +367,7 @@ class Master extends CI_Controller
                     $data = array(
                         'name' => $this->input->post('product_category'),
                         'is_active' => 1,
-                        'created_by' => $this->session->userdata('user')->id,
-                        
-
-
+                        'created_by' => $this->session->userdata('user')->id
                     );
                     $this->User_model->addProductcategory($data);
                     $this->session->set_flashdata('message', array('success', "Product Category Added Successfully"));
@@ -435,19 +390,16 @@ class Master extends CI_Controller
 
     public function editProductcategory($id)
     {
-        $data['product_category'] = $this->User_model->getProductcategoryById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Product category Id Not Found"));
+            redirect('master/product_category_view'); 
+        }
+        $data['product_category'] = $this->User_model->getProductcategoryById($id); 
+        if ($this->input->post()) { 
             $data = array(
-                'name' => $this->input->post('product_category'),
-              
-                        'updated_by' => $this->session->userdata('user')->id
-
-
-
-            );
-
+                'name' => $this->input->post('product_category'), 
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateProductcategory($id, $data);
             if ($res)
                 redirect('master/product_category_view');
@@ -458,10 +410,10 @@ class Master extends CI_Controller
             $this->load->view('master/product_category_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Product category Not Found"));
+            redirect('master/product_category_view');
         }
-    }
-
+    } 
 
     public function product_group_add()
     {
@@ -474,20 +426,16 @@ class Master extends CI_Controller
 
     public function product_group_view()
     {
-        $data['product_groups'] = $this->User_model->getActiveProductgroups();
-
+        $data['product_groups'] = $this->User_model->getActiveProductgroups(); 
         $class['classname'] = 'product_group_view';
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_group_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addProductgroup()
     {
-        if ($this->input->server('REQUEST_METHOD') == 'POST') {
-
+        if ($this->input->server('REQUEST_METHOD') == 'POST') { 
             if ($this->input->post()) {
                 $this->form_validation->set_rules('name', 'Name', 'required');
                 $this->form_validation->set_rules('product_category', 'Product Category', 'required');
@@ -499,10 +447,7 @@ class Master extends CI_Controller
                         'name' => $this->input->post('name'),
                         'product_category_id' => $this->input->post('product_category'),
                         'is_active' => 1,
-                        'created_by' => $this->session->userdata('user')->id,
-                        
-
-
+                        'created_by' => $this->session->userdata('user')->id, 
                     );
                     $this->User_model->addProductgroup($data);
                     $this->session->set_flashdata('message', array('success', "Product Group Added Successfully"));
@@ -520,19 +465,15 @@ class Master extends CI_Controller
 
     public function editProductgroup($id)
     {
-        $data['product_group'] = $this->User_model->getProductgroupById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){ 
+            $this->session->set_flashdata('message', array('danger', "Product group Id Not Found"));
+            redirect('master/product_group_view'); 
+        }
+        $data['product_group'] = $this->User_model->getProductgroupById($id); 
+        if ($this->input->post()) { 
             $data = array(
-                'name' => $this->input->post('name'),
-                
-                
-                        'updated_by' => $this->session->userdata('user')->id
-
-
-
-
+                'name' => $this->input->post('name'), 
+                'updated_by' => $this->session->userdata('user')->id 
             );
 
             $res = $this->User_model->updateProductgroup($id, $data);
@@ -545,12 +486,10 @@ class Master extends CI_Controller
             $this->load->view('master/product_group_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('success', "Product group Not Found"));
+            redirect('master/product_group_view');
         }
-    }
-
-
-
+    } 
 
     public function product_model_add()
     {
@@ -568,9 +507,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_model_view', $data);
         $this->load->view("footer");
-    }
-
-
+    }  
 
     public function addProductmodel()
     {
@@ -587,13 +524,10 @@ class Master extends CI_Controller
                         'name' => $this->input->post('name'),
                         'product_group_id' => $this->input->post('customer_group'),
                         'is_active' => 1,
-                        'created_by' => $this->session->userdata('user')->id,
-                       
-
-
+                        'created_by' => $this->session->userdata('user')->id, 
                     );
                     $this->User_model->addProductmodel($data);
-                    $this->session->set_flashdata('message', array('success', "Product Group Added Successfully"));
+                    $this->session->set_flashdata('message', array('danger', "Product Group Added Successfully"));
                     redirect('master/product_model_add');
                 }
             }
@@ -608,21 +542,16 @@ class Master extends CI_Controller
 
     public function editProductmodel($id)
     {
-        $data['product_model'] = $this->User_model->getProductmodelById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Product Model Id Not Found"));
+            redirect('master/product_model_view'); 
+        }
+        $data['product_model'] = $this->User_model->getProductmodelById($id); 
+        if ($this->input->post()) { 
             $data = array(
-                'name' => $this->input->post('name'),
-            
-                
-                        'updated_by' => $this->session->userdata('user')->id
-
-
-
-
-            );
-
+                'name' => $this->input->post('name'), 
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateProductmodel($id, $data);
             if ($res)
                 redirect('master/product_model_view');
@@ -633,13 +562,10 @@ class Master extends CI_Controller
             $this->load->view('master/product_model_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Product Model Id Not Found"));
+            redirect('master/product_model_view'); 
         }
-    }
-
-
-
-
+    } 
 
     public function product_model_complaint_add()
     {
@@ -657,9 +583,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_model_complaint_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addProductmodelcomplaint()
     {
@@ -677,7 +601,7 @@ class Master extends CI_Controller
                         'product_model_id' => $this->input->post('product_model'),
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        
+
 
 
                     );
@@ -697,21 +621,16 @@ class Master extends CI_Controller
 
     public function editProductmodelcomplaint($id)
     {
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Product Model Complaint Not Found"));
+            redirect('master/product_model_complaint_view'); 
+        }
         $data['product_model_complaint'] = $this->User_model->getProductmodelcomplaintById($id);
-
-        if ($this->input->post()) {
-
+        if ($this->input->post()) { 
             $data = array(
-                'name' => $this->input->post('name'),
-            
-               
-                'updated_by' => $this->session->userdata('user')->id
-
-
-
-
-            );
-
+                'name' => $this->input->post('name'), 
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateProductmodelcomplaint($id, $data);
             if ($res)
                 redirect('master/product_model_complaint_view');
@@ -722,11 +641,10 @@ class Master extends CI_Controller
             $this->load->view('master/product_model_complaint_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Product Model Complaint Not Found"));
+            redirect('master/product_model_complaint_view');
         }
-    }
-
-
+    } 
 
     public function product_brand_add()
     {
@@ -735,10 +653,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_brand_add', $data);
         $this->load->view("footer");
-    }
-
-
-
+    } 
 
     public function product_brand_view()
     {
@@ -747,9 +662,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_brand_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addProductbrand()
     {
@@ -767,7 +680,7 @@ class Master extends CI_Controller
 
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                       
+
 
 
                     );
@@ -787,16 +700,17 @@ class Master extends CI_Controller
 
     public function editProductbrand($id)
     {
-        $data['product_brand'] = $this->User_model->getProductbrandById($id);
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Product brand Id Not Found"));
+            redirect('master/product_brand_view'); 
+        }
+        $data['product_brand'] = $this->User_model->getProductbrandById($id); 
         if ($this->input->post()) {
 
             $data = array(
                 'name' => $this->input->post('name'),
-                'updated_by' => $this->session->userdata('user')->id
-
-            );
-
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateProductbrand($id, $data);
             if ($res)
                 redirect('master/product_brand_view');
@@ -807,13 +721,10 @@ class Master extends CI_Controller
             $this->load->view('master/product_brand_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Product brand Id Not Found"));
+            redirect('master/product_brand_view');
         }
-    }
-
-
-
-
+    } 
 
     public function product_item_add()
     {
@@ -836,13 +747,10 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/product_item_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addProductitem()
-    {
-        
+    { 
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
             if ($this->input->post()) {
@@ -864,13 +772,12 @@ class Master extends CI_Controller
                 $this->form_validation->set_rules('mop', 'MOP', 'required');
                 $this->form_validation->set_rules('minimumstock', 'Minimum Stock', 'required');
                 $this->form_validation->set_rules('maximumstock', 'Maximum Stock', 'required');
-                
+
                 if ($this->form_validation->run() == FALSE) {
-                 
+
                     $this->session->set_flashdata('message', array('danger', validation_errors()));
                 } else {
-                    $data = array(
-
+                    $data = array( 
                         'code ' => $this->input->post('icode'),
                         'name ' => $this->input->post('name'),
                         'description ' => $this->input->post('description'),
@@ -890,14 +797,9 @@ class Master extends CI_Controller
                         'min_stock ' => $this->input->post('minimumstock'),
                         'max_stock'   => $this->input->post('maximumstock'),
                         'is_active ' => 1,
-                        'created_by' => $this->session->userdata('user')->id,
-                       
-
-
-
-
+                        'created_by' => $this->session->userdata('user')->id, 
                     );
-                   
+
                     $this->User_model->addProductitem($data);
                     $this->session->set_flashdata('message', array('success', "Product Item Added Successfully"));
                     redirect('master/product_item_add');
@@ -919,19 +821,19 @@ class Master extends CI_Controller
 
     public function editProductitem($id)
     {
-        $data['product_item'] = $this->User_model->getProductitemById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Product Id Not Found"));
+            redirect('master/product_item_view'); 
+        }
+        $data['product_item'] = $this->User_model->getProductitemById($id); 
+        if ($this->input->post()) { 
             $data = array(
                 'code' => $this->input->post('icode'),
                 'name' => $this->input->post('name'),
                 'description ' => $this->input->post('description'),
                 'image_url'  => $this->input->post('img'),
                 'selling_unit'  => $this->input->post('sellingunit'),
-                'purchase_unit'  => $this->input->post('purchaseunit'),
-             
-                
+                'purchase_unit'  => $this->input->post('purchaseunit'), 
                 'hsn_sac_code' => $this->input->post('code'),
                 'purchase_price' => $this->input->post('purchaseprice'),
                 'dealer_billing_price' => $this->input->post('dealerbprice'),
@@ -939,14 +841,8 @@ class Master extends CI_Controller
                 'mpo' => $this->input->post('mop'),
                 'min_stock ' => $this->input->post('minimumstock'),
                 'max_stock'   => $this->input->post('maximumstock'),
-                'is_active' => 1,
-                
-                'updated_by' => $this->session->userdata('user')->id
-
-
-
-
-
+                'is_active' => 1, 
+                'updated_by' => $this->session->userdata('user')->id 
             );
 
             $res = $this->User_model->updateProductitem($id, $data);
@@ -959,12 +855,13 @@ class Master extends CI_Controller
             $this->load->view('master/product_item_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Product Not Found"));
+            redirect('master/product_item_view');
         }
     }
 
     public function addProductimage($id)
-    {
+    { 
         $data['product_item'] = $this->User_model->getProductitemById($id);
         $data['product_image'] = $this->User_model->getProductimageById($id);
 
@@ -979,18 +876,13 @@ class Master extends CI_Controller
     }
 
     public function saveProductImage($id)
-    {
-
+    { 
         $image_url = $this->User_model->uploadMultiple('img');
         foreach ($image_url as $item) {
             $this->User_model->insertProductImage($id, $item);
-        }
-      
-
+        } 
         redirect('master/product_item_view');
-    }
-
-
+    } 
 
     public function jobcard_service_add()
     {
@@ -999,10 +891,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_service_add', $data);
         $this->load->view("footer");
-    }
-
-
-
+    }  
 
     public function jobcard_service_view()
     {
@@ -1011,9 +900,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_service_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addServicetype()
     {
@@ -1033,7 +920,7 @@ class Master extends CI_Controller
 
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        
+
 
 
                     );
@@ -1053,16 +940,16 @@ class Master extends CI_Controller
 
     public function editServicetype($id)
     {
-        $data['service_type'] = $this->User_model->getServicetypeById($id);
-
-        if ($this->input->post()) {
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Service Type Not Found"));
+            redirect('master/jobcard_service_view'); 
+        }
+        $data['service_type'] = $this->User_model->getServicetypeById($id); 
+        if ($this->input->post()) { 
             $data = array(
                 'name' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
-                'updated_by' => $this->session->userdata('user')->id
-
-
+                'updated_by' => $this->session->userdata('user')->id 
             );
 
             $res = $this->User_model->updateServicetype($id, $data);
@@ -1075,12 +962,10 @@ class Master extends CI_Controller
             $this->load->view('master/jobcard_service_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Service Type Not Found"));
+            redirect('master/jobcard_service_view'); 
         }
-    }
-
-
-
+    } 
 
     public function jobcard_employee_add()
     {
@@ -1089,10 +974,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_employee_add', $data);
         $this->load->view("footer");
-    }
-
-
-
+    } 
 
     public function jobcard_employee_view()
     {
@@ -1101,9 +983,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_employee_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addEmployee()
     {
@@ -1127,11 +1007,11 @@ class Master extends CI_Controller
                         'contact' => $this->input->post('contact'),
                         'address' => $this->input->post('address'),
                         'username' => $this->input->post('username'),
-                        'password' => md5( $this->input->post('password')),
+                        'password' => md5($this->input->post('password')),
 
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        
+
 
 
                     );
@@ -1151,23 +1031,21 @@ class Master extends CI_Controller
 
     public function editEmployee($id)
     {
-        $data['employees'] = $this->User_model->getEmployeeById($id);
-
-        if ($this->input->post()) {
-
-            $data = array(
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Employee Not Found"));
+            redirect('master/jobcard_employee_view'); 
+        }
+        $data['employees'] = $this->User_model->getEmployeeById($id); 
+        if ($this->input->post()) { 
+            $data = array( 
                 'name' => $this->input->post('name'),
                 'designation' => $this->input->post('designation'),
                 'contact' => $this->input->post('contact'),
                 'address' => $this->input->post('address'),
                 'username' => $this->input->post('username'),
-                'password' => $this->input->post('password'),
-                
-                        'updated_by' => $this->session->userdata('user')->id
-
-            );
-
+                'password' => $this->input->post('password'), 
+                'updated_by' => $this->session->userdata('user')->id 
+            ); 
             $res = $this->User_model->updateEmployee($id, $data);
             if ($res)
                 redirect('master/jobcard_employee_view');
@@ -1178,14 +1056,11 @@ class Master extends CI_Controller
             $this->load->view('master/jobcard_employee_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Employee Not Found"));
+            redirect('master/jobcard_employee_view'); 
         }
-    }
-
-
-
-
-
+    }  
+    
     public function jobcard_outwork_add()
     {
         $data = '';
@@ -1193,10 +1068,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_outwork_add', $data);
         $this->load->view("footer");
-    }
-
-
-
+    } 
 
     public function jobcard_outwork_view()
     {
@@ -1205,9 +1077,7 @@ class Master extends CI_Controller
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_outwork_view', $data);
         $this->load->view("footer");
-    }
-
-
+    } 
 
     public function addOutwork()
     {
@@ -1232,7 +1102,7 @@ class Master extends CI_Controller
                         'email' => $this->input->post('email'),
                         'is_active' => 1,
                         'created_by' => $this->session->userdata('user')->id,
-                        
+
 
 
                     );
@@ -1252,20 +1122,18 @@ class Master extends CI_Controller
 
     public function editOutwork($id)
     {
-        $data['outworks'] = $this->User_model->getOutworkById($id);
-
-        if ($this->input->post()) {
-
-            $data = array(
-
-                'name' => $this->input->post('name'),
-
+        if(!$id){
+            $this->session->set_flashdata('message', array('danger', "Jobcard outwork  Not Found"));
+            redirect('master/jobcard_outwork_view'); 
+        }
+        $data['outworks'] = $this->User_model->getOutworkById($id); 
+        if ($this->input->post()) { 
+            $data = array( 
+                'name' => $this->input->post('name'), 
                 'contact' => $this->input->post('contact'),
                 'address' => $this->input->post('address'),
-                'email' => $this->input->post('email'),
-              
-                        'updated_by' => $this->session->userdata('user')->id
-
+                'email' => $this->input->post('email'), 
+                'updated_by' => $this->session->userdata('user')->id 
             );
 
             $res = $this->User_model->updateOutwork($id, $data);
@@ -1278,11 +1146,10 @@ class Master extends CI_Controller
             $this->load->view('master/jobcard_outwork_edit', $data);
             $this->load->view("footer");
         } else {
-            //error page
+            $this->session->set_flashdata('message', array('danger', "Jobcard outwork  Not Found"));
+            redirect('master/jobcard_outwork_view');
         }
-    }
-
-
+    } 
 
     public function jobcard_add()
     {
@@ -1290,8 +1157,8 @@ class Master extends CI_Controller
         $data['product_models'] = $this->User_model->getActiveProductmodels();
         $data['service_types'] = $this->User_model->getActiveServicetype();
         $data['technitions'] = $this->User_model->getActiveTechnician();
-        $data['service_no'] = intval(($this->db->query("SELECT MAX(id) AS id FROM job")->row())->id)+1;
-        
+        $data['service_no'] = intval(($this->db->query("SELECT MAX(id) AS id FROM job")->row())->id) + 1;
+
         $class['classname'] = 'jobcard_add';
         $this->load->view("sidebar", $class);
         $this->load->view('master/jobcard_add', $data);
@@ -1301,13 +1168,12 @@ class Master extends CI_Controller
     public function jobcard_view()
     {
         $data['jobs'] = $this->User_model->getJobcards();
-        
+
         $class['classname'] = 'jobcard_view';
         $this->load->view("sidebar", $class);
-        $this->load->view('master/jobcard_view',$data);
+        $this->load->view('master/jobcard_view', $data);
         $this->load->view("footer");
-    }
-
+    } 
 
     public function getLedgerName()
     {
@@ -1324,16 +1190,12 @@ class Master extends CI_Controller
         }
 
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
-    }
-
+    } 
 
     public function addJobCard()
     {
         $post = $this->input->post('data');
-     
-        $data = json_decode($post , true);
-        print_r($data);
-        return;
+        $data = json_decode($post, true);
         $jobData = $data['jobData'];
         $productsData = $data['productsData'];
 
@@ -1346,13 +1208,11 @@ class Master extends CI_Controller
             'remarks' => $jobData['remarks'],
             'jobcard_status' => true,
             'createdBy' => $this->session->userdata('user')->id,
-            'is_active' => 1, 
+            'is_active' => 1,
         ); 
-
-
         $job_id = $this->User_model->insert_job($job_data);
 
-        foreach ($productsData as $product) { 
+        foreach ($productsData as $product) {
             $product_data = array(
                 'jobID' => $job_id,
                 'jobcardNo' => $product['jobcardNo'],
@@ -1360,15 +1220,13 @@ class Master extends CI_Controller
                 'complaint' => $product['complaint'],
                 'service' => $product['service'],
                 'assigned' => $product['assigned'],
-                'status' =>'open', 
-                'image_url'=>$product['image_url']
-            );
-
-
+                'status' => 'open',
+                'image_url' => $product['image_url']
+            ); 
             $product_id = $this->User_model->insert_product($product_data);
-             $this->User_model->updateStatus($product_id,STATUS_OPEN);
+            $this->User_model->updateStatus($product_id, STATUS_OPEN);
 
-            foreach ($product['group'] as $group) { 
+            foreach ($product['group'] as $group) {
                 $group_data = array(
                     'jobID' => $job_id,
                     'parent_id' => $product_id,
@@ -1377,39 +1235,25 @@ class Master extends CI_Controller
                     'problem_stated' => $group['problem'],
                     'service' => $group['service'],
                     'assigned' => $group['assigned'],
-                    'status' =>'open', 
-                    'image_url'=>$group['image_url']
-                );
-
-
-               
+                    'status' => 'open',
+                    'image_url' => $group['image_url']
+                ); 
                 $group_id = $this->User_model->insert_product($group_data);
-                $this->User_model->updateStatus($group_id,STATUS_OPEN);
+                $this->User_model->updateStatus($group_id, STATUS_OPEN);
             }
-
-            
         }
         $this->session->set_flashdata('message', array('success', "Job Added Successfully"));
         redirect('master/jobcard_add');
-    }
-
-
-    public function fetchProductsAndGroups($jobID) {
+    } 
+    
+    public function fetchProductsAndGroups($jobID)
+    {
         $data['jobID'] = $jobID;
-        
-       
         $data['products'] = $this->User_model->getProductsByJobID($jobID);
         $data['groups'] = $this->User_model->getGroupsByJobID($jobID);
-        
-    
-       
-       
         $class['classname'] = 'jobcard_view';
         $this->load->view("sidebar", $class);
         $this->load->view('master/products_and_groups_view', $data);
         $this->load->view("footer");
     }
-
-
-    
 }

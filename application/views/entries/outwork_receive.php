@@ -1,19 +1,26 @@
 <div class="layout-content">
     <div class="container-fluid flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-0">Outwork Receive</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Outwork Master</li>
+                <li class="breadcrumb-item ">Outworks</li>
+                <li class="breadcrumb-item active">Receive</li>
+            </ol>
+        </div>
         <?php if ($this->session->flashdata('message')) { ?>
             <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4">Outwork Receive Entry</h4>
         <div class="card mb-4">
-            <h6 class="card-header">Outwork Receive Entry</h6>
+            <h6 class="card-header">Outwork Receive</h6>
 
             <div class="card-body">
                 <form method="post" action="<?= base_url('entries/receiveOutwork/' ) ?>">
-                    <div style="display: flex;">
-                
+                    <div style="display: flex;"> 
                     <input type="hidden" name="job_id" id="job_id" />
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_group">Outwork Vendor</label>
@@ -49,14 +56,7 @@
                             <label class="form-label" for="customer_contact">Customer Contact Number:</label>
                             <p id="contact"></p>
                         </div>
-                    </div>
-
-
-
-
-
-
-
+                    </div> 
                     <div style="display: flex;">
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_gst">Remarks: </label>
@@ -65,8 +65,7 @@
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">Warranty Status: </label>
                             <p id="warranty"></p>
-                        </div>
-
+                        </div> 
                     </div>
                     <div style="display: flex;">
                         <div class="form-group col-6">
@@ -76,8 +75,7 @@
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">Product Given for Service </label>
                             <p id="product_model_name"></p>
-                        </div>
-
+                        </div> 
                     </div>
                     <div style="display: flex;">
                         <div class="form-group col-6">
@@ -87,18 +85,12 @@
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">Service Type : </label>
                             <p id="service_name"></p>
-                        </div>
-
-
+                        </div> 
                     </div>
                     <div style="display: flex;">
                         <div class="form-group col-6">
-                            <label class="form-label" for="customer_email">Photos : </label>
-
-                        </div>
-
-
-
+                            <label class="form-label" for="customer_email">Photos : </label> 
+                        </div> 
                     </div>
                     <div style="display: flex;">
                         <div class="form-group col-6 ">
@@ -108,21 +100,10 @@
                         <div class="form-group col-6 ">
                             <label class="form-label" for="name">Customer Charges:</label>
                             <input type="text" class="form-control" name="customer_charges" id="name" required placeholder="Enter Contact Number">
-                        </div>
-
-
-                    </div>
-
+                        </div> 
+                    </div> 
                     <button type="submit" class="btn btn-primary">Send</button>
-            </div>
-
-
-
-
-
-
-
-
+            </div> 
             </form>
         </div>
     </div>

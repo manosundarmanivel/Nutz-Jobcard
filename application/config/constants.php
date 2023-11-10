@@ -90,5 +90,6 @@ defined('CUSTOMER_ID')      OR define('CUSTOMER_ID', "SYM");
 defined('STATUS_OPEN')      OR define('STATUS_OPEN', "open"); // highest automatically-assigned error code
 defined('STATUS_PROCESS')      OR define('STATUS_PROCESS', "outwork_in_process"); // highest automatically-assigned error code
 defined('STATUS_COMPLETED')      OR define('STATUS_COMPLETED', "Outwork completed"); // highest automatically-assigned error code
+defined('STATUS_JOBCARD_COMPLETED')      OR define('STATUS_JOBCARD_COMPLETED', "Completed"); // highest automatically-assigned error code
 
 

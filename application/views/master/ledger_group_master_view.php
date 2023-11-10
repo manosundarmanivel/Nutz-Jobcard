@@ -1,14 +1,31 @@
 <div class="layout-content">
-    <div class="container-fluid flex-grow-1 container-p-y">
+    <div class="container-fluid flex-grow-1 container-p-y"> 
+        <h4 class="font-weight-bold py-3 mb-0">Ledger Group View</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Ledger Master</li>
+                <li class="breadcrumb-item ">Ledger Group</li>
+                <li class="breadcrumb-item active">View</li>
+            </ol>
+        </div>
         <?php if ($this->session->flashdata('message')) { ?>
             <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>View Ledger Group</h4>
-        <div class="card">
-            <h6 class="card-header">View Ledger Groups</h6>
+        <div class="card"> 
+            <div style="display: flex; justify-content:space-between; align-items: center;
+            border-bottom: 0 solid rgba(24, 28, 33, 0.13);
+            border-color: rgba(24, 28, 33, 0.13);
+            border-radius: 0.125rem 0.125rem 0 0; 
+            border-bottom-width: 1px;">
+                <h6 class="card-header" style="border:none">Ledger Groups</h6>
+                <div>
+                    <a href="<?=base_url('master/ledger_group_master_add')?>" class="btn btn-primary mr-3">Add Ledger Group</a> 
+                </div>
+            </div>
             <div class="card-datatable table-responsive">
                 <table class="datatables-demo table table-striped table-bordered">
                     <thead>
@@ -20,8 +37,6 @@
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th>Options</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
@@ -39,9 +54,7 @@
                                         }
                                         ?></td>
                                     <td><?= $ledger_group->created_at ?></td>
-                                    <td><?= $ledger_group->updated_at ?></td>
-                                    
-
+                                    <td><?= $ledger_group->updated_at ?></td> 
                                     <td>
                                         <?php
                                         if ($ledger_group->is_default == 0) { ?>
@@ -51,10 +64,8 @@
                                         } else {
                                             echo ("-");
                                         }
-                                        ?>
-
-                                    </td>
-
+                                        ?> 
+                                    </td> 
                                 </tr>
                             <?php }
                         } else { ?>

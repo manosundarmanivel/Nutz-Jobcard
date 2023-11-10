@@ -1,12 +1,20 @@
 <div class="layout-content">
     <div class="container-fluid flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-0">Ledger</h4>
+        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                <li class="breadcrumb-item">Ledger Master</li>
+                <li class="breadcrumb-item ">Ledger</li>
+                <li class="breadcrumb-item active">Add</li>
+            </ol>
+        </div>
         <?php if ($this->session->flashdata('message')) { ?>
             <div class="alert alert-dark-<?= $this->session->flashdata('message')[0] ?> alert-dismissible fade show" id="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <span><?= $this->session->flashdata('message')[1] ?></span>
             </div>
         <?php   } ?>
-        <h4 class="font-weight-bold  mt-2 mb-4"><i class="feather icon-home"></i>Add Ledger</h4>
         <div class="card mb-4">
             <h6 class="card-header">Add Ledger</h6>
             <div class="card-body">
@@ -22,44 +30,29 @@
                             <label class="form-label" for="customer_contact">Customer Contact Number:</label>
                             <input type="text" class="form-control" id="customer_contact" name="customer_contact" placeholder="Enter Contact Number">
                         </div>
-                    </div>
-
-
-
+                    </div> 
                     <div style="display: flex;">
                         <div class="form-group col-6" style="display: flex;">
                             <div class="form-group col-10 p-0 ">
                                 <label class="form-label" for="customer_group">Customer Group:</label>
                                 <select class="select2-demo form-control" onchange="ledgerChange()" data-allow-clear="true" style="width: 100%" id="customer_groups" name="customer_group">
-                                    <option value="">Select Customer Group</option>
-
-
+                                    <option value="">Select Customer Group</option> 
                                     <?php
                                     foreach ($active_ledger_groups as $group) { ?>
-                                        <option value="<?= $group['id'] ?>"><?= $group['type'] ?></option>
-
-                                    <?php
-
+                                        <option value="<?= $group['id'] ?>"><?= $group['type'] ?></option> 
+                                    <?php 
                                     } ?>
                                 </select>
                             </div>
                             <div class="form-group col-4 m-3 p-1">
-                            <button type="button" class="btn btn-primary" onclick="addNewCustomerGroup()">Add </button>
-
-
-                        </div>
-
-                        </div>
-
+                            <a href="<?php echo base_url('master/ledger_group_master_add'); ?>" class="btn btn-primary">Add </a> 
+                        </div> 
+                        </div> 
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_email">E-Mail ID:</label>
                             <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter Email">
-                        </div>
-
-
-                    </div>
-
-
+                        </div> 
+                    </div> 
                     <div style="display: flex;">
                         <div class="form-group col-6">
                             <label class="form-label" for="customer_gst">GST No.:</label>
@@ -78,12 +71,9 @@
                             <option value="">Select Entry Type</option>
                             <option>Sales</option>
                             <option>Purchase</option>
-                            <option>Both</option>
-
-                        </select>
-                        <!-- <input type="text" class="form-control" id="entry_type"  placeholder="Enter Entry Type"> -->
-                    </div>
-
+                            <option>Both</option> 
+                        </select> 
+                    </div> 
                     <div class="form-group">
                         <label class="form-label" for="price_list">Price List:</label>
                         <select name="price_list" class=" form-control " data-allow-clear="true" style="width: 100%">
@@ -91,12 +81,9 @@
                             <option>Purchase Price</option>
                             <option>DBP</option>
                             <option>Wholesale Price </option>
-                            <option>MOP </option>
-
-                        </select>
-
-                    </div>
-
+                            <option>MOP </option> 
+                        </select> 
+                    </div> 
                     <div class="form-group">
                         <label class="form-label" for="add_less_percentage">Add / Less %:</label>
 
@@ -106,10 +93,10 @@
                         <label class="form-label" for="customer_address">Address:</label>
                         <textarea class="form-control" id="customer_address" name="customer_address" rows="3" placeholder="Enter Address"></textarea>
                     </div>
-                    <div class="form-group" id="isVendor" style="display: none;">
+                    <!-- <div class="form-group" id="isVendor" style="display: none;">
                         <label class="form-label" for="customer_address">Add as a Vendor</label>
                         <input class="form-control" id="add_vendor" name="add_vendor" type="checkbox" />
-                    </div>
+                    </div> -->
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -124,17 +111,10 @@
 <script src="<?= base_url('') ?>assets/libs/bootstrap-select/bootstrap-select.js"></script>
 <script src="<?= base_url('') ?>assets/libs/select2/select2.js"></script>
 <script>
-    function ledgerChange() {
-        const element = document.getElementById("customer_groups");
-        if (element.value == 1) {
-            document.getElementById("isVendor").style.display = "block";
-        }
-
-
-    }
-
-    function addNewCustomerGroup() {
-        // Navigate to the "Add Customer Group" page
-        window.location.href = "<?php echo base_url('master/ledger_group_master_add'); ?>"; // Replace with the actual URL
-    }
+    // function ledgerChange() {
+    //     const element = document.getElementById("customer_groups");
+    //     if (element.value == 1) {
+    //         document.getElementById("isVendor").style.display = "block";
+    //     } 
+    // } 
 </script>
